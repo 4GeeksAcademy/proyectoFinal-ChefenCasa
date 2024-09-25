@@ -1,0 +1,19 @@
+.navbar {
+    width: 100vw;
+    padding: 20px;
+    background-color: #f9c039;
+    
+}
+
+.botonIniciarSesion {
+    background-color: #cdcccd;
+    width: 10vw;
+    box-shadow: 2px 2px 2px rgb(100, 100, 100);
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
+}
+
+.LogoChefEnCasa {
+    width: 200px;
+}
