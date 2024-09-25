@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				else {
 					localStorage.setItem("token", data.token)
-					
+				
 					return true
 				}
 
