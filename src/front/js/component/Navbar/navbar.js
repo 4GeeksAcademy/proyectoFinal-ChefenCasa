@@ -8,7 +8,7 @@ export const Navbar = () => {
 		<nav className="navbar">
 			<div className="container">
 				<Link to="/">
-					<img src="logo_sin_fondo.png" alt="Logo Chef en Casa"></img>
+					<img className="LogoChefEnCasa" src="logo_ChefEnCasa" alt="Logo Chef en Casa"></img>
 				</Link>
 				<div className="ml-auto">
 					<Link to="/iniciarSesion">
