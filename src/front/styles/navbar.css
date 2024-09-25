@@ -7,7 +7,7 @@
 
 .botonIniciarSesion {
     background-color: #cdcccd;
-    width: 10vw;
+    width: 100px;
     box-shadow: 2px 2px 2px rgb(100, 100, 100);
     padding: 10px;
     border: none;
@@ -15,5 +15,7 @@
 }
 
 .LogoChefEnCasa {
-    width: 200px;
+    width: 20vw;
+    min-width: 150px;
+    max-width: 250px;
 }
