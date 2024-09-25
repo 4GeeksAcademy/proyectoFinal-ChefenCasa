@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				else {
 					localStorage.setItem("token", data.token)
-					console.log('data', data)
+					
 					return true
 				}
 
@@ -53,7 +53,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false; // Retorna false si la respuesta no es exitosa
 					}
 					else {
-						console.log('Registro exitoso:', data); // Puedes mostrar más información del registro
+						
 						return true; // Retorna true si el registro fue exitoso
 					}
 				} catch (error) {
@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 				
 					});
-					console.log(response)
+					
 					if (!response.ok) {
 						return false
 					} else {
