@@ -8,7 +8,13 @@ export const Home = () => {
 
 	return (
 		<div className="body">
-			<h1>Toda la comida de la semana en un solo lugar</h1>
+			<div className="descriptionHome">
+				<h1>All the food for the week in one place</h1>
+				<br></br>
+				<h4>Chef at Home transforms the way to explore, plan, and organize gourmet recipes.</h4>
+				<br></br>
+				<h4>Save your favorite recipes, add personalized notes, and organize your weekly menu.</h4>
+			</div>
 		</div>
 	);
 };
