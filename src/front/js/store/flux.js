@@ -1,52 +1,100 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			
+			login: async (dataUser) => {
+
+				const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+					method: "POST",
+					body: JSON.stringify(dataUser),
+					headers: {
+						"Content-Type": "application/json"
+					}
+
+				})
+
+				const data = await response.json()
+
+				if (response.status !== 200) {
+
+					return false
+				}
+				else {
+					localStorage.setItem("token", data.token)
+					console.log('data', data)
+					return true
+				}
+
 			},
 
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
+			signUp: async (email, password) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
+						method: "POST",
+						body: JSON.stringify({
+							email: email,
+							password: password,
+							is_active: true
+						}),
+						headers: {
+							"Content-Type": "application/json"
+
+						}
+					})
+
+					const data = await response.json();
+					// Verifica si la respuesta fue exitosa
+					if (response.status !== 200) {
+						alert(data.msg)
+						console.error('Error en el registro:', data); // Muestra el error en la consola
+						return false; // Retorna false si la respuesta no es exitosa
+					}
+					else {
+						console.log('Registro exitoso:', data); // Puedes mostrar más información del registro
+						return true; // Retorna true si el registro fue exitoso
+					}
+				} catch (error) {
+					console.error('Error en la solicitud de registro:', error); // Manejo de errores de red
+					return false; // Retorna false en caso de error
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			autentificacion: async () => {
 
-				//reset the global store
-				setStore({ demo: demo });
+				const token = localStorage.getItem('token')
+
+				try {
+					const response = await fetch(process.env.BACKEND_URL +'/api/protected', {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						}
+				
+					});
+					console.log(response)
+					if (!response.ok) {
+						return false
+					} else {
+						const data = await response.json()
+						
+						return true
+						
+						
+					}
+				} catch (error) {
+					console.error('error durante la autentificación', error);
+					return false
+				}
+
+
 			}
+
+			
+			
 		}
 	};
 };
