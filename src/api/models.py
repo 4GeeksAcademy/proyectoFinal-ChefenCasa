@@ -19,7 +19,6 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "password": self.password,
             "is_active": True            
         }
 
