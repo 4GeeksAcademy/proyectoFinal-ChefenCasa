@@ -14,6 +14,7 @@ import { VistaPublica } from "./pages/vistaPublica";
 import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
 import { RecetaCompletaPrivada } from "./pages/recetaCompletaPrivada";
 
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/Navbar/navbar";
@@ -34,15 +35,18 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<iniciarSesion />} path="/iniciarSesion" />
-                        <Route element={<Single />} path="/single/:theid" />
-            
+                        <Route element={<Single />} path="/single/:theid" />            
                         <Route element={<Login />} path="/login" />
                         <Route element={<SignUp />} path="/signUp" />
                         <Route element={<Private />} path="/private" />
+
+                        
+
                         <Route element={<VistaPrivada />} path="/vistaPrivada" />
                         <Route element={<VistaPublica />} path="/vistaPublica" />
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
+
                         <Route element={<h1>Not found!</h1>} />
                         
                     </Routes>
