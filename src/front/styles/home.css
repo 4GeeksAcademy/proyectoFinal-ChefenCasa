@@ -5,7 +5,25 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+.bodyHome {
+    display: flex;
+    flex-direction: row;
+}
 
-.descriptionHome {
-    margin: 100px;
+.descripcionHome {
+    margin: 10vw;
+    width: 40vw;
+}
+
+.imagenHome {
+}
+
+.botonRegistrarseBody {
+    color: white;
+    background-color: #e73827;
+    width: 100px;
+    box-shadow: 2px 2px 2px rgb(100, 100, 100);
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
 }
