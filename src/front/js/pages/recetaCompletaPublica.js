@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
 
-export const RecetaCompletaPublica = () => {
+const RecetaCompletaPublica = () => {
     const { store, actions } = useContext(Context);
 
     return (
