@@ -4,8 +4,9 @@
 }
 
 .descripcionHome {
-    margin-left: 10vw;
+    margin-left: 15vw;
     margin-top: 10vw;
+    margin-right: 5vw;
     width: 40vw; /* Ancho del texto */
 }
 
@@ -23,16 +24,17 @@
     border-radius: 100px;
 }
 
-/* Media Query para pantallas hasta 520px */
-@media (max-width: 520px) {
+/* Media Query para pantallas hasta 700px */
+@media (max-width: 700px) {
     .bodyHome {
-        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
-        align-items: center; /* Centra los elementos horizontalmente */
-        padding: 0 5%; /* Añade un poco de padding lateral */
+        flex-direction: column;
+        align-items: center; 
+        padding: 0 5%; 
     }
 
     .descripcionHome {
         margin-left: 0; /* Elimina el margen izquierdo */
+        margin-right: 0;
         margin-top: 20px; /* Ajusta el margen superior si es necesario */
         width: auto; /* Permite que el ancho sea automático */
         text-align: center; /* Centra el texto */
@@ -46,6 +48,7 @@
         max-width: 90%; /* Limita el ancho máximo de la imagen */
         height: auto; /* Mantiene la proporción de la imagen */
         margin-top: 20px; /* Añade un margen superior para separar la imagen del texto */
+        margin-left: 5%;
     }
 
     .botonRegistrarseBody {
@@ -53,17 +56,16 @@
         max-width: 150px; /* Limita el ancho máximo del botón */
         padding: 12px; /* Aumenta el padding para hacerlo más clicable */
         font-size: 16px; /* Ajusta el tamaño de fuente del botón si es necesario */
-        margin-top: 10px; /* Añade margen superior al botón para separación visual */
     }
 }
 
 /* Media Query adicional para pantallas hasta 430px*/
 @media (max-width: 430px) {
     .descripcionHome h1 {
-        font-size: 18px; /* Reduce el tamaño del título en pantallas muy pequeñas */
+        font-size: 24px; /* Reduce el tamaño del título en pantallas muy pequeñas */
     }
 
     .descripcionHome h4 {
-        font-size: 14px; /* Reduce el tamaño del subtítulo en pantallas muy pequeñas */
+        font-size: 18px; /* Reduce el tamaño del subtítulo en pantallas muy pequeñas */
     }
 }
