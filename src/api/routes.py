@@ -16,7 +16,7 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 #ruta para inicio sesión
-@api.route('/login', methods=['GET'])
+@api.route('/login', methods=['POST'])
 def login():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
@@ -54,9 +54,9 @@ def signup():
     email = data.get('email')
     password = data.get('password')
     is_active = data.get('is_active')
-
+    print(email,is_active)
     user = User.query.filter_by(email=email, is_active = is_active).first()
-
+    print(user)
     if not user:
         
         user = User(email=email, password=password, is_active= is_active)

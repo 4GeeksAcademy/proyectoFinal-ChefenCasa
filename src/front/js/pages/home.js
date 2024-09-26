@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Navbar } from "../../js/component/Navbar/navbar";
+import { ModalRegister } from "../component/modalRegister";
 
 import imagen_Home from "../../img/imagen_Home.jpg";
 
@@ -9,6 +10,14 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [modal, setModal] = useState(false);
+
+	const openModal = () => {
+		setModal(true);
+	}
+	const closeModal = () => {
+		setModal(false);
+	};
 
 	return (
 		<div>
@@ -23,13 +32,14 @@ export const Home = () => {
 					<br></br>
 					<br></br>
 					<div>
-						<Link to="/iniciarSesion">
-							<button className="botonRegistrarseBody">SIGN IN</button>
-						</Link>
+						<button className="botonRegistrarseBody" onClick={openModal}>SIGN UP</button>
+						<ModalRegister show={modal} onClose={closeModal}>
+							
+						</ModalRegister>
 					</div>
 				</div>
 				<div>
-					<img className="imagenHome" src={imagen_Home} alt="Imagen de una chica buscando recetas"/>
+					<img className="imagenHome" src={imagen_Home} alt="Imagen de una chica buscando recetas" />
 				</div>
 			</div>
 		</div>
