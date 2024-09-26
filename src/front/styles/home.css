@@ -16,5 +16,14 @@
 }
 
 .imagenHome {
+}
 
+.botonRegistrarseBody {
+    color: white;
+    background-color: #e73827;
+    width: 100px;
+    box-shadow: 2px 2px 2px rgb(100, 100, 100);
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
 }

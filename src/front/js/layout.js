@@ -12,8 +12,6 @@ import { Private } from "./pages/private";
 
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/Navbar/navbar";
-
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -26,7 +24,6 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<iniciarSesion />} path="/iniciarSesion" />
