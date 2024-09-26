@@ -1,21 +1,16 @@
-/*
-    home.css: This website contains selectors only used in home.css
-
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
 .bodyHome {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Por defecto, en pantallas grandes */
 }
 
 .descripcionHome {
-    margin: 10vw;
-    width: 40vw;
+    margin-left: 10vw;
+    margin-top: 10vw;
+    width: 40vw; /* Ancho del texto */
 }
 
 .imagenHome {
+    width: 100%; /* Asegúrate de que la imagen no exceda su contenedor */
 }
 
 .botonRegistrarseBody {
@@ -26,4 +21,49 @@
     padding: 10px;
     border: none;
     border-radius: 100px;
+}
+
+/* Media Query para pantallas hasta 520px */
+@media (max-width: 520px) {
+    .bodyHome {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+        align-items: center; /* Centra los elementos horizontalmente */
+        padding: 0 5%; /* Añade un poco de padding lateral */
+    }
+
+    .descripcionHome {
+        margin-left: 0; /* Elimina el margen izquierdo */
+        margin-top: 20px; /* Ajusta el margen superior si es necesario */
+        width: auto; /* Permite que el ancho sea automático */
+        text-align: center; /* Centra el texto */
+        font-size: 16px; /* Ajusta el tamaño de fuente si es necesario */
+        line-height: 1.4; /* Mejora la legibilidad con mayor interlineado */
+        padding-bottom: 20px; /* Añade espacio debajo del texto */
+    }
+
+    .imagenHome {
+        width: auto; /* Permite que la imagen mantenga su proporción sin exceder su contenedor */
+        max-width: 90%; /* Limita el ancho máximo de la imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        margin-top: 20px; /* Añade un margen superior para separar la imagen del texto */
+    }
+
+    .botonRegistrarseBody {
+        width: auto; /* Haz el botón más ancho en pantallas pequeñas */
+        max-width: 150px; /* Limita el ancho máximo del botón */
+        padding: 12px; /* Aumenta el padding para hacerlo más clicable */
+        font-size: 16px; /* Ajusta el tamaño de fuente del botón si es necesario */
+        margin-top: 10px; /* Añade margen superior al botón para separación visual */
+    }
+}
+
+/* Media Query adicional para pantallas hasta 430px*/
+@media (max-width: 430px) {
+    .descripcionHome h1 {
+        font-size: 18px; /* Reduce el tamaño del título en pantallas muy pequeñas */
+    }
+
+    .descripcionHome h4 {
+        font-size: 14px; /* Reduce el tamaño del subtítulo en pantallas muy pequeñas */
+    }
 }
