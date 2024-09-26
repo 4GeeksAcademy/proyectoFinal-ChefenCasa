@@ -20,7 +20,7 @@ export const RecetaCompletaPublica = () => {
                                 
                             </div>
                             <div>
-                                <img>reemplazar por imagen receta</img>                                
+                                <img alt="reemplazar por imagen receta"/>                                
                             </div>
                         </div>
                         <div className="col">
