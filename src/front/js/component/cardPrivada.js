@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import "../../styles/cardPrivada.css";
 
 export const CardPrivada = () => {
     return (
-        <div className="card" style={{ width: "18rem" }}>
-            <img src="..." className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Chicken</h5>
-                <i className="fa-regular fa-clock"></i> <p>20 Minutes</p>
-                <i className="fa-regular fa-heart"></i>
-                <a href="#" className="btn btn-primary">Info</a>
-            </div>
+        <div className="contenedor-card">
+            <img src="image-url.jpg" alt="Recipe Image" class="recipe-image"/>
+                <div className="card-content">
+                    <h4 className="title">Recipe Title</h4>
+                    <p className="time"><i className="fa-regular fa-clock"></i> 45 minutes</p>
+                </div>
         </div>
+
     );
 };
