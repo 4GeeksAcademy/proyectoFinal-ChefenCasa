@@ -7,16 +7,15 @@ user_favorites = db.Table('user_favorites',
     db.Column('favoritos_id', db.Integer, db.ForeignKey('favoritos.id'), primary_key=True)
 )
 
-
 class User(db.Model):
     __tablename__ = 'usuario'    
     id = db.Column(db.Integer, primary_key=True)
-    name= db.Column(db.String(120), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    name= db.Column(db.String(120), unique=True)
+    email = db.Column(db.String(120), unique=True)
+    password = db.Column(db.String(80))
+    is_active = db.Column(db.Boolean())
 
-    favoritos = db.relationship('Favoritos', secondary=user_favorites, backref=db.backref('usuarios',lazy='dynamic'))
+    favoritos = db.relationship('Favoritos', secondary=user_favorites, backref=db.backref('usuarios', lazy='dynamic'))
     menuSemanal = db.relationship('MenuSemanal', backref='usuario')
     notas = db.relationship('Notas', backref='usuario')
 
@@ -25,14 +24,14 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "is_active": True            
+            "is_active": self.is_active
         }
 
 class Favoritos(db.Model):
     __tablename__ = 'favoritos'
     id = db.Column(db.Integer, primary_key=True)
-    api_receta_id = db.Column(db.Integer, nullable=False)
-    
+    api_receta_id = db.Column(db.Integer)
+
     def serialize(self):
         return {
             "id": self.id,
@@ -42,10 +41,10 @@ class Favoritos(db.Model):
 class MenuSemanal(db.Model):
     __tablename__ = 'menuSemanal'
     id = db.Column(db.Integer, primary_key=True)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
-    dia_semana = db.Column(db.String(20), nullable=False)
-    tipo_comida = db.Column(db.String(20), nullable=False)
-    api_receta_id = db.Column(db.Integer, nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    dia_semana = db.Column(db.String(20))
+    tipo_comida = db.Column(db.String(20))
+    api_receta_id = db.Column(db.Integer)
 
     def serialize(self):
         return {
@@ -59,9 +58,9 @@ class MenuSemanal(db.Model):
 class Notas(db.Model):
     __tablename__ = 'notas'
     id = db.Column(db.Integer, primary_key=True)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
-    api_receta_id = db.Column(db.Integer, nullable=False)
-    contenido = db.Column(db.Text, nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    api_receta_id = db.Column(db.Integer)
+    contenido = db.Column(db.Text)
 
     def serialize(self):
         return {
@@ -70,10 +69,3 @@ class Notas(db.Model):
             "api_receta_id" : self.api_receta_id,
             "contendio": self.contenido
         }
-
-
-
-
-
-
-    
