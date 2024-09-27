@@ -30,11 +30,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			signUp: async (email, password) => {
+			signUp: async (name,email, password) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
 						method: "POST",
 						body: JSON.stringify({
+							name:name,
 							email: email,
 							password: password,
 							is_active: true

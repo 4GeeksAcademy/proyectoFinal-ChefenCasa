@@ -1,0 +1,65 @@
+.modal.display-block {
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .modal.display-none {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000
+  }
+  .modal-main {
+    background-color: #FFC83D;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    min-height: 300px;
+  }
+  .login-field {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 2px solid #EDEDED;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .login-field::placeholder, .signUp-field::placeholder {
+    color: #999;
+  }
+  .btn-modal {
+    background-color: #E73827;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 50%;
+    color:white;
+  }
+  .btn-modal:hover {
+    background-color: #FF3333;
+  }
+  p{
+    font-size: 30px;
+  }
+  .btn-modal{
+    display: block;
+    margin: 20px auto;
+  }
