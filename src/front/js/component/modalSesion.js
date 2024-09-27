@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { Context } from "../store/appContext";
 import '../../styles/modal.css'
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,13 @@ export const ModalSesion = ({ show, onClose }) => {
     const [passValor, setPassValor] = useState('');
     const [data, setData] = useState()
     const navigate = useNavigate();
+    useEffect(() => {
+        return () => {
+            
+            setEmailtValor('');  
+            setPassValor('');
+        };
+    }, []);
 
     const login = async (e) => {
         e.preventDefault()
@@ -21,16 +28,16 @@ export const ModalSesion = ({ show, onClose }) => {
             "password": passValor
         }
         const userLogin = await actions.login(data);
-
-                if (userLogin) {
-                    navigate('/vistaPrivada')
-                } else {
-                    alert('Usuario o contraseña incorrectos');
-                }
         
-                setEmailtValor('');
-                setPassValor('');
-                onclose();
+
+        if (userLogin) {
+            navigate('/vistaPrivada')
+        } else {
+            alert('Usuario o contraseña incorrectos');
+        }
+
+        setEmailtValor('');
+        setPassValor('');
     }
 
     return (

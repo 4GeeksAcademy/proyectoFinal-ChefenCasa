@@ -22,8 +22,8 @@ export const ModalRegistro = ({ show, onClose }) => {
         const signUpProcess = await actions.signUp(name, email, password)
         if (signUpProcess) {
             alert('usuario registrado con exito')
-            
         }
+        onClose();
 
     }
     return (
