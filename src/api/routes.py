@@ -16,7 +16,7 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 #ruta para inicio sesión
-@api.route('/login', methods=['GET'])
+@api.route('/login', methods=['POST'])
 def login():
     email = request.json.get('email', None)
     password = request.json.get('password', None)

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import { Navbar } from "../../js/component/Navbar/navbar";
 import { ModalRegistro } from "../component/modalRegistro";
 

@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import '../../styles/modalRegistro.css'
+import '../../styles/modal.css'
 import { useNavigate } from 'react-router-dom';
+import { ModalSesion } from "./modalSesion";
 
 
 
@@ -18,17 +19,17 @@ export const ModalRegistro = ({ show, onClose }) => {
 
     const navigate = useNavigate()
     const signUp = async () => {
-        const signUpProcess = await actions.signUp(email, password, name)
+        const signUpProcess = await actions.signUp(name, email, password)
         if (signUpProcess) {
             alert('usuario registrado con exito')
-            navigate('/login')
+            
         }
 
     }
     return (
         <div className={showHideClassName + " modal-overlay"}>
             <section className="modal-main">
-               
+
                 <p>Sign in</p>
                 <form onSubmit={signUp}>
                     <label >Name</label>
@@ -69,7 +70,7 @@ export const ModalRegistro = ({ show, onClose }) => {
 
 
                 </form>
-                <button  className="btn-modal" type="submit" onClick={signUp}>
+                <button className="btn-modal" type="submit" onClick={signUp}>
                     Sign in
                 </button>
             </section>
