@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { Navbar } from "../../js/component/Navbar/navbar";
+import { NavbarPublico } from "../component/Navbar/navbarPublico";
 
 import imagen_Home from "../../img/imagen_Home.jpg";
 
@@ -12,7 +12,7 @@ export const Home = () => {
 
 	return (
 		<div>
-			< Navbar />
+			< NavbarPublico />
 			<div className="bodyHome">
 				<div className="descripcionHome">
 					<h1>All the food for the week in one place</h1>

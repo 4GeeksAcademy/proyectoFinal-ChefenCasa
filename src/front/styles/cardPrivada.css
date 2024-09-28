@@ -1,6 +1,7 @@
+
+
 .contenedor-card {
-    width: 250px;
-    height: auto; /* Para que la tarjeta ajuste su altura */
+    width: 15vw;
     background-color: #f9c039;
     border-radius: 10px;
     display: flex;

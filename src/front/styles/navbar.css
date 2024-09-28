@@ -1,3 +1,5 @@
+/* Navbar público */
+
 .navbar {
     width: 100vw;
     padding: 20px;
@@ -18,4 +20,13 @@
     width: 20vw;
     min-width: 150px;
     max-width: 250px;
+}
+
+/* Navbar Privado */
+
+.botonPerfil {
+    background-color: #f9c039;
+    width: 100px;
+    padding: 10px;
+    border: none;
 }

@@ -4,7 +4,7 @@ import "../../../styles/navbar.css";
 import logo from "./logo_ingles.png";
 
 
-export const Navbar = () => {
+export const NavbarPublico = () => {
 	return (
 		<nav className="navbar">
 			<div className="container">
