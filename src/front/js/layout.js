@@ -11,9 +11,13 @@ import { VistaPrivada } from "./pages/vistaPrivada";
 import { VistaPublica } from "./pages/vistaPublica";
 import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
 import { RecetaCompletaPrivada } from "./pages/recetaCompletaPrivada";
-import { RutasPrivadas } from "./component/rutasProtegidas";
+
+import { CardPrueba } from "./pages/card_prueba";
+import { CardPrivada } from "./component/cardPrivada";
 
 import injectContext from "./store/appContext";
+
+
 
 //create your first component
 const Layout = () => {
@@ -35,6 +39,9 @@ const Layout = () => {
                         <Route element={<VistaPublica />} path="/vistaPublica" />
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
+
+                        <Route element={<CardPrueba />} path="/cardPrueba" />
+                        <Route element={<CardPrivada />} path="/cardPrivada" />
 
                         <Route element={<h1>Not found!</h1>} />
                         

@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
+			recetas:[]
+			
 		},
 		actions: {
 
@@ -94,10 +96,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 
+			},
+
+			
+			obtenerRecetas : async () => {
+				const apiKey='4f102ececb3243b0b4487681fc6f9ae5'
+				const url = `https://api.spoonacular.com/recipes/random?number=50&apiKey=${apiKey}`;
+				
+				try {
+					const response = await fetch(url);					
+					if (!response.ok) {
+						throw new Error('Error al obtener las recetas');
+					}
+										
+					const data = await response.json();
+					const recetas = data.recipes; 
+			
+					//cuando va asyn y cuando no en el map(asyn(receta))
+					const resultados = recetas.map((receta) => ({
+						id: receta.id,
+						title: receta.title,
+						image: receta.image,
+						dieta: receta.diets,
+						instructions: receta.instructions 
+							? receta.instructions 
+							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
+						tiempo_de_coccion: receta.readyInMinutes 
+							? `${receta.readyInMinutes} minutos`
+							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
+						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps) 
+							? receta.analyzedInstructions[0].steps 
+							: 'Los pasos no están disponibles.'
+						
+					}));
+
+					const store = getStore();
+                	setStore({ ...store, recetas: resultados });
+
+
+				} catch (error) {
+					console.error('Error al obtener las recetas:', error); 
+				}
 			}
-
-
-
+	
 		}
 	};
 };
