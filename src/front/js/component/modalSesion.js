@@ -12,12 +12,15 @@ export const ModalSesion = ({ show, onClose }) => {
     const [emailValor, setEmailtValor] = useState('');
     const [passValor, setPassValor] = useState('');
     const [data, setData] = useState()
+    
     const navigate = useNavigate();
+
+    const [montado,setMontado]=useState(true)
+
     useEffect(() => {
+        
         return () => {
-            
-            setEmailtValor('');  
-            setPassValor('');
+            setMontado(false);
         };
     }, []);
 
@@ -29,16 +32,19 @@ export const ModalSesion = ({ show, onClose }) => {
         }
         const userLogin = await actions.login(data);
         
-
-        if (userLogin) {
-            navigate('/vistaPrivada')
-        } else {
-            alert('Usuario o contraseña incorrectos');
+        if(montado){ //solo lo actualiza si tengo el componente montado
+            if (userLogin) {
+                navigate('/vistaPrivada')
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+    
+            setEmailtValor('');
+            setPassValor('');
         }
-
-        setEmailtValor('');
-        setPassValor('');
-    }
+        
+        };
+        
 
     return (
         <div className={showHideClassName + " modal-overlay"}>
