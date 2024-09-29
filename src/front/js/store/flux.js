@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 		},
 		actions: {
-			
+
 			login: async (dataUser) => {
 
 				const response = await fetch(process.env.BACKEND_URL + "/api/login", {
@@ -20,23 +20,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const data = await response.json()
 
+
+
 				if (response.status !== 200) {
 
 					return false
 				}
 				else {
 					localStorage.setItem("token", data.token)
-				
+
 					return true
 				}
 
 			},
 
-			signUp: async (email, password) => {
+			signUp: async (name, email, password) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
 						method: "POST",
 						body: JSON.stringify({
+							name: name,
 							email: email,
 							password: password,
 							is_active: true
@@ -55,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false; // Retorna false si la respuesta no es exitosa
 					}
 					else {
-						
+
 						return true; // Retorna true si el registro fue exitoso
 					}
 				} catch (error) {
@@ -69,23 +72,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const token = localStorage.getItem('token')
 
 				try {
-					const response = await fetch(process.env.BACKEND_URL +'/api/protected', {
+					const response = await fetch(process.env.BACKEND_URL + '/api/protected', {
 						method: "GET",
 						headers: {
 							"Content-Type": "application/json",
 							'Authorization': 'Bearer ' + token
 						}
-				
+
 					});
-					
+
 					if (!response.ok) {
 						return false
 					} else {
 						const data = await response.json()
-						
+
 						return true
-						
-						
+
+
 					}
 				} catch (error) {
 					console.error('error durante la autentificación', error);

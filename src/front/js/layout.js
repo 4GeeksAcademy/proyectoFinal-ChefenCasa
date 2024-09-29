@@ -6,9 +6,7 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { iniciarSesion } from "./pages/iniciarSesion";
 import { Single } from "./pages/single";
-import { Login } from "./pages/login";
-import { SignUp } from "./pages/signUp";
-import { Private } from "./pages/private";
+
 import { VistaPrivada } from "./pages/vistaPrivada";
 import { VistaPublica } from "./pages/vistaPublica";
 import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
@@ -37,13 +35,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<iniciarSesion />} path="/iniciarSesion" />
                         <Route element={<Single />} path="/single/:theid" />            
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<SignUp />} path="/signUp" />
-                        <Route element={<Private />} path="/private" />
-
-                        
-
-                        <Route element={<VistaPrivada />} path="/vistaPrivada" />
+                        <Route element={<RutasPrivadas><VistaPrivada /></RutasPrivadas>} path="/vistaPrivada" />
                         <Route element={<VistaPublica />} path="/vistaPublica" />
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
