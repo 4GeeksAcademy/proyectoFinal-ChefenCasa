@@ -11,7 +11,7 @@ import { VistaPrivada } from "./pages/vistaPrivada";
 import { VistaPublica } from "./pages/vistaPublica";
 import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
 import { RecetaCompletaPrivada } from "./pages/recetaCompletaPrivada";
-import { RutasPrivadas } from "./component/rutasPrivadas";
+
 
 import { CardPrueba } from "./pages/card_prueba";
 import { CardPrivada } from "./component/cardPrivada";
@@ -37,7 +37,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<iniciarSesion />} path="/iniciarSesion" />
                         <Route element={<Single />} path="/single/:theid" />            
-                        <Route element={<RutasPrivadas><VistaPrivada /></RutasPrivadas>} path="/vistaPrivada" />
+                        <Route element={<VistaPrivada />} path="/vistaPrivada" />
                         <Route element={<VistaPublica />} path="/vistaPublica" />
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
