@@ -19,9 +19,9 @@ export const ModalSesion = ({ show, onClose }) => {
 
     useEffect(() => {
         
-        return () => {
+       
             setMontado(false);
-        };
+        
     }, []);
 
     const login = async (e) => {
@@ -49,6 +49,9 @@ export const ModalSesion = ({ show, onClose }) => {
     return (
         <div className={showHideClassName + " modal-overlay"}>
             <section className="modal-main">
+            <button className="close-button" onClick={onClose}>
+                    &times; 
+                </button>
                 <p>LOGIN</p>
                 <form onSubmit={login}>
                     <label>Email</label>
@@ -72,10 +75,11 @@ export const ModalSesion = ({ show, onClose }) => {
                         value={passValor}
                         onChange={(e) => setPassValor(e.target.value)}
                     />
-
+                        <h6>If you are not registered, click here </h6>
                     <button className="btn-modal" type="submit">
-                        Sign in
+                        Login
                     </button>
+                    
                 </form>
             </section>
         </div>

@@ -29,7 +29,9 @@ export const ModalRegistro = ({ show, onClose }) => {
     return (
         <div className={showHideClassName + " modal-overlay"}>
             <section className="modal-main">
-
+            <button className="close-button" onClick={onClose}>
+                    &times; 
+                </button>
                 <p>Sign in</p>
                 <form onSubmit={signUp}>
                     <label >Name</label>
