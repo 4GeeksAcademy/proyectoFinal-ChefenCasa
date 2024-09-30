@@ -17,6 +17,7 @@ import { CardPrueba } from "./pages/card_prueba";
 import { CardPrivada } from "./component/cardPrivada";
 
 import injectContext from "./store/appContext";
+import { MenuSemanal } from "./pages/menu_semanal";
 
 
 
@@ -40,6 +41,7 @@ const Layout = () => {
                         <Route element={<VistaPublica />} path="/vistaPublica" />
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
+                        <Route element={<MenuSemanal />} path="/menuSemanal" />
 
                         <Route element={<CardPrueba />} path="/cardPrueba" />
                         <Route element={<CardPrivada />} path="/cardPrivada" />
