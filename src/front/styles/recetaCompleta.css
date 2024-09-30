@@ -1,0 +1,45 @@
+
+
+.contenedor {
+    display: grid;
+    grid-template-rows: auto auto; 
+    grid-gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+.encabezado {
+    background-color: #ffc107; 
+    text-align: center;
+    padding: 20px;
+}
+
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.col {
+    padding: 20px;
+}
+
+.ingredientes {
+    background-color: #ffc107; 
+    border-radius: 10px;
+}
+
+.ingredientes ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+
+.menu-lateral {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 10px;
+    padding: 10px;
+}
