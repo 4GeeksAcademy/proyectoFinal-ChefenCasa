@@ -1,16 +1,26 @@
 import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext"
+import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
+import { CardPrivada } from "../component/cardPrivada";
 
-export const VistaPrivada = ()=>{
-    const { store, actions } = useContext(Context);
-   
+import "../../styles/vistaPrivada.css";
+import "../../styles/cardPrivada.css";
 
-    return ( 
-        <div className="vista-privada">
-            <h1>Bienvenido, {store.userName || "Usuario"}</h1> 
-            <p>TEXTO DE PRUEBA</p>
-            
+
+export const VistaPrivada = () => {
+	const { store, actions } = useContext(Context);
+
+	return (
+        <div>
+        <NavbarPrivado />
+        <div className="contenedorCartasRecetas col-3">
+            <CardPrivada />
+            <CardPrivada />
+            <CardPrivada />
+            <CardPrivada />
         </div>
-    );
-};
+    </div>
+        );
+    };
+        

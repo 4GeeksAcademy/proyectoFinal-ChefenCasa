@@ -15,7 +15,6 @@ export const CardPrivada = () => {
 
     return (
         <div>
-            <h1>Receta</h1>
             {receta ? (
                 <div className="contenedor-card">
                     <img src={receta.image} alt={receta.title} className="recipe-image" />
@@ -34,7 +33,7 @@ export const CardPrivada = () => {
                     </div>
                 </div>
             ) : (
-                <p>Cargando receta...</p>
+                <p>Loading recipe...</p>
             )}
         </div>
     );
