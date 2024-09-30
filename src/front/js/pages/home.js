@@ -19,7 +19,7 @@ export const Home = () => {
 
 	return (
 		<div>
-			< NavbarPublico />
+			< Navbar />
 			<div className="bodyHome">
 				<div className="descripcionHome">
 					<h1>All the food for the week in one place</h1>
