@@ -1,4 +1,6 @@
 .contenedorCartasRecetas {
-    display: flex;
-    
+    width: 20vw;
+    display: flex; /* Activa el modelo de caja flexible */
+    justify-content: space-between; /* Espacia las cartas uniformemente */
+    margin: 100px;
 }

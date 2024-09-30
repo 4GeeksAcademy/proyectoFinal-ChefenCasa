@@ -1,14 +1,15 @@
 
 
 .contenedor-card {
-    width: 15vw;
+    width: 15vw; /* Ancho fijo o relativo para cada tarjeta */
     background-color: #f9c039;
     border-radius: 10px;
     display: flex;
-    flex-direction: column; /* Organiza los elementos en una columna */
+    flex-direction:column; /* Mantiene la disposición interna en columna */
     align-items: center; /* Centra los elementos horizontalmente */
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 100px; /* Espacio entre las tarjetas */
 }
 
 .recipe-image {
