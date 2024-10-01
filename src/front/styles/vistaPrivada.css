@@ -1,6 +1,63 @@
 .contenedorCartasRecetas {
-    width: 20vw;
+    width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */
     justify-content: space-between; /* Espacia las cartas uniformemente */
-    margin: 100px;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias líneas */
+    margin: 0 auto; /* Centra el contenedor si es necesario */
+}
+
+.contenedor-card {
+    width: 20vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
+    background-color: #f9c039;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Mantiene la disposición interna en columna */
+    align-items: start; /* Centra los elementos horizontalmente */
+    padding: 1vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 1vw; /* Espacio entre las tarjetas */
+    margin-left: 2vw;
+    margin-right: 2vw;
+    position: relative;
+}
+
+.recipe-image {
+    width: 100%;
+}
+
+.title.ms-auto {
+    margin-bottom: 30%;
+}
+
+.time.me-5 {
+    position: absolute;
+    bottom: 0;
+    font-size: medium;
+}
+
+.corazon-info.d-flex {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 5%;
+    font-size: medium;
+
+    display: flex;
+    flex-direction: row; /* Coloca los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.botonFavorito {
+    background-color: #f9c039;
+    border: none;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) { /* Ajusta este valor según tus necesidades */
+    .contenedor-card {
+        width: 40vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+    }
+    .corazon-info.d-flex {
+        font-size: small;
+    }
 }
