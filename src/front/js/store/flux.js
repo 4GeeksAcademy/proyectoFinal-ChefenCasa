@@ -100,8 +100,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			
 			obtenerRecetas : async () => {
-				const apiKey='4f102ececb3243b0b4487681fc6f9ae5'
-				const url = `https://api.spoonacular.com/recipes/random?number=50&apiKey=${apiKey}`;
+				const apiKey='538cad08e180457eb33a329a6073cc09'
+				const url = `https://api.spoonacular.com/recipes/random?number=5&apiKey=${apiKey}`;
 				
 				try {
 					const response = await fetch(url);					

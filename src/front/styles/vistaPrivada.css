@@ -1,6 +1,120 @@
 .contenedorCartasRecetas {
-    width: 20vw;
+    background-color: bisque;
+    width: 94vw;
     display: flex; /* Activa el modelo de caja flexible */
-    justify-content: space-between; /* Espacia las cartas uniformemente */
-    margin: 100px;
+    justify-content: center; /* Centra las cartas horizontalmente */
+    margin: 3vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    flex-wrap: wrap; /* Permite que las cartas se envuelvan a la siguiente línea */
+}
+
+.contenedor-card {
+    background-color: #f9c039;
+    border-radius: 10px;
+    display: flex; /* Cambiado a flex para alinear imagen y contenido */
+    align-items: stretch; /* Asegura que los elementos ocupen toda la altura */
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    justify-content: space-between;
+
+    width: 42vw; /* Ancho para cuatro cartas en una fila (ajusta según sea necesario) */
+    margin: 10px; /* Espacio entre las cartas */
+
+    aspect-ratio: 5 / 1; /* Proporción de ancho a alto (ajusta según sea necesario) */
+}
+
+.recipe-image {
+    width: 50%; /* Ajusta el ancho de la imagen */
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+    margin-right: 1vw;
+}
+
+.toda-info {
+    width: 60%; /* Ajusta el ancho del contenedor de información */
+    display: flex;
+    flex-direction: column; /* Mantiene los elementos en columna */
+}
+
+.botonFavorito {
+    background-color: #f9c039;
+    border: none;
+}
+
+.card-content {
+    width: 100%;
+}
+
+.datos {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos de forma equitativa */
+    align-items: center;
+}
+
+.dato.d-flex {
+    width: 10%;
+    font-size: small;
+}
+
+.fa-regular.fa-clock {
+    display: flex;
+    width: 6vw;
+}
+
+.corazon-info {
+    display: flex;
+}
+
+.corazon-info {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+  }
+  
+.favoritoInfo {
+        display: flex;
+        flex-direction: column; /* Coloca los elementos en una columna */
+        align-items: flex-end; /* Alinea los elementos al final (derecha) */
+}
+
+.botonFavorito,
+.botonMasInfo {
+    margin: 5px 0; /* Espaciado entre los botones */
+  }
+
+/* Estilos del botón */
+.botonMasInfo {
+    background-color: #b4b2b2;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) { 
+   .contenedor-card {
+        width: 80vw; /* Ancho para dos cartas en una fila */
+        height: 18vh;
+   }
+   
+   .toda-info {
+       width: 60%; /* Permite que ocupe el espacio restante */
+   }
+   .nombreTiempo {
+        width: 40%;
+   }
+   .recipe-image {
+        width: 30%; /* Ajusta el ancho de la imagen */
+        height: 80%;
+   }
+}
+
+@media (max-width: 1200px) { 
+    .contenedor-card {
+        height: 18vh;
+    }
+
 }
