@@ -1,0 +1,13 @@
+.modal-backdrop {
+    display: none;
+  }
+  
+  .modal {
+    background-color: transparent; 
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    max-width: 500px;
+    border: none;
+  }
