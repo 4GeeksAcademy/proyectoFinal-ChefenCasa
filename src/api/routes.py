@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from .models import db, User
+from .models import db, User, MenuSemanal
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -67,3 +67,26 @@ def signup():
         return jsonify({'msg':'Usuario registrado exitosamente'}),200 
     elif user:
         return jsonify({'msg':'Usuario ya existe'}),400
+
+
+@api.route('/menuSemanal/', methods=['GET'])
+@jwt_required()
+def get_menu_semanal():
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
+
+    if user is None:
+        return jsonify({'msg':'verificación incorrecta'}), 401
+    
+    menu_semanal= MenuSemanal.query.filter_by(usuario_id=current_user_id).all()
+
+    if not menu_semanal:
+        return jsonify({'msg': 'No se encontraron menús semanales para este usuario'}), 404
+    
+ # Para depuración
+    print(f"Menús semanales encontrados: {menu_semanal}")
+
+    resultado = [menu.serialize() for menu in menu_semanal]
+    print(f"Resultado serializado: {resultado}")  # Depura el resultado serializado
+
+    return jsonify(resultado), 200
