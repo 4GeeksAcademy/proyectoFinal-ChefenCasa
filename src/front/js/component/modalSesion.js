@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import '../../styles/modal.css'
 import { useNavigate } from 'react-router-dom';
@@ -12,17 +12,10 @@ export const ModalSesion = ({ show, onClose }) => {
     const [emailValor, setEmailtValor] = useState('');
     const [passValor, setPassValor] = useState('');
     const [data, setData] = useState()
-    
+
     const navigate = useNavigate();
 
-    const [montado,setMontado]=useState(true)
-
-    useEffect(() => {
-        
-       
-            setMontado(false);
-        
-    }, []);
+   
 
     const login = async (e) => {
         e.preventDefault()
@@ -31,26 +24,21 @@ export const ModalSesion = ({ show, onClose }) => {
             "password": passValor
         }
         const userLogin = await actions.login(data);
-        
-        if(montado){ //solo lo actualiza si tengo el componente montado
-            if (userLogin) {
-                navigate('/vistaPrivada')
-            } else {
-                alert('Usuario o contraseña incorrectos');
-            }
-    
-            setEmailtValor('');
-            setPassValor('');
+
+        if (userLogin) {
+            navigate('/vistaPrivada')
+        } else {
+            alert('Usuario o contraseña incorrectos');
         }
-        
-        };
-        
+
+    };
+
 
     return (
         <div className={showHideClassName + " modal-overlay"}>
             <section className="modal-main">
-            <button className="close-button" onClick={onClose}>
-                    &times; 
+                <button className="close-button" onClick={onClose}>
+                    &times;
                 </button>
                 <p>LOGIN</p>
                 <form onSubmit={login}>
@@ -75,11 +63,11 @@ export const ModalSesion = ({ show, onClose }) => {
                         value={passValor}
                         onChange={(e) => setPassValor(e.target.value)}
                     />
-                        <h6>If you are not registered, click here </h6>
+                    <h6>If you are not registered, click here </h6>
                     <button className="btn-modal" type="submit">
                         Login
                     </button>
-                    
+
                 </form>
             </section>
         </div>
