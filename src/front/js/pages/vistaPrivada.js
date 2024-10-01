@@ -14,7 +14,7 @@ export const VistaPrivada = () => {
 	return (
         <div>
         <NavbarPrivado />
-        <div className="contenedorCartasRecetas">
+        <div className="contenedorCartasRecetas col-3">
             <CardPrivada />
             <CardPrivada />
             <CardPrivada />

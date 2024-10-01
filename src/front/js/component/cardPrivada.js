@@ -18,15 +18,16 @@ export const CardPrivada = () => {
             {receta ? (
                 <div className="contenedor-card">
                     <img src={receta.image} alt={receta.title} className="recipe-image" />
-                    <div className="nombreTiempo">
-                        <h4 className='title ms-auto' style={{fontSize: "medium"}}>{receta.title}</h4>
-                        <p className="time me-5 " style={{fontSize: "medium"}}>
-                           🕐 {receta.tiempo_de_coccion}
+                    <h4 className='title ms-auto'>{receta.title}</h4>
+                    <div className='dato d-flex'>
+                        <p className="time me-5" style={{fontSize: "medium"}}>
+                            <i className="fa-regular fa-clock"></i> {receta.tiempo_de_coccion}
                         </p>
-                    </div>
-                    <div className='favoritoInfo'>
+
                         <div className="corazon-info d-flex">
-                            <button className='botonFavorito'>❤️​</button>
+                            <button className='botonFavorito'>
+                                <i className="fa-solid fa-heart me-2" style={{fontSize: "large"}}></i>
+                            </button>
                             <Link to={"/recetaCompletaPrivada"}>
                                 <button className="botonMasInfo">info</button>
                             </Link>
