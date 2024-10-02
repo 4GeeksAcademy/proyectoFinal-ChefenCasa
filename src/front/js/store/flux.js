@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			recetas:[]
-			
+			recetas: []
+
 		},
 		actions: {
 
@@ -28,6 +28,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				else {
 					localStorage.setItem("token", data.token)
+					localStorage.setItem("user_id", data.user_id)
+					localStorage.setItem("user_name", data.name)
+					localStorage.setItem("user_email", dataUser.email)
 
 					return true
 				}
@@ -98,47 +101,81 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			
-			obtenerRecetas : async () => {
-				const apiKey='028c2ea23fa54efab167ced1cc96873b'
+			modificar: async (id, name, email) => {
+
+				const response = await fetch(process.env.BACKEND_URL + `/api/modificar/${id}`, {
+					method: "PUT",
+					body: JSON.stringify({
+						name: name,
+						email: email
+					}),
+					headers: {
+						"Content-Type": "application/json"
+					}
+
+				})
+
+				const data = await response.json()
+
+				if (response.status == 200) {
+
+					localStorage.setItem("user_name", data.name)
+					localStorage.setItem("user_email", data.email)
+
+				}
+
+				return data
+
+			},
+
+
+
+
+
+
+
+
+
+			obtenerRecetas: async () => {
+				const apiKey = '028c2ea23fa54efab167ced1cc96873b'
 				const url = `https://api.spoonacular.com/recipes/random?number=1&apiKey=${apiKey}`;
-				
+
 				try {
-					const response = await fetch(url);					
+					const response = await fetch(url);
 					if (!response.ok) {
 						throw new Error('Error al obtener las recetas');
 					}
-										
+
 					const data = await response.json();
-					const recetas = data.recipes; 
-			
+					const recetas = data.recipes;
+
 					//cuando va asyn y cuando no en el map(asyn(receta))
 					const resultados = recetas.map((receta) => ({
 						id: receta.id,
 						title: receta.title,
 						image: receta.image,
 						dieta: receta.diets,
-						instructions: receta.instructions 
-							? receta.instructions 
+						instructions: receta.instructions
+							? receta.instructions
 							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
-						tiempo_de_coccion: receta.readyInMinutes 
+						tiempo_de_coccion: receta.readyInMinutes
 							? `${receta.readyInMinutes} minutos`
 							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
-						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps) 
-							? receta.analyzedInstructions[0].steps 
+						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps)
+							? receta.analyzedInstructions[0].steps
 							: 'Los pasos no están disponibles.'
-						
+
 					}));
 
 					const store = getStore();
-                	setStore({ ...store, recetas: resultados });
+					setStore({ ...store, recetas: resultados });
 
 
 				} catch (error) {
-					console.error('Error al obtener las recetas:', error); 
+					console.error('Error al obtener las recetas:', error);
 				}
 			}
-	
+
 		}
 	};
 };
