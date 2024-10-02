@@ -2,8 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			recetas: [],
-
+			recetas:[],
+			menuSemanal:[],
+			
 		},
 		actions: {
 
@@ -130,8 +131,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = '028c2ea23fa54efab167ced1cc96873b'
-				const url = `https://api.spoonacular.com/recipes/random?number=1&apiKey=${apiKey}`;
+				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
 					const response = await fetch(url);
@@ -229,8 +230,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const tituloReceta = await Promise.all(respuestaPromesaTitulos);
 
 						console.log("Titulos de las recetas:", tituloReceta);
-
-						return tituloReceta; // Devolver el array de menús con los títulos de las recetas
+			
+						// Guardar en el store
+						setStore({ menuSemanal: tituloReceta });
+						//localStorage.setItem("user_name", data.name)
 					}
 				} catch (error) {
 					console.error('Error durante la autenticación o al obtener datos', error);

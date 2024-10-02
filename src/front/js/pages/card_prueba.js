@@ -5,16 +5,11 @@ export const CardPrueba = () => {
     const { store, actions } = useContext(Context); // Obtén el store y las acciones de Flux
 
     useEffect(() => {
-        
+
         actions.obtenerRecetas(); // Llama a la acción para obtener 50 recetas
     }, []); // Este efecto se ejecuta al montar el componente
 
-    useEffect(() => {
-        
-        console.log(store.recetas);
-        actions.obtenerMenu()
-         
-    }, [store.recetas]);
+    
 
     return (
         <div>
