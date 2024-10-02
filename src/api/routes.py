@@ -136,11 +136,8 @@ def get_menu_semanal():
 
     if not menu_semanal:
         return jsonify({'msg': 'No se encontraron menús semanales para este usuario'}), 404
-    
- # Para depuración
-    print(f"Menús semanales encontrados: {menu_semanal}")
 
     resultado = [menu.serialize() for menu in menu_semanal]
-    print(f"Resultado serializado: {resultado}")  # Depura el resultado serializado
+    
 
     return jsonify(resultado), 200
