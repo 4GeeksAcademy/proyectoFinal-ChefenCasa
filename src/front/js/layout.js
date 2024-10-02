@@ -11,7 +11,7 @@ import { VistaPrivada } from "./pages/vistaPrivada";
 import { VistaPublica } from "./pages/vistaPublica";
 import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
 import { RecetaCompletaPrivada } from "./pages/recetaCompletaPrivada";
-import { RutasPrivadas } from "./component/rutasPrivadas";
+
 
 import { CardPrueba } from "./pages/card_prueba";
 import { CardPrivada } from "./component/cardPrivada";

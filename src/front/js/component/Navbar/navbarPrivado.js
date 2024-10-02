@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../../styles/navbar.css";
 import logo from "./logo_ingles.png";
+import { ModalPerfil } from "../modalPerfil";
+import { Context } from "../../store/appContext";
 
 
 export const NavbarPrivado = () => {
+
+	const { store, actions } = useContext(Context);
+	
+    
+	const [showModalPerfil, setShowModalPerfil] = useState(false);
+    const openModalProfile = () => {
+        setShowModalPerfil(true);
+    }
+    
+    const closeModal = () => {
+        setShowModalPerfil(false);
+    };
 	return (
+		<>
 		<nav className="navbar">
 			<div className="container">
 				<Link to="/">
@@ -16,7 +31,8 @@ export const NavbarPrivado = () => {
 						<i className="fas fa-user fa-xl"></i> &nbsp; <i className="fas fa-bars fa-xl"></i>
 					</button>
 					<ul className="dropdown-menu">
-						<li><a className="dropdown-item" href="#">Profile</a></li>
+						
+						<li><a className="dropdown-item" href="#" onClick={openModalProfile}>Profile</a></li>
 						<li><a className="dropdown-item" href="#">Favorites</a></li>
 						<li><a className="dropdown-item" href="#">Weekly Menu</a></li>
 						<li><hr className="dropdown-divider"/></li>
@@ -25,5 +41,7 @@ export const NavbarPrivado = () => {
 				</div>
 			</div>
 		</nav>
+		<ModalPerfil show={showModalPerfil} onClose={closeModal}></ModalPerfil>
+		</>
 	);
 };
