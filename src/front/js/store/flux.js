@@ -153,6 +153,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						title: receta.title,
 						image: receta.image,
 						dieta: receta.diets,
+						ingredientes: receta.extendedIngredients.map((ingrediente) => ({
+							ingrediente: ingrediente.name
+						})),						
 						instructions: receta.instructions
 							? receta.instructions
 							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
