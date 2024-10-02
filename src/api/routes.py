@@ -114,24 +114,29 @@ def eliminarUsario(id):
 
 @api.route('/guardarmenu', methods=['POST'])
 @jwt_required()
-def guardarMenu (): 
+def guardarMenu(): 
+    data = request.get_json() 
+    usuario_id = get_jwt_identity()  # busco el usuario autentificado
 
-    data =request.get_json() 
-    usuario_id = get_jwt_identity() # busco el usuario autentificado
+    # Validación de datos
+    if not all(key in data for key in ('dia_semana', 'tipo_comida', 'api_receta_id')):
+        return jsonify({'msg': 'Faltan datos necesarios'}), 400
 
-    #creo un obj vacio donde guardo el menu
-    nuevoMenu= MenuSemanal(
-        usuario_id = usuario_id,
-        dia_semana = data['dia_semana'],
-        tipo_comida = data['tipo_comida'],
-        api_receta_id =data ['api_receta_id']
+    # creo un obj vacio donde guardo el menu
+    nuevoMenu = MenuSemanal(
+        usuario_id=usuario_id,
+        dia_semana=data['dia_semana'],
+        tipo_comida=data['tipo_comida'],
+        api_receta_id=data['api_receta_id']
     )
 
-    db.session.add(nuevoMenu)
-    db.session.commit()
-    return jsonify({'msg':'Menú guardado'}),200
-
-
+    try:
+        db.session.add(nuevoMenu)
+        db.session.commit()
+        return jsonify({'msg': 'Menú guardado'}), 200
+    except Exception as e:
+        db.session.rollback()  
+        return jsonify({'msg': str(e)}), 500
 
 
 @api.route('/menuSemanal/', methods=['GET'])
@@ -141,14 +146,12 @@ def get_menu_semanal():
     user = User.query.get(current_user_id)
 
     if user is None:
-        return jsonify({'msg':'verificación incorrecta'}), 401
-    
-    menu_semanal= MenuSemanal.query.filter_by(usuario_id=current_user_id).all()
+        return jsonify({'msg': 'verificación incorrecta'}), 401
+
+    menu_semanal = MenuSemanal.query.filter_by(usuario_id=current_user_id).all()
 
     if not menu_semanal:
         return jsonify({'msg': 'No se encontraron menús semanales para este usuario'}), 404
 
     resultado = [menu.serialize() for menu in menu_semanal]
-    
-
     return jsonify(resultado), 200
