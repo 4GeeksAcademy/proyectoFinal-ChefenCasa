@@ -119,7 +119,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							? receta.instructions 
 							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
 						tiempo_de_coccion: receta.readyInMinutes 
-							? `${receta.readyInMinutes} minutos`
+							? `${receta.readyInMinutes} minutes`
 							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
 						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps) 
 							? receta.analyzedInstructions[0].steps 
