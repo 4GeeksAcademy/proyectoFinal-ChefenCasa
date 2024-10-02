@@ -112,13 +112,24 @@ def eliminarUsario(id):
         return jsonify({'msg':'Usuario no encontrado'}),400
 
 
-    
+@api.route('/guardarmenu', methods=['POST'])
+@jwt_required()
+def guardarMenu (): 
 
+    data =request.get_json() 
+    usuario_id = get_jwt_identity() # busco el usuario autentificado
 
+    #creo un obj vacio donde guardo el menu
+    nuevoMenu= MenuSemanal(
+        usuario_id = usuario_id,
+        dia_semana = data['dia_semana'],
+        tipo_comida = data['tipo_comida'],
+        api_receta_id =data ['api_receta_id']
+    )
 
-
-
-    
+    db.session.add(nuevoMenu)
+    db.session.commit()
+    return jsonify({'msg':'Menú guardado'}),200
 
 
 

@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/dropMenuSemanal.css"
 export const DropMenuSemanal = () => {
+    
     return (
         <div className="dropdown">
             <button className="btn btn-receta dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
