@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 
 			recetas:[],
+			menuSemanal:[],
 			
 		},
 		actions: {
@@ -235,7 +236,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 						console.log("Titulos de las recetas:", tituloReceta);
 			
-						return tituloReceta; // Devolver el array de menús con los títulos de las recetas
+						// Guardar en el store
+						setStore({ menuSemanal: tituloReceta });
+						//localStorage.setItem("user_name", data.name)
 					}
 				} catch (error) {
 					console.error('Error durante la autenticación o al obtener datos', error);
