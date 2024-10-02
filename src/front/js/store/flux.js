@@ -158,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Acá guardo la promesa de info de la api(los titulos)
 						const respuestaPromesaTitulos = [];
 			
-						//con el for recorro data y obtengo api_receta_id
+						//con el for recorro data y obtengo api_receta_id (receta)
 						for (let receta of data) {
 							
 							const apiResponse = (async () => {
@@ -176,10 +176,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 									receta.receta_title = recetaData.title;
 			
 									console.log("titulo obtenido correctamente" , 200);
+
+									return receta;
 									
 								} catch (error) {
 									console.error(`Error en la llamada a la API de Spoonacular para el id ${receta.api_receta_id}:`, error);
-									return receta; // Retornar el menú sin cambios si falla el fetch
+									return receta;
 								}
 							})();
 			
