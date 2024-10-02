@@ -40,7 +40,9 @@
     bottom: 0;
     right: 0;
     margin-right: 5%;
+    margin-bottom: 5%;
     font-size: medium;
+
 
     display: flex;
     flex-direction: row; /* Coloca los elementos en una columna */
