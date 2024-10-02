@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
 import { Context } from '../store/appContext'; // Importa tu store de Flux
-import "../../styles/cardPrivada.css";
 import { Link } from 'react-router-dom';
 
 export const CardPrivada = () => {
