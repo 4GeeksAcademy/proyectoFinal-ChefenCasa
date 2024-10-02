@@ -30,7 +30,7 @@ def login():
 
     #sino entra en esa condición, se inicia seción y se genera el jwt:
     token_creado = create_access_token(identity = user.id) 
-    return jsonify({'token': token_creado, 'user_id': user.id}), 200
+    return jsonify({'token': token_creado, 'user_id': user.id, 'name':user.name}), 200
 
 #una vez se inicia sesión, se va realizando la verificación del token. 
 @api.route('/protected', methods=['GET'])
@@ -67,6 +67,60 @@ def signup():
         return jsonify({'msg':'Usuario registrado exitosamente'}),200 
     elif user:
         return jsonify({'msg':'Usuario ya existe'}),400
+    
+#obtenemos los usuarios registrados
+@api.route('/usuarios', methods=['GET'])
+def obtenerUsuario():
+    usuarios = User.query.all() #almaceno todos los usuarios 
+    usuarios_json=[]
+    for usuario in usuarios:
+        usuarios_json.append({
+            "id": usuario.id,
+            "name": usuario.name,
+            "email":usuario.email,
+            "is_active":usuario.is_active
+        })
+
+    return jsonify(usuarios_json),200
+    
+@api.route('/modificar/<int:id>', methods=['PUT'])
+def modificarUsuario(id):
+    #primero obtengo los datos json de la solicitud 
+    data = request.get_json()
+    #extraígo el email y contraseña
+    name = data.get('name')
+    email = data.get('email')    
+
+    user = User.query.filter_by(id=id).first()
+
+    if user: 
+        user.name = name
+        user.email = email
+        db.session.commit() 
+        return jsonify({'msg':'Usuario modificado exitosamente', 'name':name, 'email':email}),200 
+    else:
+        return jsonify({'msg':'Usuario no encontrado'}),400
+    
+@api.route('/eliminar/<int:id>', methods=['DELETE'])
+def eliminarUsario(id):
+     user = User.query.filter_by(id=id)#no se ejecuta hasta que haga el user.first()
+     if user.first():
+         user.delete()
+         db.session.commit()
+         return jsonify({'msg':'Usuario eliminado exitosamente'}),200 
+     else:
+        return jsonify({'msg':'Usuario no encontrado'}),400
+
+
+    
+
+
+
+
+
+    
+
+
 
 
 @api.route('/menuSemanal/', methods=['GET'])

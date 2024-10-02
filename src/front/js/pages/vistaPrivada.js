@@ -9,18 +9,20 @@ import "../../styles/cardPrivada.css";
 
 
 export const VistaPrivada = () => {
-	const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
-	return (
+    console.log("hikaa", localStorage)
+
+    return (
         <div>
-        <NavbarPrivado />
-        <div className="contenedorCartasRecetas col-3">
-            <CardPrivada />
-            <CardPrivada />
-            <CardPrivada />
-            <CardPrivada />
+            <NavbarPrivado />
+            <div className="contenedorCartasRecetas col-3">
+                <CardPrivada />
+                <CardPrivada />
+                <CardPrivada />
+                <CardPrivada />
+            </div>
         </div>
-    </div>
-        );
-    };
-        
+    );
+};
+
