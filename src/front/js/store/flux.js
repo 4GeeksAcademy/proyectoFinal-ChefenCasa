@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			recetas:[],
-			
+			recetas: [],
+
 		},
 		actions: {
 
@@ -129,11 +129,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-
-
-
-
-
 			obtenerRecetas: async () => {
 				const apiKey = '028c2ea23fa54efab167ced1cc96873b'
 				const url = `https://api.spoonacular.com/recipes/random?number=1&apiKey=${apiKey}`;
@@ -155,11 +150,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						dieta: receta.diets,
 						ingredientes: receta.extendedIngredients.map((ingrediente) => ({
 							ingrediente: ingrediente.name
-						})),						
+						})),
 						instructions: receta.instructions
 							? receta.instructions
 							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
-						tiempo_de_coccion: receta.readyInMinutes 
+						tiempo_de_coccion: receta.readyInMinutes
 							? `${receta.readyInMinutes} minutes`
 							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
 						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps)
@@ -179,7 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-			
+
 				try {
 					// obtener el menú semanal desde nuestra base
 					const response = await fetch(process.env.BACKEND_URL + '/api/menuSemanal', {
@@ -189,59 +184,125 @@ const getState = ({ getStore, getActions, setStore }) => {
 							'Authorization': 'Bearer ' + token
 						}
 					});
-			
+
 					if (!response.ok) {
 						console.log('Error al obtener el menú');
 					} else {
 						const data = await response.json(); // Array de menús semanales
 						console.log("Menús obtenidos:", data);
-			
+
 						// Acá guardo la promesa de info de la api(los titulos)
 						const respuestaPromesaTitulos = [];
-			
+
 						//con el for recorro data y obtengo api_receta_id (receta)
 						for (let receta of data) {
-							
+
 							const apiResponse = (async () => {
 								try {
 									const response = await fetch(`https://api.spoonacular.com/recipes/${receta.api_receta_id}/information?apiKey=${apiKey}`);
-			
+
 									if (!response.ok) {
-										
-										throw new Error(`Error al obtener la receta con id ${receta.api_receta_id}`); 
-				
+
+										throw new Error(`Error al obtener la receta con id ${receta.api_receta_id}`);
+
 									}
-			
+
 									//detro de response vienen todos los datos de la receta, y solo necesitamos el titulo
 									const recetaData = await response.json();
 									receta.receta_title = recetaData.title;
-			
-									console.log("titulo obtenido correctamente" , 200);
+
+									console.log("titulo obtenido correctamente", 200);
 
 									return receta;
-									
+
 								} catch (error) {
 									console.error(`Error en la llamada a la API de Spoonacular para el id ${receta.api_receta_id}:`, error);
 									return receta;
 								}
 							})();
-			
+
 							// hago un push con la promesa (async function) al array
 							respuestaPromesaTitulos.push(apiResponse);
 						}
-			
+
 						// Promise.all me sirve para que se ejecuten todas las promesas juntas, por si tengo mas de una, y no hacer un fetch por cada una.
 						const tituloReceta = await Promise.all(respuestaPromesaTitulos);
-			
+
 						console.log("Titulos de las recetas:", tituloReceta);
-			
+
 						return tituloReceta; // Devolver el array de menús con los títulos de las recetas
 					}
 				} catch (error) {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}
 			},
-			
+
+
+			guardarMenu: async (dia_semana, tipo_comida, api_receta_id) => {
+				//verifico si existe un menu en local
+				const menuGuardado = localStorage.getItem('menuSemanal');
+
+				if (menuGuardado) {
+					//si tiene el menu guardado, lo carga:
+					const menu = JSON.parse(menuGuardado)
+					//actualizo con los valores q tengo en el store
+					setStore({
+						menuSemanal: {
+							dia_semana: menu.dia_semana,
+							tipo_comida: menu.tipo_comida,
+							api_receta_id: menu.api_receta_id
+						}
+					});
+				} //si en el localstore no hay menu, se hace el fetch al backend
+				else {
+					const token = localStorage.getItem("token");
+					try {
+						const response = await fetch(process.env.BACKEND_URL + `/api/guardarmenu`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								'Authorization': 'Bearer ' + token
+							},
+							body: JSON.stringify({
+								dia_semana: dia_semana,
+								tipo_comida: tipo_comida,
+								api_receta_id: null //aun no tengo el id de la receta que se agrega al menu 
+							})
+
+						});
+						if (!response.ok) {
+							console.error("Error al guardar la receta en el menu");
+							return;
+						}
+						const data = await response.json();
+						console.log("Menu agregado", data)
+
+						//actualizo store y localStore con los datos nuevos del menu 
+						setStore({
+							menuSemanal:{
+								dia_semana: dia_semana,
+								tipo_comida :tipo_comida,
+								api_receta_id: null
+							}
+						});
+						//se guarda en el localStore como un json
+						localStorage.setItem('menuSemanal', JSON.stringify({
+							dia_semana :dia_semana,
+							tipo_comida:tipo_comida,
+							api_receta_id:null
+						}));
+
+
+
+					}catch (error){
+						console.log("se produjo un error durante la solicitud");
+					}
+
+				}
+
+
+			}
+
 		}
 	};
 };
