@@ -34,6 +34,16 @@ export const CardPrueba = () => {
                         : 'Pasos no disponibles'}
                 </p>
                 <p>{receta.tiempo_de_coccion}</p>
+                <p>
+                                <strong>Ingredientes:</strong>
+                                <ul>
+                                    {receta.ingredientes && receta.ingredientes.length > 0 
+                                        ? receta.ingredientes.map((ingrediente, index) => (
+                                            <li key={index}>{ingrediente.ingrediente}</li>
+                                        ))
+                                        : 'Ingredientes no disponibles'}
+                                </ul>
+                            </p>
             </li>
         ))
     ) : (
