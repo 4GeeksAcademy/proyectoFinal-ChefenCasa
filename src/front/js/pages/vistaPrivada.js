@@ -1,27 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import { CardPrivada } from "../component/cardPrivada";
-
 import "../../styles/vistaPrivada.css";
-
 
 export const VistaPrivada = () => {
     const { store, actions } = useContext(Context);
 
-    console.log("hikaa", localStorage)
+    useEffect(() => {
+        if (store.recetas.length === 0) { // Solo llama si no hay recetas
+            actions.obtenerRecetas();
+        }
+    }, [actions, store.recetas.length]); // Dependencias del efecto
+
 
     return (
         <div>
             <NavbarPrivado />
             <div className="contenedorCartasRecetas col-3">
-                <CardPrivada />
-                <CardPrivada />
-                <CardPrivada />
-                <CardPrivada />
+                {store.recetas.length > 0 ? (
+                    store.recetas.map((receta) => (
+                        <CardPrivada key={receta.id} receta={receta} /> // Pasa la receta como prop
+                    ))
+                ) : (
+                    <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
+                )}
             </div>
         </div>
     );
 };
-
