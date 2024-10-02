@@ -5,7 +5,6 @@ import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import { CardPrivada } from "../component/cardPrivada";
 
 import "../../styles/vistaPrivada.css";
-import "../../styles/cardPrivada.css";
 
 
 export const VistaPrivada = () => {
