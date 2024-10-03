@@ -31,7 +31,7 @@ export const Home = () => {
 					<br></br>
 					<div>
 						
-					<button className="botonRegistrarseBody" onClick={openModal}>SIGN IN</button>
+					<button className="botonRegistrarseBody" onClick={openModal}>SIGN UP</button>
                         <ModalRegistro show={modal} onClose={closeModal}>
                         </ModalRegistro>
 						
