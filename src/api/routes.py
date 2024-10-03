@@ -186,26 +186,26 @@ def obtenerFavorito():
         })
     return jsonify(favoritos_json),200
 
-#guardar favoritos 
+
+#CERRAR SESION
+@api.route('/api/logout', methods=['POST'])
+def logout():
+    return jsonify({"message": "Usuario desconectado"}), 200
+
+#guardar favoritos
 @api.route('/guardarfavoritos', methods=['POST'])
 @jwt_required()
 def guardarFavoritos():
     usuario_id= get_jwt_identity()
     data = request.get_json()
-
     if 'api_receta_id' not in data:
         return jsonify({'msg':'api_receta_id necesario'}),100
-    
     #creo un nuevo obj favorito, que se añade mi tabla
     nuevo_favorito = Favoritos(
-        api_receta_id=data['api_receta_id'],  
-        usuario_id=usuario_id  
+        api_receta_id=data['api_receta_id'],
+        usuario_id=usuario_id
     )
-
     #guardamos en base de datos
     db.session.add(nuevo_favorito)
     db.session.commit()
     return jsonify({'msg':'Receta guardada en favoritos correctamente'}),200
-    
-        
-        
