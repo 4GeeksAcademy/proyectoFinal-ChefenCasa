@@ -383,8 +383,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify({
 							api_receta_id : api_receta_id, 
-							
-
 						})
 					});
 					if (!response.ok) {

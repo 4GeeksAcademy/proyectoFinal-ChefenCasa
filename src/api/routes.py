@@ -210,7 +210,7 @@ def guardarFavoritos():
     #inserto en la tabla intermedia(tabla del principio)
     stmt = user_favorites.insert().values(usuario_id=usuario_id, favoritos_id=favorito.id)
     db.session.execute(stmt)
-    db.session.commit()  # Confirmar la inserción
+    db.session.commit()  
 
     return jsonify({'msg': 'Receta guardada en favoritos correctamente'}), 200
 
