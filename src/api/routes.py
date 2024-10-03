@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from .models import db, User, MenuSemanal
+from .models import db, User, MenuSemanal, Favoritos
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -163,4 +163,22 @@ def get_menu_semanal():
         return jsonify({'msg': 'No se encontraron menús semanales para este usuario'}), 404
 
     resultado = [menu.serialize() for menu in menu_semanal]
+    
+
     return jsonify(resultado), 200
+
+
+#FAVORITOS
+
+#obtenemos los favoritos
+@api.route('/favoritos', methods=['GET'])
+@jwt_required()
+def obtenerFavorito():
+    favoritos = Favoritos.query.all() #almaceno todos los favoritos 
+    favoritos_json=[]
+    for usuario in favoritos:
+        favoritos_json.append({
+            "id": favoritos.id,
+            "aapi_receta_id": usuario.api_receta_id
+        })
+    return jsonify(favoritos_json),200

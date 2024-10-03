@@ -2,9 +2,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			recetas: [],
-			menuSemanal: [],
-
+			recetas:[],
+			menuSemanal:[],
+			favoritos:[]
+			
 		},
 		actions: {
 
@@ -126,7 +127,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return data
 
 			},
-
 
 
 
