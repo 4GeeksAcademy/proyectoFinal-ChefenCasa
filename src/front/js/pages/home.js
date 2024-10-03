@@ -18,7 +18,7 @@ export const Home = () => {
 		setModal(false);
 	};
 	const navigate = useNavigate()
-	const [showContent, setShowContent]   = useState(false)
+	const [showContent, setShowContent] = useState(false)
 	useEffect(() => {
 		const checkAuth = async () => {
 			const token = localStorage.getItem('token')
@@ -44,31 +44,25 @@ export const Home = () => {
 	return (
 
 		<div>
-				< Navbar />
-				<div className="bodyHome">
-					<div className="descripcionHome">
-						<h1>All the food for the week in one place</h1>
-						<br></br>
-						<h4>Chef at Home transforms the way to explore, plan, and organize gourmet recipes.</h4>
-						<br></br>
-						<h4>Save your favorite recipes, add personalized notes, and organize your weekly menu.</h4>
-						<br></br>
-						<br></br>
-						<div>
-
-							<button className="botonRegistrarseBody" onClick={openModal}>SIGN UP</button>
-							<ModalRegistro show={modal} onClose={closeModal}>
-							</ModalRegistro>
-
-						</div>
-					</div>
+			< Navbar />
+			<div className="bodyHome">
+				<div className="descripcionHome">
+					<h1>All the food for the week in one place</h1>
+					<br></br>
+					<h4>Chef at Home transforms the way to explore, plan, and organize gourmet recipes.</h4>
+					<br></br>
+					<h4>Save your favorite recipes, add personalized notes, and organize your weekly menu.</h4>
+					<br></br>
+					<br></br>
 					<div>
-						
-					
-						
+						<button className="botonRegistrarseBody" onClick={openModal}>SIGN IN</button>
+						<ModalRegistro show={modal} onClose={closeModal}></ModalRegistro>
 					</div>
 				</div>
-			
+				<div>
+					<img className="imagenHome" src={imagen_Home} alt="Imagen de una chica buscando recetas" />
+				</div>
+			</div>
 		</div>
 
 	);
