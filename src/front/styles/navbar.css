@@ -22,6 +22,12 @@
     max-width: 250px;
 }
 
+.botonClickHere {
+    background-color: #f9c039;
+    border: none;
+    color: blue;
+}
+
 /* Navbar Privado */
 
 .botonPerfil {

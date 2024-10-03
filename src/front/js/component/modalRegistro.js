@@ -32,7 +32,7 @@ export const ModalRegistro = ({ show, onClose }) => {
             <button className="close-button" onClick={onClose}>
                     &times; 
                 </button>
-                <p>Sign in</p>
+                <p>Sign up</p>
                 <form onSubmit={signUp}>
                     <label >Name</label>
                     <input
@@ -73,7 +73,7 @@ export const ModalRegistro = ({ show, onClose }) => {
 
                 </form>
                 <button className="btn-modal" type="submit" onClick={signUp}>
-                    Sign in
+                    Sign up
                 </button>
             </section>
         </div>

@@ -63,7 +63,11 @@ export const Home = () => {
 						</div>
 					</div>
 					<div>
-						<img className="imagenHome" src={imagen_Home} alt="Imagen de una chica buscando recetas" />
+						
+					<button className="botonRegistrarseBody" onClick={openModal}>SIGN UP</button>
+                        <ModalRegistro show={modal} onClose={closeModal}>
+                        </ModalRegistro>
+						
 					</div>
 				</div>
 			
