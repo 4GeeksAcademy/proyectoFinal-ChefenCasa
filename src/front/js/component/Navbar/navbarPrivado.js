@@ -23,7 +23,7 @@ export const NavbarPrivado = () => {
 		<>
 		<nav className="navbar">
 			<div className="container">
-				<Link to="/">
+				<Link to="/vistaPrivada">
 					<img className="LogoChefEnCasa" src="logo_ingles.png" alt="Logo Chef at Home"></img>
 				</Link>
 				<div className="btn-group">

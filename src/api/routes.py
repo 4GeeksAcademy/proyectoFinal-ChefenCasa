@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
@@ -22,12 +23,11 @@ def login():
     password = request.json.get('password', None)
     
     #hago un filter para ver si tengo en la base de datos el usuario/contraseña y lo almaceno en una va. 
-    user = User.query.filter_by(email=email, password=password).first()
-     
-    #verifico si se encuentra o no:
-    if not user:
-        return jsonify({'msg':'Email o contraseña incorrectos'}), 401
-
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password, password): 
+        return jsonify({'msg': 'Email o contraseña incorrectos'}), 401
+        
+    
     #sino entra en esa condición, se inicia seción y se genera el jwt:
     token_creado = create_access_token(identity = user.id) 
     return jsonify({'token': token_creado, 'user_id': user.id, 'name':user.name}), 200
@@ -54,19 +54,20 @@ def signup():
     name = data.get('name')
     email = data.get('email')
     password = data.get('password')
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
     is_active = data.get('is_active')
 
     user = User.query.filter_by(name=name,email=email, is_active = is_active).first()
 
     if not user:
         
-        user = User(name=name,email=email, password=password, is_active= is_active)
+        user = User(name=name,email=email, password=hashed_password, is_active= is_active)
         #añadimos esos datos a nuestro base 
         db.session.add(user)
-        db.session.commit() 
+        db.session.commit()  
         return jsonify({'msg':'Usuario registrado exitosamente'}),200 
     elif user:
-        return jsonify({'msg':'Usuario ya existe'}),400
+        return jsonify({'msg':'Usuario ya existee'}),400
     
 #obtenemos los usuarios registrados
 @api.route('/usuarios', methods=['GET'])
@@ -84,7 +85,9 @@ def obtenerUsuario():
     return jsonify(usuarios_json),200
     
 @api.route('/modificar/<int:id>', methods=['PUT'])
+@jwt_required()
 def modificarUsuario(id):
+
     #primero obtengo los datos json de la solicitud 
     data = request.get_json()
     #extraígo el email y contraseña
@@ -111,7 +114,7 @@ def eliminarUsario(id):
      else:
         return jsonify({'msg':'Usuario no encontrado'}),400
 
-
+#menu semanal 
 @api.route('/guardarmenu', methods=['POST'])
 @jwt_required()
 def guardarMenu(): 
@@ -179,6 +182,30 @@ def obtenerFavorito():
     for usuario in favoritos:
         favoritos_json.append({
             "id": favoritos.id,
-            "aapi_receta_id": usuario.api_receta_id
+            "api_receta_id": usuario.api_receta_id
         })
     return jsonify(favoritos_json),200
+
+#guardar favoritos 
+@api.route('/guardarfavoritos', methods=['POST'])
+@jwt_required()
+def guardarFavoritos():
+    usuario_id= get_jwt_identity()
+    data = request.get_json()
+
+    if 'api_receta_id' not in data:
+        return jsonify({'msg':'api_receta_id necesario'}),100
+    
+    #creo un nuevo obj favorito, que se añade mi tabla
+    nuevo_favorito = Favoritos(
+        api_receta_id=data['api_receta_id'],  
+        usuario_id=usuario_id  
+    )
+
+    #guardamos en base de datos
+    db.session.add(nuevo_favorito)
+    db.session.commit()
+    return jsonify({'msg':'Receta guardada en favoritos correctamente'}),200
+    
+        
+        
