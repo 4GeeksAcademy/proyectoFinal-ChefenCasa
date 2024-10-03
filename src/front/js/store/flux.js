@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			recetas:[],
 			menuSemanal:[],
+			favoritos:[]
 			
 		},
 		actions: {
@@ -129,12 +130,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-
-
-
-
-
-
 			obtenerRecetas: async () => {
 				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
@@ -244,6 +239,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}
 			},
+
+			
 			
 		}
 	};
