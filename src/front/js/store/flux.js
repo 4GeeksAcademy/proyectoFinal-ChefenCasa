@@ -258,7 +258,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					});
 
-					console.log('response', response);
+				
 					if (!response.ok) {
 						// Manejo de errores más específico
 						const errorData = await response.json();
@@ -369,10 +369,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("Error al cerrar sesión", error);
 				}
-			}
+			}, 
+			
+			//Guardar favoritos
+			addFavoritos: async(api_receta_id)=>{
+				const token = localStorage.getItem("token");
+				try{
+					const response = await fetch(process.env.BACKEND_URL + `/api/guardarfavoritos`, {
+						method : "POST",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						},
+						body: JSON.stringify({
+							api_receta_id : api_receta_id, 
+							
+
+						})
+					});
+					if (!response.ok) {
+						const errorData = await response.json();
+						alert(errorData.msg);
+
+					}else{
+						alert('Receta agregada a favoritos')
+					}
+				} catch (error) {
+					console.log("Se produjo un error durante la solicitud:", error);
+				}
+				}
+
+
+			},
 			
 
-		}
+		
 	}
 };
 
