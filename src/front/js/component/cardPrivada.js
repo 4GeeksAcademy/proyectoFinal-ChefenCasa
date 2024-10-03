@@ -14,7 +14,7 @@ export const CardPrivada = ({ receta }) => {
                     <button className='botonFavorito'>
                         <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }}></i>
                     </button>
-                    <Link to={"/recetaCompletaPrivada"}>
+                    <Link to={`/recetaCompletaPrivada/${receta.id}`}>
                         <button className="botonMasInfo">info</button>
                     </Link>
                 </div>

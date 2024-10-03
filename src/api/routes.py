@@ -112,6 +112,42 @@ def eliminarUsario(id):
         return jsonify({'msg':'Usuario no encontrado'}),400
 
 
+@api.route('/guardarmenu', methods=['POST'])
+@jwt_required()
+def guardarMenu(): 
+    data = request.get_json() 
+    usuarioId = get_jwt_identity()  # busco el usuario autentificado
+    diaSemana = data['dia_semana']
+    tipoComida = data['tipo_comida']
+    apiRecetaId = data['api_receta_id']
+    # Validación de datos
+    if not all(key in data for key in ('dia_semana', 'tipo_comida', 'api_receta_id')):
+        return jsonify({'msg': 'Faltan datos necesarios'}), 400
+    
+    menuSemanal = MenuSemanal.query.filter_by(usuario_id = usuarioId, dia_semana = diaSemana, tipo_comida = tipoComida).first()
+
+    if menuSemanal:
+        return jsonify({'msg': 'Este menu ya se ha guardado anteriormente en la misma fecha'}), 400
+
+    else:
+        # creo un obj vacio donde guardo el menu
+        nuevoMenu = MenuSemanal(
+            usuario_id=usuarioId,
+            dia_semana=diaSemana,
+            tipo_comida=tipoComida,
+            api_receta_id=apiRecetaId
+        )
+
+        try:
+            db.session.add(nuevoMenu)
+            db.session.commit()
+            return jsonify({'msg': 'Menú guardado'}), 200
+        except Exception as e:
+            db.session.rollback()  
+            return jsonify({'msg': str(e)}), 500
+            
+
+
 @api.route('/menuSemanal/', methods=['GET'])
 @jwt_required()
 def get_menu_semanal():
@@ -119,9 +155,9 @@ def get_menu_semanal():
     user = User.query.get(current_user_id)
 
     if user is None:
-        return jsonify({'msg':'verificación incorrecta'}), 401
-    
-    menu_semanal= MenuSemanal.query.filter_by(usuario_id=current_user_id).all()
+        return jsonify({'msg': 'verificación incorrecta'}), 401
+
+    menu_semanal = MenuSemanal.query.filter_by(usuario_id=current_user_id).all()
 
     if not menu_semanal:
         return jsonify({'msg': 'No se encontraron menús semanales para este usuario'}), 404

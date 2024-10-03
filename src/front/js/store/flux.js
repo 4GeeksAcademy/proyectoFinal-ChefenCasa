@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -151,11 +151,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						dieta: receta.diets,
 						ingredientes: receta.extendedIngredients.map((ingrediente) => ({
 							ingrediente: ingrediente.name
-						})),						
+						})),
 						instructions: receta.instructions
 							? receta.instructions
 							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
-						tiempo_de_coccion: receta.readyInMinutes 
+						tiempo_de_coccion: receta.readyInMinutes
 							? `${receta.readyInMinutes} minutes`
 							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
 						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps)
@@ -175,6 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
+				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24';
 			
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -239,11 +240,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}
 			},
+			guardarMenu: async (dia_semana, tipo_comida, api_receta_id) => {
 
-			
-			
+				// Si en el localstore no hay menu, se hace el fetch al backend
+				const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(process.env.BACKEND_URL + `/api/guardarmenu`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						},
+						body: JSON.stringify({
+							dia_semana: dia_semana,
+							tipo_comida: tipo_comida,
+							api_receta_id: api_receta_id
+						})
+					});
+
+					console.log('response', response);
+					if (!response.ok) {
+						// Manejo de errores más específico
+						const errorData = await response.json();
+						alert(errorData.msg);
+
+					}
+					else {
+						alert('Menú guardado correctamente.')
+					}
+
+				} catch (error) {
+					console.log("Se produjo un error durante la solicitud:", error);
+				}
+
+			}
+
+
+
 		}
-	};
+	}
 };
 
 export default getState;

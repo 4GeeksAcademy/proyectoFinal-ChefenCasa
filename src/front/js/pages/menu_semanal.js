@@ -23,6 +23,16 @@ export const MenuSemanal = () => {
         return recetaMenu ? recetaMenu.receta_title : "Sin receta";
     };
     
+    const handleRecetaChange = async (dia, tipo, api_receta_id) => {
+        
+        setSelectedRecetas((prevState) => ({
+            ...prevState,
+            [`${dia}-${tipo}`]: api_receta_id,
+        }));
+
+        // Guarda la receta en el menú
+        await actions.guardarMenu(dia, tipo, api_receta_id);
+    };
 
     return (
         <div>
