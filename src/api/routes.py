@@ -64,10 +64,10 @@ def signup():
         user = User(name=name,email=email, password=hashed_password, is_active= is_active)
         #añadimos esos datos a nuestro base 
         db.session.add(user)
-        db.session.commit() 
+        db.session.commit()  
         return jsonify({'msg':'Usuario registrado exitosamente'}),200 
     elif user:
-        return jsonify({'msg':'Usuario ya existe'}),400
+        return jsonify({'msg':'Usuario ya existee'}),400
     
 #obtenemos los usuarios registrados
 @api.route('/usuarios', methods=['GET'])
