@@ -182,3 +182,10 @@ def obtenerFavorito():
             "aapi_receta_id": usuario.api_receta_id
         })
     return jsonify(favoritos_json),200
+
+
+#CERRAR SESION
+@api.route('/api/logout', methods=['POST'])
+def logout():
+    return jsonify({"message": "Usuario desconectado"}), 200
+

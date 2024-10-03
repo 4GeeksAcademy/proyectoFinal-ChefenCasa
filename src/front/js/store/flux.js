@@ -345,6 +345,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}
 			},
+
+			//CERRAR SESION
+			cerrarSesion: async (history) => {
+				try {
+					// Eliminar el token de localStorage
+					localStorage.removeItem('token');
+		
+					// Hacer la solicitud al backend para cerrar sesión
+					const response = await fetch(`${process.env.BACKEND_URL}/api/logout`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+		
+					if (response.ok) {
+						alert("Sesión cerrada correctamente");
+						history.push('/');
+					} else {
+						alert("Error al cerrar sesión");
+					}
+				} catch (error) {
+					console.error("Error al cerrar sesión", error);
+				}
+			}
 			
 
 		}
