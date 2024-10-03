@@ -273,9 +273,79 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Se produjo un error durante la solicitud:", error);
 				}
 
-			}
+			},
 
+			obtenerFavoritos: async () => {
+				const token = localStorage.getItem('token');
+				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24';
+			
+				try {
+					// Obtengo los favoritos desde nuestra base de datos
+					const response = await fetch(process.env.BACKEND_URL + '/api/favoritos', {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						}
+					});
+			
+					if (!response.ok) {
+						console.log('Error al obtener favoritos');
+						return;
+					}
+			
+					const data = await response.json(); // Array de favoritos
+					console.log("Favoritos obtenidos:", data);
+			
+					// Aca vamos a guardar la promesa de la api con todos los datos
+					const respuestaApi = [];
+			
+					// Recorrer el array de favoritos (data contiene favoritos)
+					for (let receta of data) {
 
+						const apiResponse = (async () => {
+							try {
+								const apiFetchResponse = await fetch(`https://api.spoonacular.com/recipes/${receta.api_receta_id}/information?apiKey=${apiKey}`);
+			
+								if (!apiFetchResponse.ok) {
+									throw new Error(`Error al obtener la receta con id ${receta.api_receta_id}`);
+								}
+			
+								const recetaData = await apiFetchResponse.json(); //recetaData es la respuesta de la api a ese id
+			
+								// Asignar los datos obtenidos a la receta original
+								receta.receta_title = recetaData.title;
+								receta.imagen = recetaData.image;
+								receta.ingredientes = recetaData.extendedIngredients.map(ingrediente => ingrediente.name); // Array de ingredientes
+								receta.tiempo_de_coccion = recetaData.readyInMinutes;
+			
+								console.log("Receta obtenida con éxito", receta, 200);
+			
+								return receta; // Devolver la receta con los nuevos datos
+			
+							} catch (error) {
+								console.error(`Error en la llamada a la API de Spoonacular para el id ${receta.api_receta_id}:`, error);
+								return receta; // Devolver la receta sin cambios si hay un error
+							}
+						})();
+			
+						// Añadir la promesa al array (en el array que tengo arriba guardo la repsuesta de la api )
+						respuestaApi.push(apiResponse);
+					}
+			
+					// Promise.all espera a que todas las promesas se resuelvan
+					const datosReceta = await Promise.all(respuestaApi);
+			
+					console.log("Datos de las recetas:", datosReceta);
+			
+					// Guardar en el store
+					setStore({ favoritos: datosReceta });
+			
+				} catch (error) {
+					console.error('Error durante la autenticación o al obtener datos', error);
+				}
+			},
+			
 
 		}
 	}
