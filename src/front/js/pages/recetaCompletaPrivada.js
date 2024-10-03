@@ -14,8 +14,6 @@ export const RecetaCompletaPrivada = () => {
   //me traigo la receta, filtro por id 
   const receta = store.recetas.find(rec => rec.id.toString() === recetaId);
 
-  console.log('receta', receta)
-
   return (
     <div>
       <NavbarPrivado />

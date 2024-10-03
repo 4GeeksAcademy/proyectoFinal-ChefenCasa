@@ -116,27 +116,36 @@ def eliminarUsario(id):
 @jwt_required()
 def guardarMenu(): 
     data = request.get_json() 
-    usuario_id = get_jwt_identity()  # busco el usuario autentificado
-
+    usuarioId = get_jwt_identity()  # busco el usuario autentificado
+    diaSemana = data['dia_semana']
+    tipoComida = data['tipo_comida']
+    apiRecetaId = data['api_receta_id']
     # Validación de datos
     if not all(key in data for key in ('dia_semana', 'tipo_comida', 'api_receta_id')):
         return jsonify({'msg': 'Faltan datos necesarios'}), 400
+    
+    menuSemanal = MenuSemanal.query.filter_by(usuario_id = usuarioId, dia_semana = diaSemana, tipo_comida = tipoComida).first()
 
-    # creo un obj vacio donde guardo el menu
-    nuevoMenu = MenuSemanal(
-        usuario_id=usuario_id,
-        dia_semana=data['dia_semana'],
-        tipo_comida=data['tipo_comida'],
-        api_receta_id=data['api_receta_id']
-    )
+    if menuSemanal:
+        return jsonify({'msg': 'Este menu ya se ha guardado anteriormente en la misma fecha'}), 400
 
-    try:
-        db.session.add(nuevoMenu)
-        db.session.commit()
-        return jsonify({'msg': 'Menú guardado'}), 200
-    except Exception as e:
-        db.session.rollback()  
-        return jsonify({'msg': str(e)}), 500
+    else:
+        # creo un obj vacio donde guardo el menu
+        nuevoMenu = MenuSemanal(
+            usuario_id=usuarioId,
+            dia_semana=diaSemana,
+            tipo_comida=tipoComida,
+            api_receta_id=apiRecetaId
+        )
+
+        try:
+            db.session.add(nuevoMenu)
+            db.session.commit()
+            return jsonify({'msg': 'Menú guardado'}), 200
+        except Exception as e:
+            db.session.rollback()  
+            return jsonify({'msg': str(e)}), 500
+            
 
 
 @api.route('/menuSemanal/', methods=['GET'])

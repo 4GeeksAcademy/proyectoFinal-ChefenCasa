@@ -7,6 +7,7 @@ export const DropMenuSemanal = ({ recetaId }) => {
     const guardarMenu = (dia_semana, tipo_comida) => {
         if (recetaId) { // verifico si existe
             actions.guardarMenu(dia_semana, tipo_comida, recetaId);
+
         } else {
             console.error("Receta ID no disponible");
         }
