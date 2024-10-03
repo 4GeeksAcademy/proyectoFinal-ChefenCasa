@@ -111,7 +111,7 @@ def eliminarUsario(id):
      else:
         return jsonify({'msg':'Usuario no encontrado'}),400
 
-
+#menu semanal 
 @api.route('/guardarmenu', methods=['POST'])
 @jwt_required()
 def guardarMenu(): 
@@ -179,6 +179,29 @@ def obtenerFavorito():
     for usuario in favoritos:
         favoritos_json.append({
             "id": favoritos.id,
-            "aapi_receta_id": usuario.api_receta_id
+            "api_receta_id": usuario.api_receta_id
         })
     return jsonify(favoritos_json),200
+
+#guardar favoritos 
+@api.route('/guardarFavoritos', methods=['POST'])
+@jwt_required()
+def guardarFavoritos():
+    usuario_id= get_jwt_identity()
+    data = request.get_json()
+
+    if 'api_receta_id' not in data:
+        return jsonify({'msg':'api_receta_id necesario'}),100
+    
+    #creo un nuevo obj favorito, que se añade mi tabla
+    nuevo_favorito = Favoritos(
+        api_receta_id = data['api_receta_id']
+    )
+
+    #guardamos en base de datos
+    db.session.add(nuevo_favorito)
+    db.session.commit()
+    return jsonify({'msg':'Receta guardada en favoritos correctamente'}),200
+    
+        
+        
