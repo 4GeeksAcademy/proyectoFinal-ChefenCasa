@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import imagen_Home from "../../img/imagen_Home.jpg";
 
-import "../../styles/home.css";
+import "../../styles/home.css"
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -56,7 +56,7 @@ export const Home = () => {
 						<br></br>
 						<div>
 
-							<button className="botonRegistrarseBody" onClick={openModal}>SIGN IN</button>
+							<button className="botonRegistrarseBody" onClick={openModal}>SIGN UP</button>
 							<ModalRegistro show={modal} onClose={closeModal}>
 							</ModalRegistro>
 
@@ -64,9 +64,7 @@ export const Home = () => {
 					</div>
 					<div>
 						
-					<button className="botonRegistrarseBody" onClick={openModal}>SIGN UP</button>
-                        <ModalRegistro show={modal} onClose={closeModal}>
-                        </ModalRegistro>
+					
 						
 					</div>
 				</div>
