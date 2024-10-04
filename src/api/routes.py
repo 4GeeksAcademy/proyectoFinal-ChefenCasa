@@ -269,13 +269,14 @@ def logout():
 
 
 #NOTAS
-@api.route('/agregarNota', methods=['POST'])
+@api.route('/agregarnota', methods=['POST'])
 @jwt_required()
 def agregarNota(): 
     data = request.get_json() 
     usuarioId = get_jwt_identity()  # busco el usuario autentificado
     contenido = data['contenido']
     apiRecetaId = data['api_receta_id']
+    
     # Validación de datos
     if not all(key in data for key in ('contenido', 'api_receta_id')):
         return jsonify({'msg': 'Faltan datos necesarios'}), 400
@@ -291,7 +292,30 @@ def agregarNota():
     try:
             db.session.add(nuevaNota)
             db.session.commit()
-            return jsonify({'msg': 'Nota guardada'}), 200
+            return jsonify({'msg': 'Nota guardada exitosamente aaaaaa'}), 200
     except Exception as e:
             db.session.rollback()  
             return jsonify({'msg': str(e)}), 500
+    
+
+@api.route('/modificarnota', methods=['PUT'])
+@jwt_required()
+def modificarNota():
+
+    #primero obtengo los datos json de la solicitud 
+    data = request.get_json()
+    #tomo los datos de la solicitud
+    contenido = data.get('contenido')
+    api_receta_id = data.get('api_receta_id')
+
+    if not api_receta_id or not contenido:
+        return jsonify({'msg': 'Faltan datos necesarios: api_receta_id o contenido'}), 400
+    
+    notas = Notas.query.filter_by(api_receta_id=api_receta_id).first()
+
+    if notas: 
+        notas.contenido = contenido
+        db.session.commit() 
+        return jsonify({'msg':'Nota modificada exitosamente', 'contenido':contenido, }),200 
+    else:
+        return jsonify({'msg':'no se encontro la nota'}),404
