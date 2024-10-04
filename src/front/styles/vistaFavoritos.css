@@ -1,4 +1,4 @@
-.contenedorCartasRecetas {
+.contenedorCardsFavoritos {
     width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */
     justify-content: space-between; /* Espacia las cartas uniformemente */
@@ -6,7 +6,7 @@
     margin: 0 auto; /* Centra el contenedor si es necesario */
 }
 
-.contenedor-card {
+.contenedorCardFavorito {
     width: 20vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
     background-color: #f9c039;
     border-radius: 10px;
@@ -22,21 +22,21 @@
     box-shadow: 5px 3px 10px rgb(100, 100, 100);
 }
 
-.recipe-image {
+.imagenRecetaFavorito {
     width: 100%;
 }
 
-.title.ms-auto {
+.tituloRecetaFavorito {
     margin-bottom: 30%;
 }
 
-.time.me-5 {
+.tiempoCoccionFavorito {
     position: absolute;
     bottom: 0;
     font-size: medium;
 }
 
-.corazon-info.d-flex {
+.corazonInfoFavorito {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -50,14 +50,14 @@
     align-items: center; /* Centra los elementos horizontalmente */
 }
 
-.botonFavorito {
+.corazonFavorito {
     background-color: #f9c039;
     border: none;
 }
 
 /* Media query para pantallas más pequeñas */
 @media (max-width: 768px) { /* Ajusta este valor según tus necesidades */
-    .contenedor-card {
+    .contenedor-card-fav {
         width: 40vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
     }
     .corazon-info.d-flex {
