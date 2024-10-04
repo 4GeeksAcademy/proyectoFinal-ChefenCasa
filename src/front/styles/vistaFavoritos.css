@@ -28,6 +28,8 @@
 
 .datosTituloImagen {
     width: 15vw;
+    display: flex;
+    
 }
 
 .tituloRecetaFavorito {
@@ -36,15 +38,23 @@
 
 .imagenRecetaFavorito {
     width: 100%;
-    bottom: 0;
+    max-width: 20vw;
+}
+
+.descripcionBotones{
+    width: 20vw;
 }
 
 .descripcionFavoritos {
-    width: 25vw;
+    width: 19vw;
     background-color: #f9c039;
     border-radius: 10px;
     padding: 1vw;
     margin: 1vw;
+}
+
+.ingredientesFavoritos{
+
 }
 
 .tiempoCoccionFavorito {
@@ -59,7 +69,6 @@
     margin-right: 5%;
     margin-bottom: 5%;
     font-size: medium;
-
 
     display: flex;
     flex-direction: row; /* Coloca los elementos en una columna */
