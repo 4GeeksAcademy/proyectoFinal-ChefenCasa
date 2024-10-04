@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from .models import db, User, MenuSemanal, Favoritos, user_favorites
+from .models import db, User, MenuSemanal, Favoritos, user_favorites, Notas 
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -150,7 +150,6 @@ def guardarMenu():
             return jsonify({'msg': str(e)}), 500
             
 
-
 @api.route('/menuSemanal/', methods=['GET'])
 @jwt_required()
 def get_menu_semanal():
@@ -187,7 +186,6 @@ def obtenerFavorito():
     return jsonify(favoritos_json),200
 
 
-
 # Guardar favoritos
 @api.route('/guardarfavoritos', methods=['POST'])
 @jwt_required()
@@ -215,11 +213,35 @@ def guardarFavoritos():
     return jsonify({'msg': 'Receta guardada en favoritos correctamente'}), 200
 
 
-
-
-
-
 #CERRAR SESION
 @api.route('/api/logout', methods=['POST'])
 def logout():
     return jsonify({"message": "Usuario desconectado"}), 200
+
+
+#NOTAS
+@api.route('/agregarNota', methods=['POST'])
+@jwt_required()
+def agregarNota(): 
+    data = request.get_json() 
+    usuarioId = get_jwt_identity()  # busco el usuario autentificado
+    contenido = data['contenido']
+    apiRecetaId = data['api_receta_id']
+    # Validación de datos
+    if not all(key in data for key in ('contenido', 'api_receta_id')):
+        return jsonify({'msg': 'Faltan datos necesarios'}), 400
+    
+        # creo un obj vacio donde guardo la nota
+    nuevaNota = Notas(
+            
+            contenido=contenido,
+            api_receta_id=apiRecetaId
+        )
+
+    try:
+            db.session.add(nuevaNota)
+            db.session.commit()
+            return jsonify({'msg': 'Nota guardada'}), 200
+    except Exception as e:
+            db.session.rollback()  
+            return jsonify({'msg': str(e)}), 500
