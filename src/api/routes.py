@@ -212,6 +212,55 @@ def guardarFavoritos():
 
     return jsonify({'msg': 'Receta guardada en favoritos correctamente'}), 200
 
+@api.route('/eliminarfav', methods=['DELETE'])
+@jwt_required()
+def eliminarFav(): 
+    usuario_id = get_jwt_identity()
+    data = request.get_json()
+
+    #Busco si hay un fav en la tabla intermedia(que relaciona fav con user)
+    favorito = Favoritos.query.filter_by(api_receta_id=data['api_receta_id']).first()
+
+    #verifico si existe: 
+    if not favorito:
+        return jsonify({'msg': 'Favorito no encontrado'}), 400
+    
+    #verifico ahora si esta en la tabla intermedia:
+    existe_relacion = db.session.query(user_favorites).filter_by(usuario_id=usuario_id, favoritos_id=favorito.id).first()
+    if not existe_relacion:
+        return jsonify({'msg': 'No esta guardado en favoritos'}), 400
+    
+    #si existe, pasa a esto y se elimina 
+    stmt = user_favorites.delete().where(user_favorites.c.usuario_id == usuario_id, user_favorites.c.favoritos_id == favorito.id)
+    db.session.execute(stmt)
+    db.session.commit()
+
+    return jsonify({'msg': 'Favorito eliminado correctamente'}), 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #CERRAR SESION
 @api.route('/api/logout', methods=['POST'])
