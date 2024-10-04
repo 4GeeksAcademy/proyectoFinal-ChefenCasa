@@ -2,8 +2,9 @@
     display: none;
   }
   
-  .modal {
-    background-color: transparent; 
+  
+  .notaModal {
+   background-color: transparent;
     position: absolute;
     top: 20%;
     left: 50%;

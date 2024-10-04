@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import imagen_Home from "../../img/imagen_Home.jpg";
 
-import "../../styles/home.css";
+import "../../styles/home.css"
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
