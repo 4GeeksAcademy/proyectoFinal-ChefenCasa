@@ -11,12 +11,19 @@ export const CardFavoritos = ({ receta }) => {
 
     return (
         <div className="contenedorCardFavorito">
-            <h4 className='tituloRecetaFavorito'>{receta.title}</h4>
-            <img src={receta.image} alt={receta.title} className="imagenRecetaFavorito" />
-            <div className='descripcionFavoritos'>
-                <p className="tiempoCoccionFavorito" style={{ fontSize: "medium" }}>
-                    <i className="fa-regular fa-clock"></i> {receta.tiempo_de_coccion}
-                </p>
+            <div className="datosCompletosFavoritos">
+                <div className="datostTituloImagen">
+                    <h4 className='tituloRecetaFavorito'>{receta.title}</h4>
+                    <img src={receta.image} alt={receta.title} className="imagenRecetaFavorito" />
+                </div>    
+                <div className='descripcionFavoritos'>
+                    <p>Ingredientes</p>
+                    <p className="tiempoCoccionFavorito" style={{ fontSize: "medium" }}>
+                        <i className="fa-regular fa-clock"></i> {receta.tiempo_de_coccion}
+                    </p>
+                </div>
+            </div>            
+            <div className="botonesFavoritos">
                 <div className="corazonInfoFavorito ">
                     <button className='corazonFavorito'>
                         <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={handleFavoritos}></i>

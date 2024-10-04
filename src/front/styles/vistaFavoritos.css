@@ -1,38 +1,54 @@
 .contenedorCardsFavoritos {
     width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */
-    justify-content: space-between; /* Espacia las cartas uniformemente */
     flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias líneas */
     margin: 0 auto; /* Centra el contenedor si es necesario */
 }
 
 .contenedorCardFavorito {
-    width: 20vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
-    background-color: #f9c039;
+    width: 35vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
+    background-color: #d7d6d6;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column; /* Mantiene la disposición interna en columna */
     align-items: start; /* Centra los elementos horizontalmente */
+    display: flex;
+    flex-direction: column;
+
     padding: 1vw;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    margin: 1vw; /* Espacio entre las tarjetas */
-    margin-left: 2vw;
-    margin-right: 2vw;
+    margin-top: 1vw;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-bottom: 1vw;
     position: relative;
-    box-shadow: 5px 3px 10px rgb(100, 100, 100);
+    box-shadow: 10px 6px 10px rgb(100, 100, 100);
 }
 
-.imagenRecetaFavorito {
-    width: 100%;
+.datosCompletosFavoritos {
+    display: flex;
+}
+
+.datosTituloImagen {
+    width: 15vw;
 }
 
 .tituloRecetaFavorito {
     margin-bottom: 30%;
 }
 
+.imagenRecetaFavorito {
+    width: 100%;
+    bottom: 0;
+}
+
+.descripcionFavoritos {
+    width: 25vw;
+    background-color: #f9c039;
+    border-radius: 10px;
+    padding: 1vw;
+    margin: 1vw;
+}
+
 .tiempoCoccionFavorito {
     position: absolute;
-    bottom: 0;
     font-size: medium;
 }
 
