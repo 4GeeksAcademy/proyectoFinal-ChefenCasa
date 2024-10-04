@@ -240,6 +240,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}
 			},
+
 			guardarMenu: async (dia_semana, tipo_comida, api_receta_id) => {
 
 				// Si en el localstore no hay menu, se hace el fetch al backend
@@ -423,6 +424,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Se produjo un error:", error);
 				}
 			},
+
+			modificarNota: async (api_receta_id, contenido) => {
+				const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(process.env.BACKEND_URL + `/api/modificarnota`, {
+						method: "PUT",
+						body: JSON.stringify({
+							contenido: contenido,
+							api_receta_id: api_receta_id
+						}),
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token  
+						}
+					});
+			
+					if (!response.ok) {
+						const errorData = await response.json();
+						alert(errorData.msg); 
+					} else {
+						const data = await response.json();
+						alert(data.msg);  
+					}
+				} catch (error) {
+					console.log("Error:", error); 
+				}
+			},
+			
+
+			
 
 
 		},
