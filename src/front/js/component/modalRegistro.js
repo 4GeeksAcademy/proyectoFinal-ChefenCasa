@@ -15,18 +15,21 @@ export const ModalRegistro = ({ show, onClose }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
+    const [showModalSesion, setShowModalSesion] = useState(false); //controlo si se abre el modal sesion una vez se hga el registro
 
 
     const navigate = useNavigate()
     const signUp = async () => {
         const signUpProcess = await actions.signUp(name, email, password)
         if (signUpProcess) {
-            alert('usuario registrado con exito')
+            alert('usuario registrado con exito');
+            setShowModalSesion(true);
         }
         onClose();
 
     }
     return (
+        <>
         <div className={showHideClassName + " modal-overlay"}>
             <section className="modal-main">
             <button className="close-button" onClick={onClose}>
@@ -77,5 +80,11 @@ export const ModalRegistro = ({ show, onClose }) => {
                 </button>
             </section>
         </div>
+        {
+            showModalSesion && (
+                <ModalSesion show={showModalSesion} onClose={()=>setShowModalSesion(false)}/>
+            )
+        }
+        </>
     );
 };
