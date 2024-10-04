@@ -284,6 +284,7 @@ def agregarNota():
     nuevaNota = Notas(
             
             contenido=contenido,
+            usuario_id=usuarioId,
             api_receta_id=apiRecetaId
         )
 
