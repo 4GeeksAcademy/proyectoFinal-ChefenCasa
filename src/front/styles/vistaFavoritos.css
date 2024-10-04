@@ -28,44 +28,53 @@
 
 .datosTituloImagen {
     width: 15vw;
-    display: flex;
-    
 }
 
 .tituloRecetaFavorito {
-    margin-bottom: 30%;
+    margin-bottom: 10%;
 }
 
 .imagenRecetaFavorito {
     width: 100%;
-    max-width: 20vw;
+    max-width: 15vw;
 }
 
 .descripcionBotones{
     width: 20vw;
+    margin-left: 1vw;
 }
 
 .descripcionFavoritos {
-    width: 19vw;
+    width: 17vw;
     background-color: #f9c039;
     border-radius: 10px;
     padding: 1vw;
-    margin: 1vw;
 }
 
 .ingredientesFavoritos{
-
+    font-size: 20px;
 }
 
 .tiempoCoccionFavorito {
-    position: absolute;
     font-size: medium;
 }
 
+.botonesFavoritos {
+    text-align: start;
+    margin-top: 20%;
+}
+
+.botonNotaFavoritos {
+    color: white;
+    background-color: #e73827;
+    width: 100px;
+    box-shadow: 2px 2px 2px rgb(100, 100, 100);
+    padding: 5px;
+    border: none;
+    border-radius: 50px;
+}
+
 .corazonInfoFavorito {
-    position: absolute;
-    bottom: 0;
-    right: 0;
     margin-right: 5%;
     margin-bottom: 5%;
     font-size: medium;
@@ -76,8 +85,9 @@
 }
 
 .corazonFavorito {
-    background-color: #f9c039;
     border: none;
+    background-color: #d7d6d6;
+    margin-left: 1vw;
 }
 
 /* Media query para pantallas más pequeñas */
