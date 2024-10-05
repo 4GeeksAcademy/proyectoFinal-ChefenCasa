@@ -398,6 +398,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			//Eliminar favoritos:
+			eliminarFav:async()=>{
+				const token = localStorage.getItem("token");
+				try{
+					const response = await fetch(process.env.BACKEND_URL + `/api/eliminarfav`, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						},
+						body: JSON.stringify({
+							api_receta_id: api_receta_id,
+						})
+					});
+					if (!response.ok) {
+						const errorData = await response.json();
+						alert(errorData.msg);
+
+					} else {
+						alert('Receta eleminada de favoritos')
+					}
+				} catch (error) {
+					console.log("Se produjo un error durante la solicitud:", error);
+				}
+				}
+
+			},
+
 			//GUARDAR NOTAS
 			agregarNotas: async (api_receta_id, contenido) => {
 				const token = localStorage.getItem("token");
@@ -456,11 +484,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 
 
-		},
+		}
 
 
 
-	}
+	
 };
 
 export default getState;
