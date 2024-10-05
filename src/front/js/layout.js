@@ -9,6 +9,7 @@ import { Single } from "./pages/single";
 
 import { VistaPrivada } from "./pages/vistaPrivada";
 import { VistaPublica } from "./pages/vistaPublica";
+import { VistaFavoritos } from "./pages/vistaFavoritos";
 import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
 import { RecetaCompletaPrivada } from "./pages/recetaCompletaPrivada";
 
@@ -42,6 +43,7 @@ const Layout = () => {
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada/:recetaId" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
                         <Route element={<MenuSemanal />} path="/menuSemanal" />
+                        <Route element={<VistaFavoritos />} path="/vistaFavoritos" />
 
                         <Route element={<CardPrueba />} path="/cardPrueba" />
                         <Route element={<CardPrivada />} path="/cardPrivada" />

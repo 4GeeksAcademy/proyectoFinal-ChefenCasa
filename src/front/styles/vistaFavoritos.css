@@ -1,0 +1,101 @@
+.contenedorCardsFavoritos {
+    width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
+    display: flex; /* Activa el modelo de caja flexible */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias líneas */
+    margin: 0 auto; /* Centra el contenedor si es necesario */
+}
+
+.contenedorCardFavorito {
+    width: 35vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
+    background-color: #d7d6d6;
+    border-radius: 10px;
+    align-items: start; /* Centra los elementos horizontalmente */
+    display: flex;
+    flex-direction: column;
+
+    padding: 1vw;
+    margin-top: 1vw;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-bottom: 1vw;
+    position: relative;
+    box-shadow: 10px 6px 10px rgb(100, 100, 100);
+}
+
+.datosCompletosFavoritos {
+    display: flex;
+}
+
+.datosTituloImagen {
+    width: 15vw;
+}
+
+.tituloRecetaFavorito {
+    margin-bottom: 10%;
+}
+
+.imagenRecetaFavorito {
+    width: 100%;
+    max-width: 15vw;
+}
+
+.descripcionBotones{
+    width: 20vw;
+    margin-left: 1vw;
+}
+
+.descripcionFavoritos {
+    width: 17vw;
+    background-color: #f9c039;
+    border-radius: 10px;
+    padding: 1vw;
+}
+
+.ingredientesFavoritos{
+    font-size: 20px;
+}
+
+.tiempoCoccionFavorito {
+    font-size: medium;
+}
+
+.botonesFavoritos {
+    text-align: start;
+    margin-top: 20%;
+}
+
+.botonNotaFavoritos {
+    color: white;
+    background-color: #e73827;
+    width: 100px;
+    box-shadow: 2px 2px 2px rgb(100, 100, 100);
+    padding: 5px;
+    border: none;
+    border-radius: 50px;
+}
+
+.corazonInfoFavorito {
+    margin-right: 5%;
+    margin-bottom: 5%;
+    font-size: medium;
+
+    display: flex;
+    flex-direction: row; /* Coloca los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.corazonFavorito {
+    border: none;
+    background-color: #d7d6d6;
+    margin-left: 1vw;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) { /* Ajusta este valor según tus necesidades */
+    .contenedor-card-fav {
+        width: 40vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+    }
+    .corazon-info.d-flex {
+        font-size: small;
+    }
+}
