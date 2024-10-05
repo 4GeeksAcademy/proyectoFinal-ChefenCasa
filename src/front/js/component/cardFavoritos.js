@@ -13,8 +13,8 @@ export const CardFavoritos = ({ receta }) => {
         <div className="contenedorCardFavorito">
             <div className="datosCompletosFavoritos">
                 <div className="datosTituloImagen">
-                    <h4 className='tituloRecetaFavorito'>{receta.title}</h4>
-                    <img src={receta.image} alt={receta.title} className="imagenRecetaFavorito" />
+                    <h4 className='tituloRecetaFavorito'>{receta.receta_title}</h4>
+                    <img src={receta.imagen} alt={receta.title} className="imagenRecetaFavorito" />
                     <div className="botonesFavoritos">
                         <div className="corazonInfoFavorito ">
                             <button className="botonNotaFavoritos">Note</button>
@@ -32,16 +32,18 @@ export const CardFavoritos = ({ receta }) => {
                     <div className='descripcionFavoritos'>
                         <p className="ingredientesFavoritos">
                             <strong>Ingredientes:</strong>
-                            <ul>
-                                {receta.ingredientes && receta.ingredientes.length > 0
-                                    ? receta.ingredientes.map((ingrediente, index) => (
-                                        <li key={index}>{ingrediente.ingrediente}</li>
-                                    ))
-                                    : 'Ingredientes no disponibles'}
-                            </ul>
                         </p>
+                        <ul>
+                            {receta.ingredientes && receta.ingredientes.length > 0
+                                ? receta.ingredientes.map((ingrediente, index) => (
+                                    <li key={index}>{ingrediente}</li> // Esto debería funcionar
+                                ))
+                                : <li>Ingredientes no disponibles</li>}
+                        </ul>
+
                         <p className="tiempoCoccionFavorito" style={{ fontSize: "medium" }}>
-                            <i className="fa-regular fa-clock"></i> {receta.tiempo_de_coccion}
+                            <i className="fa-regular fa-clock"></i> {receta.tiempo_de_coccion
+                            }
                         </p>
                     </div>
                 </div>

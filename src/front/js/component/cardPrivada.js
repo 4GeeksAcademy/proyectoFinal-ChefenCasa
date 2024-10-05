@@ -6,7 +6,7 @@ export const CardPrivada = ({ receta }) => {
 
     const { actions, store } = useContext(Context)
     const handleFavoritos = () => {
-        actions.addFavoritos(receta.id)
+        actions.addFavoritos(receta.id || receta.api_receta_id)
     }
 
     return (

@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
+				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24';
+				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -278,8 +278,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24';
-
+				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
+			
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
 					const response = await fetch(process.env.BACKEND_URL + '/api/favoritos', {
@@ -289,59 +289,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 							'Authorization': 'Bearer ' + token
 						}
 					});
-
+			
 					if (!response.ok) {
 						console.log('Error al obtener favoritos');
 						return;
 					}
-
+			
 					const data = await response.json(); // Array de favoritos
 					console.log("Favoritos obtenidos:", data);
-
-					// Aca vamos a guardar la promesa de la api con todos los datos
-					const respuestaApi = [];
-
-					// Recorrer el array de favoritos (data contiene favoritos)
-					for (let receta of data) {
-
-						const apiResponse = (async () => {
+			
+					// cambio el for por map 
+					const respuestaApi = await Promise.all(
+						data.map(async (receta) => {
 							try {
 								const apiFetchResponse = await fetch(`https://api.spoonacular.com/recipes/${receta.api_receta_id}/information?apiKey=${apiKey}`);
-
+			
 								if (!apiFetchResponse.ok) {
 									throw new Error(`Error al obtener la receta con id ${receta.api_receta_id}`);
 								}
-
-								const recetaData = await apiFetchResponse.json(); //recetaData es la respuesta de la api a ese id
-
+			
+								const recetaData = await apiFetchResponse.json(); // recetaData es la respuesta de la api a ese id
+			
 								// Asignar los datos obtenidos a la receta original
-								receta.receta_title = recetaData.title;
-								receta.imagen = recetaData.image;
-								receta.ingredientes = recetaData.extendedIngredients.map(ingrediente => ingrediente.name); // Array de ingredientes
-								receta.tiempo_de_coccion = recetaData.readyInMinutes;
-
-								console.log("Receta obtenida con éxito", receta, 200);
-
-								return receta; // Devolver la receta con los nuevos datos
-
+								return {
+									...receta,
+									receta_title: recetaData.title,
+									imagen: recetaData.image,
+									ingredientes: recetaData.extendedIngredients ? recetaData.extendedIngredients.map(ingrediente => ingrediente.name) : [], 
+									tiempo_de_coccion: recetaData.readyInMinutes,
+								};
+			
 							} catch (error) {
 								console.error(`Error en la llamada a la API de Spoonacular para el id ${receta.api_receta_id}:`, error);
 								return receta; // Devolver la receta sin cambios si hay un error
 							}
-						})();
-
-						// Añadir la promesa al array (en el array que tengo arriba guardo la repsuesta de la api )
-						respuestaApi.push(apiResponse);
-					}
-
-					// Promise.all espera a que todas las promesas se resuelvan
-					const datosReceta = await Promise.all(respuestaApi);
-
-					console.log("Datos de las recetas:", datosReceta);
-
+						})
+					);
+			
+					console.log("Datos de las recetas:", respuestaApi);
+			
 					// Guardar en el store
-					setStore({ favoritos: datosReceta });
-
+					setStore({ favoritos: respuestaApi });
+			
 				} catch (error) {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}

@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { iniciarSesion } from "./pages/iniciarSesion";
+
 import { Single } from "./pages/single";
 
 import { VistaPrivada } from "./pages/vistaPrivada";
