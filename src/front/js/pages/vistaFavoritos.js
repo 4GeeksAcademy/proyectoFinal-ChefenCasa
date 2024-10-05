@@ -8,19 +8,22 @@ export const VistaFavoritos = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        if (store.recetas.length === 0) { // Solo llama si no hay recetas
-            actions.obtenerRecetas();
+        if (store.favoritos.length === 0) { // Solo llama si no hay recetas
+            actions.obtenerFavoritos();
+        } else{
+            console.log("Favoritos cargados:", store.favoritos);
         }
-    }, [actions, store.recetas.length]); // Dependencias del efecto
+    }, [actions, store.favoritos.length]); // Dependencias del efecto
 
 
     return (
         <div>
             <NavbarPrivado />
             <div className="contenedorCardsFavoritos">
-                {store.recetas.length > 0 ? (
-                    store.recetas.map((receta) => (
-                        <CardFavoritos key={receta.id} receta={receta} /> // Pasa la receta como prop
+                {store.favoritos.length > 0 ? (
+                    store.favoritos.map((favoritos) => (
+                        
+                        <CardFavoritos key={favoritos.api_receta_id} receta={favoritos} /> // Pasa la receta como prop
                     ))
                 ) : (
                     <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
