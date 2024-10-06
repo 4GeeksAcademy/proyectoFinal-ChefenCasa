@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 export const CardFavoritos = ({ receta }) => {
-
+    console.log("Receta en CardFavoritos:", receta);
     const { actions, store } = useContext(Context)
-    const handleFavoritos = () => {
-        actions.addFavoritos(receta.id)
+    const handleObtener = () => {
+        actions.handleObtener(receta.id || receta.api_receta_id)
+        console.log(store.favoritos, "hola")
     }
 
     return (
@@ -19,7 +20,7 @@ export const CardFavoritos = ({ receta }) => {
                         <div className="corazonInfoFavorito ">
                             <button className="botonNotaFavoritos">Note</button>
                             <button className='corazonFavorito'>
-                                <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={handleFavoritos}></i>
+                                <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={handleObtener}></i>
                             </button>
                             <Link to={`/recetaCompletaPrivada/${receta.id}`}>
                                 <button className="botonMasInfoFavorito">info</button>

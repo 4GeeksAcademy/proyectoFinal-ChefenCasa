@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
+				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -278,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
+				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
 			
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
