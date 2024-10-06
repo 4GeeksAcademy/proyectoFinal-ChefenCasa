@@ -1,5 +1,3 @@
-
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -25,8 +23,11 @@
     list-style: none;
     padding-left: 0;
   }
-  
- 
+
+  .col-10.col-md-6.rounded {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
   
   
   
@@ -37,6 +38,7 @@
     object-fit: cover;
     border-radius: 10px;
   }
+
   .note-section {
     display: flex;
     justify-content: space-between;
