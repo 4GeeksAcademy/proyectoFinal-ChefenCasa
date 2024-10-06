@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
+				const apiKey = '1d3c5f8b46cf4b2c92c6107cc8673de7'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
+				const apiKey = '1d3c5f8b46cf4b2c92c6107cc8673de7'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -278,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'ae5c3aaa78114f5ab1ba60c9fc662b24'
+				const apiKey = '1d3c5f8b46cf4b2c92c6107cc8673de7'
 			
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
@@ -388,10 +388,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//Eliminar favoritos:
-			eliminarFav:async()=>{
+			eliminarFav:async(api_receta_id)=>{
 				const token = localStorage.getItem("token");
 				try{
-					const response = await fetch(process.env.BACKEND_URL + `/api/eliminarfav/<int:api_receta_id>`, {
+					 const response = await fetch(`${process.env.BACKEND_URL}/api/eliminarfav/${api_receta_id}`, {
 						method: "DELETE",
 						headers: {
 							"Content-Type": "application/json",
@@ -401,11 +401,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					if (!response.ok) {
 						const errorData = await response.json();
-						alert(errorData.msg);
+					
 
-					} else {
-						alert('Receta eleminada de favoritos')
-					}
+					}setStore(prevStore => {
+						const nuevosFavoritos = prevStore.favoritos.filter(favorito => favorito.api_receta_id !== api_receta_id);
+			
+						// Aquí puedes agregar un log para verificar la lista actualizada
+						console.log("Favoritos actualizados:", nuevosFavoritos);
+			
+						return {
+							...prevStore,
+							favoritos: nuevosFavoritos,
+						};
+					});
+					
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
 				}

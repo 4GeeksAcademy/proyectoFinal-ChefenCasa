@@ -7,14 +7,14 @@ export const CardFavoritos = ({ receta }) => {
     const { actions, store } = useContext(Context)
     const handleObtener = () => {
         actions.obtenerFavoritos(receta.id || receta.api_receta_id)
-        console.log(store.favoritos, "hola")
+        
     }
     
-    const handlEliminar = ()=>{
-        actions.eliminarFav( receta.api_receta_id)
-        console.log("eliminado")
-    }
-
+    const handleEliminar = async () => {
+         actions.eliminarFav(receta.api_receta_id);
+            
+        
+    };
     
     return (
         <div className="contenedorCardFavorito">
@@ -26,7 +26,7 @@ export const CardFavoritos = ({ receta }) => {
                         <div className="corazonInfoFavorito ">
                             <button className="botonNotaFavoritos">Note</button>
                             <button className='corazonFavorito'>
-                                <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={handlEliminar}></i>
+                                <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={() => handleEliminar(receta.api_receta_id)}></i>
                             </button>
                             <Link to={`/recetaCompletaPrivada/${receta.id}`}>
                                 <button className="botonMasInfoFavorito">info</button>
