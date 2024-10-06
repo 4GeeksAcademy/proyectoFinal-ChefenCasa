@@ -43,7 +43,7 @@ export const CardFavoritos = ({ receta }) => {
 
                         <p className="tiempoCoccionFavorito" style={{ fontSize: "medium" }}>
                             <i className="fa-regular fa-clock"></i> {receta.tiempo_de_coccion
-                            }
+                            } minutes
                         </p>
                     </div>
                 </div>

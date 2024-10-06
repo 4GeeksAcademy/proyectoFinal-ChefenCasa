@@ -38,7 +38,7 @@ export const DropMenuSemanal = ({ recetaId }) => {
                     Wednesday
                     <ul className="submenu">
 
-                        <li><a className="dropdown-item" href="#" onClick={() => guardarMenu("Wednesday", "Lunch")}>Dinner</a></li>
+                        <li><a className="dropdown-item" href="#" onClick={() => guardarMenu("Wednesday", "Lunch")}>Lunch</a></li>
                         <li><a className="dropdown-item" href="#" onClick={() => guardarMenu("Wednesday", "Dinner")}>Dinner</a></li>
                     </ul>
                 </li>
