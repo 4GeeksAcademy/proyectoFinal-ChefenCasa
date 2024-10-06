@@ -10,10 +10,11 @@ export const NavbarPrivado = () => {
     const navigate = useNavigate();  
 
     const [showModalPerfil, setShowModalPerfil] = useState(false);
+
     const openModalProfile = () => {
         setShowModalPerfil(true);
     };
-    
+
     const closeModal = () => {
         setShowModalPerfil(false);
     };
@@ -25,34 +26,34 @@ export const NavbarPrivado = () => {
 
     return (
         <>
-        <nav className="navbar">
-            <div className="container">
-                <Link to="/">
-                    <img className="LogoChefEnCasa" src={logo} alt="Logo Chef at Home"></img>
-                </Link>
-                <div className="btn-group">
-                    <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="fas fa-user fa-xl"></i> &nbsp; <i className="fas fa-bars fa-xl"></i>
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#" onClick={openModalProfile}>Edit Profile</a></li>
-                        <li>
-                            <Link to="/vistaFavoritos" style={{ textDecoration: 'none', color: 'black' }}>
-                                <a className="dropdown-item"> Favorites </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/menuSemanal" style={{ textDecoration: 'none', color: 'black' }}>
-                                <a className="dropdown-item"> Weekly menu </a>
-                            </Link>
-                        </li>
-                        <li><hr className="dropdown-divider"/></li>
-                        <li><a className="dropdown-item" style={{color: 'red'}} href="#" onClick={logout}>Sign out</a></li>
-                    </ul>
+            <nav className="navbar">
+                <div className="container">
+                    <Link to="/">
+                        <img className="LogoChefEnCasa" src={logo} alt="Logo Chef at Home" />
+                    </Link>
+                    <div className="dropdown">
+                        <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className="fas fa-user fa-xl"></i> &nbsp; <i className="fas fa-bars fa-xl"></i>
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><a className="dropdown-item" href="#" onClick={openModalProfile}>Edit Profile</a></li>
+                            <li>
+                                <Link to="/vistaFavoritos" style={{ textDecoration: 'none', color: 'black' }}>
+                                    <span className="dropdown-item">Favorites</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/menuSemanal" style={{ textDecoration: 'none', color: 'black' }}>
+                                    <span className="dropdown-item">Weekly menu</span>
+                                </Link>
+                            </li>
+                            <li><hr className="dropdown-divider"/></li>
+                            <li><a className="dropdown-item" style={{color: 'red'}} href="#" onClick={logout}>Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        <ModalPerfil show={showModalPerfil} onClose={closeModal} />
+            </nav>
+            <ModalPerfil show={showModalPerfil} onClose={closeModal} />
         </>
     );
 };
