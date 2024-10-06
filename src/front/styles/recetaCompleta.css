@@ -29,8 +29,6 @@
     overflow-y: auto;
   }
   
- 
-  
   
   
   .receta-img {
@@ -40,6 +38,7 @@
     object-fit: cover;
     border-radius: 10px;
   }
+
   .note-section {
     display: flex;
     justify-content: space-between;

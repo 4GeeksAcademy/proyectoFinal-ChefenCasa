@@ -26,21 +26,29 @@ export const RecetaCompletaPrivada = () => {
 
         <div className="row recipe-content">
           <div className="ingredientes col-12 col-md-4 p-4 rounded">
-            <h4>Ingredientes</h4>
-            <ul>
-              <li>Ingredientes api</li>
-            </ul>
-            <div className="preparation-time ">
-              <p className="mb-0 ms-2">Tiempo de preparación:</p>
-              <i className="fa-regular fa-clock"></i>
-              <span className="ms-2">20 minutos</span>
+            <p style={{ fontSize: "large" }}>
+              <strong> Ingredients<br/> </strong>
+              <ul>
+                {receta.ingredientes && receta.ingredientes.length > 0
+                  ? receta.ingredientes.map((ingrediente, index) => (
+                    <li key={index}>{ingrediente.ingrediente}</li>
+                  ))
+                  : 'Ingredients are not availables'}
+              </ul>
+            </p>
+            <div className="preparation-time">
+              <p style={{ fontSize: "large" }}>{receta.tiempo_de_coccion} </p>
             </div>
           </div>
 
           <div className="col-10 col-md-6  rounded">
-            <h4>Preparación</h4>
+            <p>{receta.instructions}</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetu adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+              {receta.pasos && receta.pasos.length > 0
+                ? receta.pasos.map((paso, index) => (
+                  <span key={index}> <br></br> - Step {index + 1}: {paso.step}</span>
+                ))
+                : 'Steps are not availables'}
             </p>
           </div>
         </div>
@@ -54,7 +62,7 @@ export const RecetaCompletaPrivada = () => {
 
         <div className="row note-section ">
           <div className="col-12 col-md-4 p-4">
-            <img src="https://assets.teenvogue.com/photos/5ab665d06d36ed4396878433/master/pass/GettyImages-519526540.jpg" alt="Imagen receta" className="img-fluid rounded receta-img" />
+            <img src={receta.image} alt={receta.title} className="img-fluid rounded receta-img" />
           </div>
 
 
