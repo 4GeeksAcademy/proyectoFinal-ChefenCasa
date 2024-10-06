@@ -35,9 +35,17 @@ export const NavbarPrivado = () => {
                         <i className="fas fa-user fa-xl"></i> &nbsp; <i className="fas fa-bars fa-xl"></i>
                     </button>
                     <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#" onClick={openModalProfile}>Profile</a></li>
-                        <li><a className="dropdown-item" href="#">Favorites</a></li>
-                        <li><a className="dropdown-item" href="#">Weekly Menu</a></li>
+                        <li><a className="dropdown-item" href="#" onClick={openModalProfile}>Edit Profile</a></li>
+                        <li>
+                            <Link to="/vistaFavoritos" style={{ textDecoration: 'none', color: 'black' }}>
+                                <a className="dropdown-item"> Favorites </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/menuSemanal" style={{ textDecoration: 'none', color: 'black' }}>
+                                <a className="dropdown-item"> Weekly menu </a>
+                            </Link>
+                        </li>
                         <li><hr className="dropdown-divider"/></li>
                         <li><a className="dropdown-item" style={{color: 'red'}} href="#" onClick={logout}>Sign out</a></li>
                     </ul>
