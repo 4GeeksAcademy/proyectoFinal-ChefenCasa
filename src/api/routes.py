@@ -213,7 +213,7 @@ def guardarFavoritos():
     return jsonify({'msg': 'Receta guardada en favoritos correctamente'}), 200
 
 #Eliminar favoritos
-@api.route('/eliminarfav', methods=['DELETE'])
+@api.route('/eliminarfav/<int:api_receta_id>', methods=['DELETE'])
 @jwt_required()
 def eliminarFav(): 
     usuario_id = get_jwt_identity()

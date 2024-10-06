@@ -6,10 +6,16 @@ export const CardFavoritos = ({ receta }) => {
     console.log("Receta en CardFavoritos:", receta);
     const { actions, store } = useContext(Context)
     const handleObtener = () => {
-        actions.handleObtener(receta.id || receta.api_receta_id)
+        actions.obtenerFavoritos(receta.id || receta.api_receta_id)
         console.log(store.favoritos, "hola")
     }
+    
+    const handlEliminar = ()=>{
+        actions.eliminarFav( receta.api_receta_id)
+        console.log("eliminado")
+    }
 
+    
     return (
         <div className="contenedorCardFavorito">
             <div className="datosCompletosFavoritos">
@@ -20,7 +26,7 @@ export const CardFavoritos = ({ receta }) => {
                         <div className="corazonInfoFavorito ">
                             <button className="botonNotaFavoritos">Note</button>
                             <button className='corazonFavorito'>
-                                <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={handleObtener}></i>
+                                <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={handlEliminar}></i>
                             </button>
                             <Link to={`/recetaCompletaPrivada/${receta.id}`}>
                                 <button className="botonMasInfoFavorito">info</button>
@@ -37,7 +43,7 @@ export const CardFavoritos = ({ receta }) => {
                         <ul>
                             {receta.ingredientes && receta.ingredientes.length > 0
                                 ? receta.ingredientes.map((ingrediente, index) => (
-                                    <li key={index}>{ingrediente}</li> // Esto debería funcionar
+                                    <li key={index}>{ingrediente}</li> 
                                 ))
                                 : <li>Ingredientes no disponibles</li>}
                         </ul>

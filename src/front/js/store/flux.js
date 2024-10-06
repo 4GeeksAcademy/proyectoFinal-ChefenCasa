@@ -391,15 +391,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			eliminarFav:async()=>{
 				const token = localStorage.getItem("token");
 				try{
-					const response = await fetch(process.env.BACKEND_URL + `/api/eliminarfav`, {
+					const response = await fetch(process.env.BACKEND_URL + `/api/eliminarfav/<int:api_receta_id>`, {
 						method: "DELETE",
 						headers: {
 							"Content-Type": "application/json",
 							'Authorization': 'Bearer ' + token
 						},
-						body: JSON.stringify({
-							api_receta_id: api_receta_id,
-						})
+						
 					});
 					if (!response.ok) {
 						const errorData = await response.json();
