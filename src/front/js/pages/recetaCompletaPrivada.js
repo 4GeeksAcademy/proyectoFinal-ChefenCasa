@@ -54,7 +54,7 @@ export const RecetaCompletaPrivada = () => {
         </div>
 
         <div className="text-center mt-3 buttonBottom">
-          <button className="btn-receta" data-bs-toggle="modal" data-bs-target="#noteModal">Agregar nota</button>
+          <button className="btn-receta" data-bs-toggle="modal" data-bs-target="#noteModal">Add note</button>
 
           <DropMenuSemanal recetaId={receta.id} />
 
