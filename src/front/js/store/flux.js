@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -278,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '4f102ececb3243b0b4487681fc6f9ae5'
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
 			
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
@@ -381,6 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					} else {
 						alert('Receta agregada a favoritos')
+						getActions().obtenerFavoritos()
 					}
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
@@ -388,26 +389,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//Eliminar favoritos:
-			eliminarFav:async()=>{
+			eliminarFav:async(api_receta_id)=>{
 				const token = localStorage.getItem("token");
 				try{
-					const response = await fetch(process.env.BACKEND_URL + `/api/eliminarfav`, {
+					 const response = await fetch(`${process.env.BACKEND_URL}/api/eliminarfav/${api_receta_id}`, {
 						method: "DELETE",
 						headers: {
 							"Content-Type": "application/json",
 							'Authorization': 'Bearer ' + token
 						},
-						body: JSON.stringify({
-							api_receta_id: api_receta_id,
-						})
+						
 					});
 					if (!response.ok) {
 						const errorData = await response.json();
-						alert(errorData.msg);
+					
 
 					} else {
-						alert('Receta eleminada de favoritos')
+						getActions().obtenerFavoritos()
 					}
+					
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
 				}
@@ -419,7 +419,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			agregarNotas: async (api_receta_id, contenido) => {
 				const token = localStorage.getItem("token");
 				try {
-					const response = await fetch(process.env.BACKEND_URL + `/api/agregarNota`, {
+					const response = await fetch(process.env.BACKEND_URL + `/api/agregarnota`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
