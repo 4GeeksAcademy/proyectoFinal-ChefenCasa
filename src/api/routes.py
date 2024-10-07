@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, make_response
 from .models import db, User, MenuSemanal, Favoritos, user_favorites, Notas 
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
@@ -241,6 +241,12 @@ def eliminarFav(api_receta_id):
 
     return jsonify({'msg': 'Favorito eliminado correctamente'}), 200
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> origin/development
 #CERRAR SESION
 @api.route('/api/logout', methods=['POST'])
 def logout():
@@ -300,15 +306,28 @@ def modificarNota():
         return jsonify({'msg':'no se encontro la nota'}),404
     
 
-
+#RECUPERACION DE CONTRASEñA
+# con esta ruta enviamos el correo al usuario desde nuestro mail a su mail
 @api.route('/enviar-correo', methods=['POST'])
 def enviar_correo():
-    from app import mail
+    from app import mail, db
     data=request.get_json()
     email=data.get("email")
-    msg = Message('Restablecimiento de contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
+   
+    
+    # Verificar si el correo existe en la base de datos
+    user = db.session.query(User).filter_by(email=email).first()
+
+    if not user:
+        return make_response(jsonify({'error': 'Email not found in the system'}), 404)
+    
+    msg = Message('Password Reset Request', recipients=[email], sender="chefathome.4geeks@gmail.com")
+    # reset_link = vista de restablecimiento de contraseña
     msg.body = 'Este es el cuerpo del correo.'
     mail.send(msg)
-    return 'Correo enviado!'
+    return {'msg': 'Email sent successfully!'}, 200
 
 # poner el mensaje en ingles 
+
+
+
