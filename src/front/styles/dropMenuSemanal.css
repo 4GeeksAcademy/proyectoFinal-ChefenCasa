@@ -13,6 +13,18 @@
     border: 1px solid #ddd;
   }
   
+  .btn-weeklyMenu {
+      background-color: #ff7f00;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+  }
+  .btn-weeklyMenu:hover {
+    background-color: #e06b00;
+  }
+
   .dropdown-item:hover .submenu {
     display: block; 
   }

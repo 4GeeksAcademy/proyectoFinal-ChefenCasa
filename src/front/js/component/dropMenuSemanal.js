@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom';
 import "../../styles/dropMenuSemanal.css"
 import { Context } from "../store/appContext";
 
@@ -14,9 +15,11 @@ export const DropMenuSemanal = ({ recetaId }) => {
     };
 
     return (
-        <div className="dropdown">
+        <div className="btn-group">
+            <Link to={`/menuSemanal`}>
+                <button type="button" class="btn-weeklyMenu">Weekly Menu</button>
+            </Link>
             <button className="btn btn-receta dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Weekly menu
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li className="dropdown-item">
