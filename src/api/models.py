@@ -24,7 +24,8 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "is_active": self.is_active
+            "is_active": self.is_active,
+            "favoritos": [favorito.serialize() for favorito in self.favoritos]
         }
 
 class Favoritos(db.Model):
