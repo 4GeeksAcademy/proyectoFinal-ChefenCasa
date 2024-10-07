@@ -10,8 +10,9 @@ import { Single } from "./pages/single";
 import { VistaPrivada } from "./pages/vistaPrivada";
 import { VistaPublica } from "./pages/vistaPublica";
 import { VistaFavoritos } from "./pages/vistaFavoritos";
-import {RecetaCompletaPublica} from "./pages/recetaCompletaPublica"
+import { RecetaCompletaPublica } from "./pages/recetaCompletaPublica";
 import { RecetaCompletaPrivada } from "./pages/recetaCompletaPrivada";
+import { ResetPassword } from "./pages/resetPassword"
 
 
 import { CardPrueba } from "./pages/card_prueba";
@@ -28,7 +29,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>
@@ -37,19 +38,20 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<iniciarSesion />} path="/iniciarSesion" />
-                        <Route element={<Single />} path="/single/:theid" />            
+                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<VistaPrivada />} path="/vistaPrivada" />
                         <Route element={<VistaPublica />} path="/vistaPublica" />
                         <Route element={<RecetaCompletaPrivada />} path="/recetaCompletaPrivada/:recetaId" />
                         <Route element={<RecetaCompletaPublica />} path="/recetaCompletaPublica" />
                         <Route element={<MenuSemanal />} path="/menuSemanal" />
                         <Route element={<VistaFavoritos />} path="/vistaFavoritos" />
+                        <Route element={<ResetPassword />} path="/resetPassword" />
 
                         <Route element={<CardPrueba />} path="/cardPrueba" />
                         <Route element={<CardPrivada />} path="/cardPrivada" />
 
                         <Route element={<h1>Not found!</h1>} />
-                        
+
                     </Routes>
                 </ScrollToTop>
             </BrowserRouter>
