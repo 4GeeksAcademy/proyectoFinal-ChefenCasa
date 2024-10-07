@@ -241,12 +241,9 @@ def eliminarFav(api_receta_id):
 
     return jsonify({'msg': 'Favorito eliminado correctamente'}), 200
 
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> origin/development
 #CERRAR SESION
 @api.route('/api/logout', methods=['POST'])
 def logout():
