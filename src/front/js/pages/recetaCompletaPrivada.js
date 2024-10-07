@@ -58,6 +58,8 @@ export const RecetaCompletaPrivada = () => {
 
           <DropMenuSemanal recetaId={receta.id} />
 
+          
+
         </div>
 
         <div className="row note-section ">

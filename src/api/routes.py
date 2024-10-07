@@ -8,7 +8,7 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_mail import Mail, Message
 
 
 api = Blueprint('api', __name__)
@@ -298,3 +298,17 @@ def modificarNota():
         return jsonify({'msg':'Nota modificada exitosamente', 'contenido':contenido, }),200 
     else:
         return jsonify({'msg':'no se encontro la nota'}),404
+    
+
+
+@api.route('/enviar-correo', methods=['POST'])
+def enviar_correo():
+    from app import mail
+    data=request.get_json()
+    email=data.get("email")
+    msg = Message('Restablecimiento de contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
+    msg.body = 'Este es el cuerpo del correo.'
+    mail.send(msg)
+    return 'Correo enviado!'
+
+# poner el mensaje en ingles 
