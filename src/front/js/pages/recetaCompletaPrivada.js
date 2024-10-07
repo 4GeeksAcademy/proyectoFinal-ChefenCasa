@@ -14,6 +14,8 @@ export const RecetaCompletaPrivada = () => {
   //me traigo la receta, filtro por id 
   const receta = store.recetas.find(rec => rec.id.toString() === recetaId);
 
+  
+
   return (
     <div>
       <NavbarPrivado />
@@ -28,6 +30,7 @@ export const RecetaCompletaPrivada = () => {
           <div className="ingredientes col-12 col-md-4 p-4 rounded">
             <p style={{ fontSize: "large" }}>
               <strong> Ingredients<br/> </strong>
+              </p>
               <ul>
                 {receta.ingredientes && receta.ingredientes.length > 0
                   ? receta.ingredientes.map((ingrediente, index) => (
@@ -35,7 +38,7 @@ export const RecetaCompletaPrivada = () => {
                   ))
                   : 'Ingredients are not availables'}
               </ul>
-            </p>
+            
             <div className="preparation-time">
               <p style={{ fontSize: "large" }}>{receta.tiempo_de_coccion} </p>
             </div>
@@ -54,7 +57,14 @@ export const RecetaCompletaPrivada = () => {
         </div>
 
         <div className="text-center mt-3 buttonBottom">
-          <button className="btn-receta" data-bs-toggle="modal" data-bs-target="#noteModal">Add note</button>
+          <button 
+          className="btn-receta" 
+          data-bs-toggle="modal" 
+          data-bs-target="#noteModal"
+          onClick={()=>{
+            setNotaSeleccionada(null)
+          }}
+          >Add note</button>
 
           <DropMenuSemanal recetaId={receta.id} />
 
@@ -69,7 +79,7 @@ export const RecetaCompletaPrivada = () => {
 
 
         </div>
-        <NotaModal />
+        <NotaModal  />
 
       </div>
     </div>
