@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
@@ -10,11 +10,14 @@ export const CardFavoritos = ({ receta }) => {
         
     }
     
-    const handleEliminar = async () => {
-         actions.eliminarFav(receta.api_receta_id);
+    // Manejo de la eliminación del favorito
+    const handleEliminar = () => {
+        
+             actions.eliminarFav(receta.api_receta_id);
             
         
     };
+
     
     return (
         <div className="contenedorCardFavorito">

@@ -203,7 +203,7 @@ def guardarFavoritos():
     #cmo tengo una tabla intermedia, relacionada con fav debemos hacer una verificación a esa:
     existe_relacion = db.session.query(user_favorites).filter_by(usuario_id=usuario_id, favoritos_id=favorito.id).first()
     if existe_relacion:
-        return jsonify({'msg': 'Este favorito ya ha sido guardado anteriormente'}), 400
+     return jsonify({'msg': 'Este favorito ya ha sido guardado anteriormente'}), 400
 
     #inserto en la tabla intermedia(tabla del principio)
     stmt = user_favorites.insert().values(usuario_id=usuario_id, favoritos_id=favorito.id)
@@ -217,7 +217,8 @@ def guardarFavoritos():
 @jwt_required()
 def eliminarFav(api_receta_id): 
     usuario_id = get_jwt_identity()
-  
+    print(api_receta_id)
+
     # Busco si hay un fav en la tabla 'Favoritos'
     favorito = Favoritos.query.filter_by(api_receta_id=api_receta_id).first()  
 
@@ -230,7 +231,7 @@ def eliminarFav(api_receta_id):
     if not existe_relacion:
         return jsonify({'msg': 'No está guardado en favoritos'}), 404
     
-    # Si existe, se elimina 
+    # Si existe, se elimina la relación en la tabla intermedia
     stmt = user_favorites.delete().where(
         user_favorites.c.usuario_id == usuario_id,
         user_favorites.c.favoritos_id == favorito.id
@@ -239,31 +240,6 @@ def eliminarFav(api_receta_id):
     db.session.commit()
 
     return jsonify({'msg': 'Favorito eliminado correctamente'}), 200
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #CERRAR SESION
 @api.route('/api/logout', methods=['POST'])
@@ -295,7 +271,7 @@ def agregarNota():
     try:
             db.session.add(nuevaNota)
             db.session.commit()
-            return jsonify({'msg': 'Nota guardada exitosamente aaaaaa'}), 200
+            return jsonify({'msg': 'Nota guardada exitosamente'}), 200
     except Exception as e:
             db.session.rollback()  
             return jsonify({'msg': str(e)}), 500
