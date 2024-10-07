@@ -13,13 +13,13 @@ export const ResetPassword = () => {
             < Navbar />
             <div className="vistaResetPassword">
                 <div className="resetPasswordContenedor">
-                    <form>
-                        <label>New Password:</label>
-                        <div className="form-row">
-                            <div>
-                                <input className="form-control" type="password" name="password" id="password"/>
-                            </div>
-                        </div>
+                    <form className="inputResetPassword">
+                        <p style={{ fontSize: "large" }}> New Password: </p>
+                        <input className="inputPassword" type="password" name="password" id="password"/>
+                    </form>
+                    <form className="inputResetPassword">
+                        <p style={{ fontSize: "large" }}> Repeat Password: </p>
+                        <input className="inputPassword" type="password" name="password" id="password"/>
                     </form>
                 </div>
             </div>
