@@ -176,14 +176,16 @@ def get_menu_semanal():
 @api.route('/favoritos', methods=['GET'])
 @jwt_required()
 def obtenerFavorito():
-    favoritos = Favoritos.query.all() #almaceno todos los favoritos 
-    favoritos_json=[]
-    for usuario in favoritos:
-        favoritos_json.append({
-            "id": usuario.id,
-            "api_receta_id": usuario.api_receta_id
-        })
-    return jsonify(favoritos_json),200
+    usuario_id = get_jwt_identity()  # Obtén el ID del usuario autenticado
+
+    # Filtra los favoritos por usuario
+    
+    usuario = User.query.get(usuario_id)
+    favoritos = usuario.favoritos
+    favoritos_json = [favorito.serialize() for favorito in favoritos]
+  
+
+    return jsonify(favoritos_json), 200
 
 
 # Guardar favoritos
@@ -191,33 +193,30 @@ def obtenerFavorito():
 @jwt_required()
 def guardarFavoritos():
     usuario_id = get_jwt_identity()
+    usuario = User.query.get(usuario_id)
+    print(usuario)
     data = request.get_json()
-    
+    api_receta_id = data.get('api_receta_id')
     #busco si hay fav añadidos, en caso de no..los creo:
-    favorito = Favoritos.query.filter_by(api_receta_id=data['api_receta_id']).first()
+    favorito = Favoritos.query.filter_by(api_receta_id=api_receta_id).first()
     if not favorito:
         favorito = Favoritos(api_receta_id=data['api_receta_id'])
         db.session.add(favorito)
         db.session.commit()
-
-    #cmo tengo una tabla intermedia, relacionada con fav debemos hacer una verificación a esa:
-    existe_relacion = db.session.query(user_favorites).filter_by(usuario_id=usuario_id, favoritos_id=favorito.id).first()
-    if existe_relacion:
-     return jsonify({'msg': 'Este favorito ya ha sido guardado anteriormente'}), 400
-
-    #inserto en la tabla intermedia(tabla del principio)
-    stmt = user_favorites.insert().values(usuario_id=usuario_id, favoritos_id=favorito.id)
-    db.session.execute(stmt)
-    db.session.commit()  
-
+    if favorito in usuario.favoritos:
+        return jsonify({'msg':'La receta ya esta agregada a favoritos'}), 200
+    usuario.favoritos.append(favorito)
+    db.session.commit()
     return jsonify({'msg': 'Receta guardada en favoritos correctamente'}), 200
+
+    
 
 #Eliminar favoritos
 @api.route('/eliminarfav/<int:api_receta_id>', methods=['DELETE'])
 @jwt_required()
 def eliminarFav(api_receta_id): 
     usuario_id = get_jwt_identity()
-    print(api_receta_id)
+    usuario = User.query.get(usuario_id)
 
     # Busco si hay un fav en la tabla 'Favoritos'
     favorito = Favoritos.query.filter_by(api_receta_id=api_receta_id).first()  
@@ -226,17 +225,10 @@ def eliminarFav(api_receta_id):
     if not favorito:
         return jsonify({'msg': 'Favorito no encontrado'}), 404
     
-    # Verifico la relación en la tabla intermedia:
-    existe_relacion = db.session.query(user_favorites).filter_by(usuario_id=usuario_id, favoritos_id=favorito.id).first()
-    if not existe_relacion:
-        return jsonify({'msg': 'No está guardado en favoritos'}), 404
+    if favorito not in usuario.favoritos: 
+        return jsonify({'msg':'Esta receta no está en tus favoritos'}), 404
     
-    # Si existe, se elimina la relación en la tabla intermedia
-    stmt = user_favorites.delete().where(
-        user_favorites.c.usuario_id == usuario_id,
-        user_favorites.c.favoritos_id == favorito.id
-    )
-    db.session.execute(stmt)
+    usuario.favoritos.remove(favorito)
     db.session.commit()
 
     return jsonify({'msg': 'Favorito eliminado correctamente'}), 200

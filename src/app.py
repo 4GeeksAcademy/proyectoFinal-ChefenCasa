@@ -16,6 +16,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from datetime import timedelta
 
 # from models import Person
 
@@ -25,6 +26,7 @@ static_file_dir = os.path.join(os.path.dirname(
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.config["JWT_SECRET_KEY"] = "codigo1518179"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"]= timedelta(hours=8)
 jwt = JWTManager(app)
 
 app.config.update(dict(

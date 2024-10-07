@@ -381,6 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					} else {
 						alert('Receta agregada a favoritos')
+						getActions().obtenerFavoritos()
 					}
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
@@ -403,14 +404,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const errorData = await response.json();
 					
 
-					}  setStore(prevStore => {
-						const updatedFavoritos = prevStore.favoritos.filter(favorito => favorito.api_receta_id !== api_receta_id);
-						
-						return {
-							...prevStore,
-							favoritos: updatedFavoritos,
-						};
-					});
+					} else {
+						getActions().obtenerFavoritos()
+					}
 					
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
