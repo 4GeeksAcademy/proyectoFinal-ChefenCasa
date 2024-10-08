@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint, make_response
+from flask import Flask, request, jsonify, url_for, Blueprint, make_response, render_template
 from .models import db, User, MenuSemanal, Favoritos, user_favorites, Notas 
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
@@ -9,6 +9,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer
 
 
 api = Blueprint('api', __name__)
@@ -296,6 +297,10 @@ def modificarNota():
     
 
 #RECUPERACION DE CONTRASEñA
+
+# Serializador para crear tokens seguros
+s = URLSafeTimedSerializer("codigo1518179")
+
 # con esta ruta enviamos el correo al usuario desde nuestro mail a su mail
 @api.route('/enviar-correo', methods=['POST'])
 def enviar_correo():
@@ -310,11 +315,18 @@ def enviar_correo():
     if not user:
         return make_response(jsonify({'error': 'Email not found in the system'}), 404)
     
-    msg = Message('Password Reset Request', recipients=[email], sender="chefathome.4geeks@gmail.com")
-    # reset_link = vista de restablecimiento de contraseña
-    msg.body = 'Este es el cuerpo del correo.'
+    # Generar token
+    token = s.dumps(email, salt='password-reset-salt')
+    
+    # Crear enlace de restablecimiento de contraseña
+    reset_link = f'http://localhost:3001/reset-password?token={token}'  # Cambia la URL según sea necesario
+    
+    # Preparar y enviar el correo
+    msg = Message('Solicitud de Restablecimiento de Contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
+    msg.body = f'Sigue este enlace para restablecer tu contraseña: {reset_link}'
     mail.send(msg)
-    return {'msg': 'Email sent successfully!'}, 200
+
+    return {'msg': '¡Correo enviado exitosamente!'}, 200
 
 # poner el mensaje en ingles 
 
@@ -322,11 +334,17 @@ def enviar_correo():
 @api.route('/reset-password', methods=['PUT'])
 def reset_password():
     data = request.get_json()
-    email=data.get("email")
+    token = data.get("token")
     new_password = data.get("new_password")
 
-    if not email or not new_password:
+    if not token or not new_password:
         return jsonify({"error": "Faltan datos"}), 400
+    
+    # Verificar y decodificar el token
+    try:
+        email = s.loads(token, salt='password-reset-salt', max_age=3600)  # El token expira en 1 hora
+    except Exception as e:
+        return jsonify({"error": "Token inválido o expirado."}), 400
 
     user = db.session.query(User).filter_by(email=email).first()
 
