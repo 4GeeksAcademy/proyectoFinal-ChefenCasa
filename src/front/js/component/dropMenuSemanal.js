@@ -17,7 +17,7 @@ export const DropMenuSemanal = ({ recetaId }) => {
     return (
         <div className="btn-group">
             <Link to={`/menuSemanal`}>
-                <button type="button" class="btn-weeklyMenu">Weekly Menu</button>
+                <button type="button" className="btn-weeklyMenu">Weekly Menu</button>
             </Link>
             <button className="btn btn-receta dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             </button>
