@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import "../../styles/recetaCompleta.css"
 import { NotaModal } from "../component/notaModal";
 import { DropMenuSemanal } from "../component/dropMenuSemanal";
 import { useParams } from "react-router-dom";
+import { useState } from "react/cjs/react.production.min";
 
 export const RecetaCompletaPrivada = () => {
   const { store, actions } = useContext(Context)
@@ -12,12 +13,23 @@ export const RecetaCompletaPrivada = () => {
   const { recetaId } = useParams()
 
   //me traigo la receta, filtro por id 
-  const receta = store.recetas.find(rec => rec.id.toString() === recetaId);
+
+  useEffect(() => {
+    actions.obtenerRecetaIndividual(recetaId);
+
+  }, [actions, store.recetas.length]); // Dependencias del efecto
+
+
+
+  //const receta = store.recetas.find(rec => rec.id.toString() === recetaId);
+
+  const receta = store.recetas;
+
+  console.log('receta', receta)
 
   return (
     <div>
       <NavbarPrivado />
-
       <div className="container mt-5">
         <header className="recipe-header text-center mb-4">
 
@@ -27,7 +39,7 @@ export const RecetaCompletaPrivada = () => {
         <div className="row recipe-content">
           <div className="ingredientes col-12 col-md-4 p-4 rounded">
             <p style={{ fontSize: "large" }}>
-              <strong> Ingredients<br/> </strong>
+              <strong> Ingredients<br /> </strong>
               <ul>
                 {receta.ingredientes && receta.ingredientes.length > 0
                   ? receta.ingredientes.map((ingrediente, index) => (
@@ -58,7 +70,7 @@ export const RecetaCompletaPrivada = () => {
 
           <DropMenuSemanal recetaId={receta.id} />
 
-          
+
 
         </div>
 
@@ -69,9 +81,9 @@ export const RecetaCompletaPrivada = () => {
 
 
         </div>
-        <NotaModal />
 
       </div>
+
     </div>
   )
 }

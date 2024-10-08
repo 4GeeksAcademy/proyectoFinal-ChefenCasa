@@ -131,8 +131,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = '8a1823fc7a1d4876885d22a1555ecaf0'
-				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const url = `https://api.spoonacular.com/recipes/random?number=2&apiKey=${apiKey}`;
 
 				try {
 					const response = await fetch(url);
@@ -140,9 +140,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error('Error al obtener las recetas');
 					}
 
+
 					const data = await response.json();
 					const recetas = data.recipes;
-
 					//cuando va asyn y cuando no en el map(asyn(receta))
 					const resultados = recetas.map((receta) => ({
 						id: receta.id,
@@ -164,8 +164,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}));
 
+
 					const store = getStore();
 					setStore({ ...store, recetas: resultados });
+
 
 
 				} catch (error) {
@@ -173,9 +175,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+			obtenerRecetaIndividual: async (apiRecetaId) => {
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const url = `https://api.spoonacular.com/recipes/${apiRecetaId}/information?includeNutrition=false&apiKey=${apiKey}`;
+
+				try {
+					const response = await fetch(url);
+					if (!response.ok) {
+						throw new Error('Error al obtener las recetas');
+					}
+
+					const data = await response.json();
+					const receta = data;
+
+
+					//cuando va async y cuando no en el map(asyn(receta))
+					const resultados = ({
+						id: receta.id,
+						title: receta.title,
+						image: receta.image,
+						dieta: receta.diets,
+						ingredientes: receta.extendedIngredients.map((ingrediente) => ({
+							ingrediente: ingrediente.name
+						})),
+						instructions: receta.instructions
+							? receta.instructions
+							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
+						tiempo_de_coccion: receta.readyInMinutes
+							? `${receta.readyInMinutes} minutes`
+							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
+						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps)
+							? receta.analyzedInstructions[0].steps
+							: 'Los pasos no están disponibles.'
+
+					})
+
+					//const store = getStore();
+					//setStore({ ...store, recetas: resultados });
+
+					console.log(store.recetas)
+
+
+				} catch (error) {
+					console.error('Error al obtener las recetas:', error);
+				}
+			},
+
+
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '8a1823fc7a1d4876885d22a1555ecaf0'
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -278,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '8a1823fc7a1d4876885d22a1555ecaf0'
+				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
 
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
@@ -411,168 +461,160 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
 				}
-			}
+			},
 
-		},
 
-		//GUARDAR NOTAS
-		agregarNotas: async (api_receta_id, contenido) => {
-			const token = localStorage.getItem("token");
-			try {
-				const response = await fetch(process.env.BACKEND_URL + `/api/agregarnota`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token
-					},
-					body: JSON.stringify({
-						api_receta_id: api_receta_id,
-						contenido: contenido
-					})
-				});
-				if (!response.ok) {
-					const errorData = await response.json();
-					alert(errorData.msg);
+			//GUARDAR NOTAS
+			agregarNotas: async (api_receta_id, contenido) => {
+				const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(process.env.BACKEND_URL + `/api/agregarnota`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						},
+						body: JSON.stringify({
+							api_receta_id: api_receta_id,
+							contenido: contenido
+						})
+					});
+					if (!response.ok) {
+						const errorData = await response.json();
+						alert(errorData.msg);
 
-				} else {
-					alert('Nota agregada')
-				}
-			} catch (error) {
-				console.log("Se produjo un error:", error);
-			}
-		},
-
-		modificarNota: async (api_receta_id, contenido) => {
-			const token = localStorage.getItem("token");
-			try {
-				const response = await fetch(process.env.BACKEND_URL + `/api/modificarnota`, {
-					method: "PUT",
-					body: JSON.stringify({
-						contenido: contenido,
-						api_receta_id: api_receta_id
-					}),
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token
+					} else {
+						alert('Nota agregada')
 					}
-				});
-
-				if (!response.ok) {
-					const errorData = await response.json();
-					alert(errorData.msg);
-				} else {
-					const data = await response.json();
-					alert(data.msg);
+				} catch (error) {
+					console.log("Se produjo un error:", error);
 				}
-			} catch (error) {
-				console.log("Error:", error);
-			}
-		},
+			},
 
-		//POST-solicitar-restablecimiento-de-contraseña
-		solicitarMailRecuperacion: async () => {
-			const token = localStorage.getItem("token");
-			const email = document.getElementById("email").value;
+			modificarNota: async (api_receta_id, contenido) => {
+				const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(process.env.BACKEND_URL + `/api/modificarnota`, {
+						method: "PUT",
+						body: JSON.stringify({
+							contenido: contenido,
+							api_receta_id: api_receta_id
+						}),
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						}
+					});
 
-			try {
-				const response = await fetch(process.env.BACKEND_URL + "/api/enviar-correo", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token,
-					},
-					body: JSON.stringify({
-						email: email,
-					}),
-				});
-
-				if (response.ok) {
-					alert("¡Correo de recuperación de contraseña enviado!");
-				} else if (response.status === 404) {
-					alert("Correo no encontrado. Por favor intenta nuevamente.");
-				} else {
-					alert("Error al enviar el correo. Intenta de nuevo.");
-				}
-			} catch (error) {
-				console.log("Se produjo un error:", error);
-			}
-		},
-
-		obtenerNotas: async (apiRecetaId) => {
-
-			const token = localStorage.getItem('token')
-
-			try {
-				const response = await fetch(process.env.BACKEND_URL + `/api/obtenerNotas/${apiRecetaId}`, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token
+					if (!response.ok) {
+						const errorData = await response.json();
+						alert(errorData.msg);
+					} else {
+						const data = await response.json();
+						alert(data.msg);
 					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
 
-				});
+			//POST-solicitar-restablecimiento-de-contraseña
+			solicitarMailRecuperacion: async () => {
+				const token = localStorage.getItem("token");
+				const email = document.getElementById("email").value;
 
-				if (!response.ok) {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/enviar-correo", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token,
+						},
+						body: JSON.stringify({
+							email: email,
+						}),
+					});
+
+					if (response.ok) {
+						alert("¡Correo de recuperación de contraseña enviado!");
+					} else if (response.status === 404) {
+						alert("Correo no encontrado. Por favor intenta nuevamente.");
+					} else {
+						alert("Error al enviar el correo. Intenta de nuevo.");
+					}
+				} catch (error) {
+					console.log("Se produjo un error:", error);
+				}
+			},
+
+			obtenerNotas: async (apiRecetaId) => {
+
+				const token = localStorage.getItem('token')
+
+				try {
+					const response = await fetch(process.env.BACKEND_URL + `/api/obtenerNotas/${apiRecetaId}`, {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token
+						}
+
+					});
+
+					if (!response.ok) {
+						return false
+					} else {
+						console.log(apiRecetaId)
+						const data = await response.json()
+						localStorage.setItem('notas', data.notas);
+						return true
+
+
+					}
+				} catch (error) {
+					console.error('Error durante la obtención de las notas', error);
 					return false
-				} else {
-					const data = await response.json()
-					console.log('notaObtenida', data.notas)
-					localStorage.setItem('notas', data.notas);
-
-					return true
-
-
 				}
-			} catch (error) {
-				console.error('Error durante la obtención de las notas', error);
-				return false
+
+
+			},
+
+			// Función para restablecer la contraseña
+			resetPassword: async (token, newPassword) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/reset-password", {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							token: token,               // Enviamos el token
+							new_password: newPassword   // Enviamos la nueva contraseña
+						})
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						alert(data.message); // Mostrar el mensaje de éxito
+					} else if (response.status === 400) {
+						const errorData = await response.json();
+						alert(errorData.error); // Mostrar el error de falta de datos
+					} else if (response.status === 404) {
+						const errorData = await response.json();
+						alert(errorData.error); // Mostrar el error de usuario no encontrado
+					} else {
+						alert("Error al actualizar la contraseña.");
+					}
+				} catch (error) {
+					console.log("Se produjo un error:", error);
+					alert("Error en la solicitud.");
+				}
 			}
 
-
-		},
-
-		// Función para restablecer la contraseña
-		resetPassword: async (token, newPassword) => {
-			try {
-				const response = await fetch(process.env.BACKEND_URL + "/reset-password", {
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						token: token,               // Enviamos el token
-						new_password: newPassword   // Enviamos la nueva contraseña
-					})
-				});
-
-				if (response.ok) {
-					const data = await response.json();
-					alert(data.message); // Mostrar el mensaje de éxito
-				} else if (response.status === 400) {
-					const errorData = await response.json();
-					alert(errorData.error); // Mostrar el error de falta de datos
-				} else if (response.status === 404) {
-					const errorData = await response.json();
-					alert(errorData.error); // Mostrar el error de usuario no encontrado
-				} else {
-					alert("Error al actualizar la contraseña.");
-				}
-			} catch (error) {
-				console.log("Se produjo un error:", error);
-				alert("Error en la solicitud.");
-			}
 		}
 
 
-
-
-
-
-
-
-
 	}
-
 
 
 

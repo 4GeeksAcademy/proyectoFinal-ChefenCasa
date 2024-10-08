@@ -1,24 +1,32 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
+import { NotaModal } from './notaModal';
 
 export const CardFavoritos = ({ receta }) => {
     console.log("Receta en CardFavoritos:", receta);
     const { actions, store } = useContext(Context)
-    const handleObtener = () => {
-        actions.obtenerFavoritos(receta.id || receta.api_receta_id)
-        
+    const [show, setShowModal] = useState(false)
+
+    const handleModal = () => {
+        setShowModal(true)
+
     }
-    
+
+    const handleClose = () => {
+        setShowModal(false)
+
+    }
+
     // Manejo de la eliminación del favorito
     const handleEliminar = () => {
-        
-             actions.eliminarFav(receta.api_receta_id);
-            
-        
+
+        actions.eliminarFav(receta.api_receta_id);
+
+
     };
 
-    
+
     return (
         <div className="contenedorCardFavorito">
             <div className="datosCompletosFavoritos">
@@ -27,11 +35,11 @@ export const CardFavoritos = ({ receta }) => {
                     <img src={receta.imagen} alt={receta.title} className="imagenRecetaFavorito" />
                     <div className="botonesFavoritos">
                         <div className="corazonInfoFavorito ">
-                            <button className="botonNotaFavoritos">Note</button>
+                            <button className="botonNotaFavoritos" onClick={handleModal}>Note</button>
                             <button className='corazonFavorito'>
                                 <i className="fa-solid fa-heart me-2" style={{ fontSize: "large" }} onClick={() => handleEliminar(receta.api_receta_id)}></i>
                             </button>
-                            <Link to={`/recetaCompletaPrivada/${receta.id}`}>
+                            <Link to={`/recetaCompletaPrivada/${receta.api_receta_id}`}>
                                 <button className="botonMasInfoFavorito">info</button>
                             </Link>
                         </div>
@@ -46,7 +54,7 @@ export const CardFavoritos = ({ receta }) => {
                         <ul>
                             {receta.ingredientes && receta.ingredientes.length > 0
                                 ? receta.ingredientes.map((ingrediente, index) => (
-                                    <li key={index}>{ingrediente}</li> 
+                                    <li key={index}>{ingrediente}</li>
                                 ))
                                 : <li>Ingredientes no disponibles</li>}
                         </ul>
@@ -58,6 +66,7 @@ export const CardFavoritos = ({ receta }) => {
                     </div>
                 </div>
             </div>
+            <NotaModal show={show} apiRecetaId={receta.api_receta_id} onClose={handleClose} />
         </div>
     );
 };
