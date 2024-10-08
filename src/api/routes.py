@@ -318,5 +318,24 @@ def enviar_correo():
 
 # poner el mensaje en ingles 
 
+# Endpoint para actualizar la contraseña
+@api.route('/reset-password', methods=['PUT'])
+def reset_password():
+    data = request.get_json()
+    email=data.get("email")
+    new_password = data.get("new_password")
+
+    if not email or not new_password:
+        return jsonify({"error": "Faltan datos"}), 400
+
+    user = db.session.query(User).filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+    
+    user.password = generate_password_hash(new_password)
+    db.session.commit()
+
+    return jsonify({"message": "Contraseña actualizada con éxito"}), 200
 
 
