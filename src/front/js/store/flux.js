@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			recetas: [],
 			menuSemanal: [],
-			favoritos: []
+			favoritos: [],
+			receta: []
 
 		},
 		actions: {
@@ -131,8 +132,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
-				const url = `https://api.spoonacular.com/recipes/random?number=2&apiKey=${apiKey}`;
+				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
+				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
 					const response = await fetch(url);
@@ -164,7 +165,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}));
 
-
 					const store = getStore();
 					setStore({ ...store, recetas: resultados });
 
@@ -177,7 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetaIndividual: async (apiRecetaId) => {
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
 				const url = `https://api.spoonacular.com/recipes/${apiRecetaId}/information?includeNutrition=false&apiKey=${apiKey}`;
 
 				try {
@@ -189,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json();
 					const receta = data;
 
-
+					const resultFinal = [];
 					//cuando va async y cuando no en el map(asyn(receta))
 					const resultados = ({
 						id: receta.id,
@@ -211,11 +211,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					})
 
-					//const store = getStore();
-					//setStore({ ...store, recetas: resultados });
+					resultFinal.push(resultados)
 
-					console.log(store.recetas)
+					console.log('resultFinal', resultFinal)
 
+					return resultFinal
 
 				} catch (error) {
 					console.error('Error al obtener las recetas:', error);
@@ -225,7 +225,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -328,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
 
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
@@ -564,9 +564,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!response.ok) {
 						return false
 					} else {
-						console.log(apiRecetaId)
 						const data = await response.json()
-						localStorage.setItem('notas', data.notas);
+						localStorage.setItem(`notas${apiRecetaId}`, data.notas);
 						return true
 
 

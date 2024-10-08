@@ -12,7 +12,7 @@ export const NotaModal = ({ apiRecetaId, onClose, show }) => {
   useEffect(() => {
     console.log('apiRecetaId', apiRecetaId)
     actions.obtenerNotas(apiRecetaId);
-    let notas = localStorage.getItem('notas');
+    let notas = localStorage.getItem(`notas${apiRecetaId}`);
 
     if (notas !== null && notas.length > 0) {
       setNotaTexto(notas);
@@ -42,35 +42,30 @@ export const NotaModal = ({ apiRecetaId, onClose, show }) => {
   };
   return (
     <div className={showHideClassName + " modal-overlay"}>
-      <div className="modal-content">
-        <div className="modal-header">
+      <section className="modal-main">
+        <button className="close-button" onClick={onClose}>&times;</button>
+
+        <div>
           <h5 className="modal-title" id="noteModalLabel">
-            {editarNota ? 'Cambiar nota' : 'Agregar nota'}
+            Note
           </h5>
-          <button type="button" className="btn-close-nota" data-bs-dismiss="modal" aria-label="Cerrar" onClick={onClose}></button>
+          <textarea
+            type="text"
+            className="login-field"
+            placeholder='Write your note here'
+            required
+            value={notaTexto}
+            onChange={(e) => setNotaTexto(e.target.value)}
+          ></textarea>
         </div>
-        <div className="modal-body">
-          <form>
-            <div className="mb-3">
-              <label htmlFor="noteText" className="form-label">Escribe tu nota</label>
-              <textarea
-                className="form-control-nota"
-                id="noteText"
-                rows="3"
-                value={notaTexto}
-                placeholder='Write your note here'
-                onChange={(e) => setNotaTexto(e.target.value)} // Manejo del cambio
-              ></textarea>
-            </div>
-          </form>
-        </div>
-        <div className="modal-footer-nota">
-          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={onClose}>Cerrar</button>
-          <button type="button" className="btn btn-receta" onClick={handleNota}>
-            {editarNota ? 'Cambiar nota' : 'Agregar nota'}
-          </button>
-        </div>
-      </div>
+
+        <button type="button" className="btn btn-receta" onClick={handleNota}>
+          {editarNota ? 'Change Note' : 'Add note'}
+        </button>
+      </section>
     </div>
+
+
+
   );
 };
