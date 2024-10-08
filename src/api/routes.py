@@ -357,3 +357,17 @@ def reset_password():
     return jsonify({"message": "Contraseña actualizada con éxito"}), 200
 
 
+#obtenemos los favoritos
+@api.route('/obtenerNotas/<int:apiRecetaId>', methods=['GET'])
+@jwt_required()
+def obtenerNotas(apiRecetaId):
+    usuario_id = get_jwt_identity()  # Obtén el ID del usuario autenticado
+    # Filtra los favoritos por usuario
+    
+    notas = Notas.query.filter_by(usuario_id = usuario_id, api_receta_id = apiRecetaId).first()
+
+    if notas :
+        return jsonify({'notas':notas.contenido}), 200
+    else:
+        return jsonify({"message": "No tiene notas"}), 400
+        
