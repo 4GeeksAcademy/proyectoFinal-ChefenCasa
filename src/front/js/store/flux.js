@@ -498,48 +498,80 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 		},
 
+		obtenerNotas: async (apiRecetaId) => {
+
+			const token = localStorage.getItem('token')
+
+			try {
+				const response = await fetch(process.env.BACKEND_URL + `/api/obtenerNotas/${apiRecetaId}`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						'Authorization': 'Bearer ' + token
+					}
+
+				});
+
+				if (!response.ok) {
+					return false
+				} else {
+					const data = await response.json()
+					console.log('notaObtenida', data.notas)
+					localStorage.setItem('notas', data.notas);
+
+					return true
+
+
+				}
+			} catch (error) {
+				console.error('Error durante la obtención de las notas', error);
+				return false
+			}
+
+
+		},
 
 		// Función para restablecer la contraseña
 		resetPassword: async (token, newPassword) => {
-		try {
-			const response = await fetch(process.env.BACKEND_URL + "/reset-password", {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					token: token,               // Enviamos el token
-					new_password: newPassword   // Enviamos la nueva contraseña
-				})
-			});
+			try {
+				const response = await fetch(process.env.BACKEND_URL + "/reset-password", {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						token: token,               // Enviamos el token
+						new_password: newPassword   // Enviamos la nueva contraseña
+					})
+				});
 
-			if (response.ok) {
-				const data = await response.json();
-				alert(data.message); // Mostrar el mensaje de éxito
-			} else if (response.status === 400) {
-				const errorData = await response.json();
-				alert(errorData.error); // Mostrar el error de falta de datos
-			} else if (response.status === 404) {
-				const errorData = await response.json();
-				alert(errorData.error); // Mostrar el error de usuario no encontrado
-			} else {
-				alert("Error al actualizar la contraseña.");
+				if (response.ok) {
+					const data = await response.json();
+					alert(data.message); // Mostrar el mensaje de éxito
+				} else if (response.status === 400) {
+					const errorData = await response.json();
+					alert(errorData.error); // Mostrar el error de falta de datos
+				} else if (response.status === 404) {
+					const errorData = await response.json();
+					alert(errorData.error); // Mostrar el error de usuario no encontrado
+				} else {
+					alert("Error al actualizar la contraseña.");
+				}
+			} catch (error) {
+				console.log("Se produjo un error:", error);
+				alert("Error en la solicitud.");
 			}
-		} catch (error) {
-			console.log("Se produjo un error:", error);
-			alert("Error en la solicitud.");
 		}
+
+
+
+
+
+
+
+
+
 	}
-
-
-
-
-
-
-
-
-
-}
 
 
 
