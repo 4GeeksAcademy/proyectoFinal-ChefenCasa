@@ -30,6 +30,11 @@ export const ModalSesion = ({ show, onClose }) => {
         setShowRegistro(true); // Abre el modal de registro
     };
 
+    const handleForgottenPassword = () => {
+        onClose();
+        setShowForgottenPassword(true);
+    }
+
     return (
         <>
             <div className={showHideClassName + " modal-overlay"}>
@@ -55,6 +60,10 @@ export const ModalSesion = ({ show, onClose }) => {
                             value={passValor}
                             onChange={(e) => setPassValor(e.target.value)}
                         />
+                        <button type="button" className="botonClickHere" onClick={handleForgottenPassword}>Have you forgotten your password?</button>
+                        <br></br>
+                        <br></br>
+                        <br></br>
                         <h6>If you are not registered,
                             <button type="button" className="botonClickHere" onClick={handleClickHere}>click here</button>
                         </h6>
