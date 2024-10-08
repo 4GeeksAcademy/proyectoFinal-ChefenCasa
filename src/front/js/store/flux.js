@@ -144,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await response.json();
 					const recetas = data.recipes;
-					//cuando va asyn y cuando no en el map(asyn(receta))
+					//cuando va asyn y cuando no en el map(asyn(recet))
 					const resultados = recetas.map((receta) => ({
 						id: receta.id,
 						title: receta.title,
