@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const apiKey = '8a1823fc7a1d4876885d22a1555ecaf0'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
+				const apiKey = '8a1823fc7a1d4876885d22a1555ecaf0'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -278,8 +278,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = '397a079f3b2045078c4a4e6537ccf023'
-			
+				const apiKey = '8a1823fc7a1d4876885d22a1555ecaf0'
+
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
 					const response = await fetch(process.env.BACKEND_URL + '/api/favoritos', {
@@ -289,48 +289,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 							'Authorization': 'Bearer ' + token
 						}
 					});
-			
+
 					if (!response.ok) {
 						console.log('Error al obtener favoritos');
 						return;
 					}
-			
+
 					const data = await response.json(); // Array de favoritos
 					console.log("Favoritos obtenidos:", data);
-			
+
 					// cambio el for por map 
 					const respuestaApi = await Promise.all(
 						data.map(async (receta) => {
 							try {
 								const apiFetchResponse = await fetch(`https://api.spoonacular.com/recipes/${receta.api_receta_id}/information?apiKey=${apiKey}`);
-			
+
 								if (!apiFetchResponse.ok) {
 									throw new Error(`Error al obtener la receta con id ${receta.api_receta_id}`);
 								}
-			
+
 								const recetaData = await apiFetchResponse.json(); // recetaData es la respuesta de la api a ese id
-			
+
 								// Asignar los datos obtenidos a la receta original
 								return {
 									...receta,
 									receta_title: recetaData.title,
 									imagen: recetaData.image,
-									ingredientes: recetaData.extendedIngredients ? recetaData.extendedIngredients.map(ingrediente => ingrediente.name) : [], 
+									ingredientes: recetaData.extendedIngredients ? recetaData.extendedIngredients.map(ingrediente => ingrediente.name) : [],
 									tiempo_de_coccion: recetaData.readyInMinutes,
 								};
-			
+
 							} catch (error) {
 								console.error(`Error en la llamada a la API de Spoonacular para el id ${receta.api_receta_id}:`, error);
 								return receta; // Devolver la receta sin cambios si hay un error
 							}
 						})
 					);
-			
+
 					console.log("Datos de las recetas:", respuestaApi);
-			
+
 					// Guardar en el store
 					setStore({ favoritos: respuestaApi });
-			
+
 				} catch (error) {
 					console.error('Error durante la autenticación o al obtener datos', error);
 				}
@@ -389,122 +389,161 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//Eliminar favoritos:
-			eliminarFav:async(api_receta_id)=>{
+			eliminarFav: async (api_receta_id) => {
 				const token = localStorage.getItem("token");
-				try{
-					 const response = await fetch(`${process.env.BACKEND_URL}/api/eliminarfav/${api_receta_id}`, {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/eliminarfav/${api_receta_id}`, {
 						method: "DELETE",
 						headers: {
 							"Content-Type": "application/json",
 							'Authorization': 'Bearer ' + token
 						},
-						
+
 					});
 					if (!response.ok) {
 						const errorData = await response.json();
-					
+
 
 					} else {
 						getActions().obtenerFavoritos()
 					}
-					
+
 				} catch (error) {
 					console.log("Se produjo un error durante la solicitud:", error);
 				}
+			}
+
+		},
+
+		//GUARDAR NOTAS
+		agregarNotas: async (api_receta_id, contenido) => {
+			const token = localStorage.getItem("token");
+			try {
+				const response = await fetch(process.env.BACKEND_URL + `/api/agregarnota`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						'Authorization': 'Bearer ' + token
+					},
+					body: JSON.stringify({
+						api_receta_id: api_receta_id,
+						contenido: contenido
+					})
+				});
+				if (!response.ok) {
+					const errorData = await response.json();
+					alert(errorData.msg);
+
+				} else {
+					alert('Nota agregada')
 				}
+			} catch (error) {
+				console.log("Se produjo un error:", error);
+			}
+		},
 
-			},
-
-			//GUARDAR NOTAS
-			agregarNotas: async (api_receta_id, contenido) => {
-				const token = localStorage.getItem("token");
-				try {
-					const response = await fetch(process.env.BACKEND_URL + `/api/agregarnota`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-							'Authorization': 'Bearer ' + token
-						},
-						body: JSON.stringify({
-							api_receta_id: api_receta_id,
-							contenido: contenido
-						})
-					});
-					if (!response.ok) {
-						const errorData = await response.json();
-						alert(errorData.msg);
-
-					} else {
-						alert('Nota agregada')
+		modificarNota: async (api_receta_id, contenido) => {
+			const token = localStorage.getItem("token");
+			try {
+				const response = await fetch(process.env.BACKEND_URL + `/api/modificarnota`, {
+					method: "PUT",
+					body: JSON.stringify({
+						contenido: contenido,
+						api_receta_id: api_receta_id
+					}),
+					headers: {
+						"Content-Type": "application/json",
+						'Authorization': 'Bearer ' + token
 					}
-				} catch (error) {
-					console.log("Se produjo un error:", error);
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json();
+					alert(errorData.msg);
+				} else {
+					const data = await response.json();
+					alert(data.msg);
 				}
-			},
+			} catch (error) {
+				console.log("Error:", error);
+			}
+		},
 
-			modificarNota: async (api_receta_id, contenido) => {
-				const token = localStorage.getItem("token");
-				try {
-					const response = await fetch(process.env.BACKEND_URL + `/api/modificarnota`, {
-						method: "PUT",
-						body: JSON.stringify({
-							contenido: contenido,
-							api_receta_id: api_receta_id
-						}),
-						headers: {
-							"Content-Type": "application/json",
-							'Authorization': 'Bearer ' + token  
-						}
-					});
-			
-					if (!response.ok) {
-						const errorData = await response.json();
-						alert(errorData.msg); 
-					} else {
-						const data = await response.json();
-						alert(data.msg);  
-					}
-				} catch (error) {
-					console.log("Error:", error); 
+		//POST-solicitar-restablecimiento-de-contraseña
+		solicitarMailRecuperacion: async () => {
+			const token = localStorage.getItem("token");
+			const email = document.getElementById("email").value;
+
+			try {
+				const response = await fetch(process.env.BACKEND_URL + "/api/enviar-correo", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						'Authorization': 'Bearer ' + token,
+					},
+					body: JSON.stringify({
+						email: email,
+					}),
+				});
+
+				if (response.ok) {
+					alert("¡Correo de recuperación de contraseña enviado!");
+				} else if (response.status === 404) {
+					alert("Correo no encontrado. Por favor intenta nuevamente.");
+				} else {
+					alert("Error al enviar el correo. Intenta de nuevo.");
 				}
-			},
-
-			//POST-solicitar-restablecimiento-de-contraseña
-			solicitarMailRecuperacion: async () => {
-				const token = localStorage.getItem("token"); 
-				const email = document.getElementById("email").value; 
-			
-				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/enviar-correo", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-							'Authorization': 'Bearer ' + token,
-						},
-						body: JSON.stringify({
-							email: email, 
-						}),
-					});
-			
-					if (response.ok) {
-						alert("¡Correo de recuperación de contraseña enviado!");
-					} else if (response.status === 404) {
-						alert("Correo no encontrado. Por favor intenta nuevamente.");
-					} else {
-						alert("Error al enviar el correo. Intenta de nuevo.");
-					}
-				} catch (error) {
-					console.log("Se produjo un error:", error); 
-				}
-			},
-					
+			} catch (error) {
+				console.log("Se produjo un error:", error);
+			}
+		},
 
 
+		// Función para restablecer la contraseña
+		resetPassword: async (token, newPassword) => {
+		try {
+			const response = await fetch(process.env.BACKEND_URL + "/reset-password", {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					token: token,               // Enviamos el token
+					new_password: newPassword   // Enviamos la nueva contraseña
+				})
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				alert(data.message); // Mostrar el mensaje de éxito
+			} else if (response.status === 400) {
+				const errorData = await response.json();
+				alert(errorData.error); // Mostrar el error de falta de datos
+			} else if (response.status === 404) {
+				const errorData = await response.json();
+				alert(errorData.error); // Mostrar el error de usuario no encontrado
+			} else {
+				alert("Error al actualizar la contraseña.");
+			}
+		} catch (error) {
+			console.log("Se produjo un error:", error);
+			alert("Error en la solicitud.");
 		}
+	}
 
 
 
-	
+
+
+
+
+
+
+}
+
+
+
+
 };
 
 export default getState;
