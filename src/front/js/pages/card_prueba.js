@@ -7,7 +7,7 @@ export const CardPrueba = () => {
     useEffect(() => {
 
         actions.obtenerRecetas(); // Llama a la acción para obtener 50 recetas
-    }, []); // Este efecto se ejecuta al montar el componente
+    }, []); // Este efecto se ejecuta al montar el componentee
 
     
 
