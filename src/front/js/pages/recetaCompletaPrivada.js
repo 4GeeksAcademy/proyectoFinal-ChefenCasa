@@ -69,7 +69,7 @@ export const RecetaCompletaPrivada = () => {
 
 
         </div>
-        <NotaModal />
+        <NotaModal apiRecetaId={receta.id} />
 
       </div>
     </div>
