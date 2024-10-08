@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint, make_response
+from flask import Flask, request, jsonify, url_for, Blueprint, make_response, render_template
 from .models import db, User, MenuSemanal, Favoritos, user_favorites, Notas 
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
@@ -334,11 +334,17 @@ def enviar_correo():
 @api.route('/reset-password', methods=['PUT'])
 def reset_password():
     data = request.get_json()
-    email=data.get("email")
+    token = data.get("token")
     new_password = data.get("new_password")
 
-    if not email or not new_password:
+    if not token or not new_password:
         return jsonify({"error": "Faltan datos"}), 400
+    
+    # Verificar y decodificar el token
+    try:
+        email = s.loads(token, salt='password-reset-salt', max_age=3600)  # El token expira en 1 hora
+    except Exception as e:
+        return jsonify({"error": "Token inválido o expirado."}), 400
 
     user = db.session.query(User).filter_by(email=email).first()
 
