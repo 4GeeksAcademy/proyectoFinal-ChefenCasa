@@ -11,7 +11,7 @@ export const ForgottenPassword = ({ show, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        actions.solicitarMailRecuperacion(emailValor);  // Llamamos a la función con el email
+        actions.solicitarMailRecuperacion();  // Llamamos a la función con el email
         onClose();  // Cerramos el modal después de enviar
     };
 
@@ -24,19 +24,19 @@ export const ForgottenPassword = ({ show, onClose }) => {
                     <form onSubmit={handleSubmit}>
                         <label>Email</label>
                         <input
+                            
                             type="text"
                             className="login-field"
-                            placeholder="Write your email"
+                            id="email"   
+                            placeholder="Ingresa tu email"
                             required
-                            value={emailValor}
-                            onChange={(e) => setEmailValor(e.target.value)}
                         />
-                                                                      
-                        <button className="btn-modal" type="submit" onClick={handleSubmit}> Send </button> {/* Debe disparar el envio del email*/}
+                        <button className="btn-modal" type="submit">Enviar</button>
+                        
                     </form>
                 </section>
             </div>
-            
+
         </>
     );
 }
