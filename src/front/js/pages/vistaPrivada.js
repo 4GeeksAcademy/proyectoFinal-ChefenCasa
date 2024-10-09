@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import { CardPrivada } from "../component/cardPrivada";
 import "../../styles/vistaPrivada.css";
+import { Footer } from "../../js/component/footer";
 
 export const VistaPrivada = () => {
     const { store, actions } = useContext(Context);
@@ -26,6 +27,7 @@ export const VistaPrivada = () => {
                     <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
                 )}
             </div>
+            < Footer />
         </div>
     );
 };

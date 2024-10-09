@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Footer } from "../../js/component/footer";
 
 import "../../styles/home.css";
 
@@ -33,6 +34,7 @@ export const RecetaCompletaPublica = () => {
                     </div> 
                 </div> 
             </div> 
+            < Footer />
         </div> 
     );
 };
