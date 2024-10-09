@@ -1,28 +1,32 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect,useState } from "react";
 import { Context } from "../store/appContext";
 import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import "../../styles/recetaCompleta.css"
 import { DropMenuSemanal } from "../component/dropMenuSemanal";
 import { useParams } from "react-router-dom";
 
+
 export const RecetaCompletaPrivada = () => {
   const { store, actions } = useContext(Context)
 
   const { recetaId } = useParams()
-
-  /*  useEffect(() => {
+  const [receta, setReceta]=useState([])
+    useEffect(() => {
       const fetchData = async () => {
-        receta = await actions.obtenerRecetaIndividual(recetaId);
-        console.log('recetaaaaaa', receta)
+        const recetaApi = await actions.obtenerRecetaIndividual(recetaId);
+        console.log('recetaaaaaa', recetaApi)
+        setReceta(recetaApi[0])
       }
       fetchData();
-    }, []); */
+    }, []); 
 
 
   //me traigo la receta, filtro por id 
-  const receta = store.recetas.find(rec => rec.id.toString() === recetaId);
-
-
+  //const receta = store.recetas.find(rec => rec.id.toString() === recetaId);
+    console.log(receta)
+    if (!receta){
+      return (<h1>No hay recetas</h1>)
+    }
   return (
     <div>
       <NavbarPrivado />
