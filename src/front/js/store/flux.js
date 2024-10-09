@@ -518,35 +518,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			//POST-solicitar-restablecimiento-de-contraseña
-			solicitarMailRecuperacion: async () => {
-				const token = localStorage.getItem("token");
-				const email = document.getElementById("email").value;
-
-				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/enviar-correo", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-							'Authorization': 'Bearer ' + token,
-						},
-						body: JSON.stringify({
-							email: email,
-						}),
-					});
-
-					if (response.ok) {
-						alert("¡Correo de recuperación de contraseña enviado!");
-					} else if (response.status === 404) {
-						alert("Correo no encontrado. Por favor intenta nuevamente.");
-					} else {
-						alert("Error al enviar el correo. Intenta de nuevo.");
-					}
-				} catch (error) {
-					console.log("Se produjo un error:", error);
-				}
-			},
-
 			obtenerNotas: async (apiRecetaId) => {
 
 				const token = localStorage.getItem('token')
@@ -577,6 +548,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			},
+
+			//POST-solicitar-restablecimiento-de-contraseña
+			solicitarMailRecuperacion: async () => {
+				const token = localStorage.getItem("token");
+				const email = document.getElementById("email").value;
+
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/enviar-correo", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							'Authorization': 'Bearer ' + token,
+						},
+						body: JSON.stringify({
+							email: email,
+						}),
+					});
+
+					if (response.ok) {
+						alert("¡Correo de recuperación de contraseña enviado!");
+					} else if (response.status === 404) {
+						alert("Correo no encontrado. Por favor intenta nuevamente.");
+					} else {
+						alert("Error al enviar el correo. Intenta de nuevo.");
+					}
+				} catch (error) {
+					console.log("Se produjo un error:", error);
+				}
+			},
+
+			
 
 			// Función para restablecer la contraseña
 			resetPassword: async (token, newPassword) => {
