@@ -32,7 +32,7 @@ export const ForgottenPassword = ({ show, onClose }) => {
                             onChange={(e) => setEmailValor(e.target.value)}
                         />
                                                                       
-                        <button className="btn-modal" type="submit"> Send </button> {/* Debe disparar el envio del email*/}
+                        <button className="btn-modal" type="submit" onClick={handleSubmit}> Send </button> {/* Debe disparar el envio del email*/}
                     </form>
                 </section>
             </div>
