@@ -542,7 +542,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}
 				} catch (error) {
-					console.error('Error durante la obtención de las notas', error);
+					console.log('Error durante la obtención de las notas');
 					return false
 				}
 
