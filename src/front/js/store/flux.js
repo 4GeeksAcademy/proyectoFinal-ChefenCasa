@@ -583,26 +583,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Función para restablecer la contraseña
 			resetPassword: async (token, newPassword) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "/reset-password", {
+					const response = await fetch(process.env.BACKEND_URL + "/api/reset-password", {
 						method: "PUT",
 						headers: {
 							"Content-Type": "application/json",
 						},
 						body: JSON.stringify({
-							token: token,               // Enviamos el token
+							token: token,               // Se captura automaticamente
 							new_password: newPassword   // Enviamos la nueva contraseña
 						})
 					});
 
 					if (response.ok) {
 						const data = await response.json();
-						alert(data.message); // Mostrar el mensaje de éxito
+						alert(data.message); 
 					} else if (response.status === 400) {
 						const errorData = await response.json();
-						alert(errorData.error); // Mostrar el error de falta de datos
+						alert(errorData.error); 
 					} else if (response.status === 404) {
 						const errorData = await response.json();
-						alert(errorData.error); // Mostrar el error de usuario no encontrado
+						alert(errorData.error); 
 					} else {
 						alert("Error al actualizar la contraseña.");
 					}
