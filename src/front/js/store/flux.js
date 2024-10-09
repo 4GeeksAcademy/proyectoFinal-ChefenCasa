@@ -536,7 +536,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false
 					} else {
 						const data = await response.json()
-						localStorage.setItem(`notas${apiRecetaId}`, data.notas);
+						localStorage.setItem(`notas${apiRecetaId}`, data.notas );
 						return true
 
 
