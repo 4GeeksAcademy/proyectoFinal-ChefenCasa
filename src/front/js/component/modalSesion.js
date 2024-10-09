@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useNavigate } from 'react-router-dom';
 import { ModalRegistro } from '../component/modalRegistro';
 import '../../styles/modal.css';
+import { ForgottenPassword } from "./modalForgottenPassword";
 
 export const ModalSesion = ({ show, onClose }) => {
     const { actions } = useContext(Context);
@@ -11,6 +12,7 @@ export const ModalSesion = ({ show, onClose }) => {
     const [passValor, setPassValor] = useState('');
     const navigate = useNavigate();
     const [showRegistro, setShowRegistro] = useState(false);
+    const [showForgottenPassword, setShowForgottenPassword] = useState(false);
 
 
 
@@ -30,9 +32,10 @@ export const ModalSesion = ({ show, onClose }) => {
         setShowRegistro(true); // Abre el modal de registro
     };
 
-    const handleForgottenPassword = () => {
+    const handleEmail = () => {
         onClose();
         setShowForgottenPassword(true);
+
     }
 
     return (
@@ -60,7 +63,7 @@ export const ModalSesion = ({ show, onClose }) => {
                             value={passValor}
                             onChange={(e) => setPassValor(e.target.value)}
                         />
-                        <button type="button" className="botonClickHere" onClick={handleForgottenPassword}>Have you forgotten your password?</button>
+                        <button type="button" className="botonClickHere" onClick={handleEmail}>Have you forgotten your password?</button>
                         <br></br>
                         <br></br>
                         <br></br>
@@ -74,6 +77,10 @@ export const ModalSesion = ({ show, onClose }) => {
             {/* Renderiza el ModalRegistro si showRegistro es true */}
             {showRegistro && (
                 <ModalRegistro show={showRegistro} onClose={() => setShowRegistro(false)} />
+            )}
+            {/* Renderiza el ForgottenPassword si showForgottenPassword es true */}
+            {showForgottenPassword && (
+                <ForgottenPassword show={showForgottenPassword} onClose={() => setShowForgottenPassword(false)} />
             )}
 
         </>
