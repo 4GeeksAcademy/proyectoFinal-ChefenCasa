@@ -319,7 +319,7 @@ def enviar_correo():
     token = s.dumps(email, salt='password-reset-salt')
     
     # Crear enlace de restablecimiento de contraseña
-    reset_link = f'http://localhost:3001/reset-password?token={token}'  # Cambia la URL según sea necesario
+    reset_link = f'https://potential-fiesta-pj74xgqwqp7wh6pjr-3000.app.github.dev/resetPassword?token={token}'  # Cambia la URL según sea necesario
     
     # Preparar y enviar el correo
     msg = Message('Solicitud de Restablecimiento de Contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
