@@ -14,7 +14,7 @@ export const VistaFavoritos = () => {
             console.log("Favoritos cargados:", store.favoritos);
         }
         console.log('favoritos', store.favoritos)
-    }, [actions, store.favoritos.length]); // Dependencias del efecto
+    }, []); // Dependencias del efecto
 
 
     return (
