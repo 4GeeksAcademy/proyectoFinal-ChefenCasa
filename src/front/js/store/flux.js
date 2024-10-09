@@ -132,7 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
+				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -177,7 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetaIndividual: async (apiRecetaId) => {
-				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
+				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
 				const url = `https://api.spoonacular.com/recipes/${apiRecetaId}/information?includeNutrition=false&apiKey=${apiKey}`;
 
 				try {
@@ -188,7 +188,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await response.json();
 					const receta = data;
-
+					console.log(data)
 					const resultFinal = [];
 					//cuando va async y cuando no en el map(asyn(receta))
 					const resultados = ({
@@ -225,7 +225,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
+				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -328,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'bca5917ea09747d88d2754b9e3de3a98'
+				const apiKey = 'e5f3cb42582245dfb43bbcb2385dcdc7'
 
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
@@ -536,13 +536,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false
 					} else {
 						const data = await response.json()
-						localStorage.setItem(`notas${apiRecetaId}`, data.notas);
+						localStorage.setItem(`notas${apiRecetaId}`, data.notas );
 						return true
 
 
 					}
 				} catch (error) {
-					console.error('Error durante la obtención de las notas', error);
+					console.log('Error durante la obtención de las notas');
 					return false
 				}
 

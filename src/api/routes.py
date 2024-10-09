@@ -369,5 +369,5 @@ def obtenerNotas(apiRecetaId):
     if notas :
         return jsonify({'notas':notas.contenido}), 200
     else:
-        return jsonify({"message": "No tiene notas"}), 400
+        return jsonify({"message": "No tiene notas"}), 204
         
