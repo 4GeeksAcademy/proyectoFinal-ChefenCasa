@@ -24,11 +24,10 @@ export const VistaFavoritos = () => {
             <div className="contenedorCardsFavoritos">
                 {store.favoritos.length > 0 ? (
                     store.favoritos.map((favoritos) => (
-
                         <CardFavoritos key={favoritos.id} receta={favoritos} /> // Pasa la receta como prop
                     ))
                 ) : (
-                    <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
+                    <p>No favorites availables</p> // Mensaje si no hay recetas
                 )}
             </div>
             < Footer />

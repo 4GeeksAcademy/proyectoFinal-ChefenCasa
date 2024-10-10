@@ -18,7 +18,7 @@
 }
 
 .LogoChefEnCasa {
-    width: 20vw;
+    width: 20vh;
     min-width: 150px;
     max-width: 250px;
 }
@@ -33,7 +33,7 @@
 
 .dropdown {
     background-color: #f9c039;
-    width: 100px;
+    width: 10vh;
     border: none;
     height: 3vh;
 }

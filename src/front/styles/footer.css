@@ -1,12 +1,11 @@
 .footer {
-    height: 10vh;
-    width: 100vw;
-    background-color: #f9c039;
-    position: fixed;
-    bottom: 0;
+    height: 10vh; /* Altura del footer */
+    width: 100vw; /* Ancho completo */
+    background-color: #f9c039; /* Color de fondo */
     display: flex;
-    justify-content: space-between;
-    padding: 2.5vh;
+    justify-content: space-between; /* Mantiene espacio entre los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 2vh;
     padding-left: 15vw;
     padding-right: 15vw;
 }
@@ -16,16 +15,9 @@
 }
 
 .logoFooter {
-    width: 6vh;
+    width: 6vh; /* Ajusta según sea necesario */
 }
 
 .cafecito {
-    margin-top:0.5vh
+    margin-top: 1vh; /* Puedes eliminar esto si no es necesario */
 }
-
-.textoCafe {
-    font-size: medium;
-    margin-right: 2vw;
-    text-align: center;
-}
-
