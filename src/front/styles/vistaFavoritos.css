@@ -99,3 +99,9 @@
         font-size: small;
     }
 }
+
+.espacioBlanco {
+    width: 100vw;
+    height: 6vh;
+    background-color: white;
+}

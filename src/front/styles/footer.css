@@ -16,7 +16,6 @@
     display: flex;
 }
 
-.textoCafe {
-    margin-top: 1.5vh;
-    font-size: medium; /* Ajusta según sea necesario */
+.footerVistaFavoritos {
+    position: relative
 }

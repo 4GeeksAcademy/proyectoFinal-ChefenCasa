@@ -1,4 +1,4 @@
-.bodyHome {
+.contenidoHome {
     display: flex;
     flex-direction: row; /* Por defecto, en pantallas grandes */
 }
