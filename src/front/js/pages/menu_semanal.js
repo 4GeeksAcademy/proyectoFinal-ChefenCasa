@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Footer } from "../../js/component/footer";
+import { useNavigate } from "react-router-dom";
 
 import "../../styles/menu.css";
 
@@ -8,6 +9,7 @@ import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 
 export const MenuSemanal = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate()
 
     useEffect(() => {
 
@@ -24,6 +26,16 @@ export const MenuSemanal = () => {
         return recetaMenu ? recetaMenu.receta_title : "Sin receta";
     };
     
+    const obtenerIDreceta = (dia, tipo) => {
+        const recetaMenu = store.menuSemanal?.find((item) => {
+            return (
+                (item.dia_semana === dia && item.tipo_comida === tipo)
+            );
+        });
+
+        return recetaMenu.api_receta_id;
+    };
+
     const handleRecetaChange = async (dia, tipo, api_receta_id) => {
         
         setSelectedRecetas((prevState) => ({
@@ -56,24 +68,26 @@ export const MenuSemanal = () => {
 
                         <div className="row">
                          <div className="col title lunch">Lunch</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Monday", "Lunch")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Tuesday", "Lunch")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Wednesday", "Lunch")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Thursday", "Lunch")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Friday", "Lunch")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Saturday", "Lunch")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Sunday", "Lunch")}</div>
+                            
+                            
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Monday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Monday", "Lunch")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Tuesday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Tuesday", "Lunch")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Wednesday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Wednesday", "Lunch")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Thursday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Thursday", "Lunch")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Friday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Friday", "Lunch")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Saturday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Saturday", "Lunch")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Sunday", "Lunch")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Sunday", "Lunch")}</div>
                         </div>
 
                         <div className="row">
                             <div className="col title dinner">Dinner</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Monday", "Dinner")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Tuesday", "Dinner")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Wednesday", "Dinner")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Thursday", "Dinner")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Friday", "Dinner")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Saturday", "Dinner")}</div>
-                            <div className="col recipe">{obtenerRecetaPorDiaYTipo("Sunday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Monday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Monday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Tuesday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Tuesday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Wednesday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Wednesday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Thursday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Thursday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Friday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Friday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Saturday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Saturday", "Dinner")}</div>
+                            <div onClick={() => navigate(`/recetaCompletaPrivada/${obtenerIDreceta("Sunday", "Dinner")}`)} className="col recipe">{obtenerRecetaPorDiaYTipo("Sunday", "Dinner")}</div>
                         </div>
                     </div>
                 </div>
