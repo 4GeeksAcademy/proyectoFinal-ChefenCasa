@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Navbar } from "../component/Navbar/navbar";
 import "../../styles/resetPassword.css";
+import { Footer } from "../../js/component/footer";
 
 export const ResetPassword = () => {
     const { store, actions } = useContext(Context);
@@ -37,6 +38,7 @@ export const ResetPassword = () => {
                     </form>
                 </div>
             </div>
+            < Footer />
         </div>
     );
 };

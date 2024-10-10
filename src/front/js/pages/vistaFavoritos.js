@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import { CardFavoritos } from "../component/cardFavoritos";
 import "../../styles/vistaFavoritos.css";
+import { Footer } from "../../js/component/footer";
 
 export const VistaFavoritos = () => {
     const { store, actions } = useContext(Context);
@@ -30,6 +31,7 @@ export const VistaFavoritos = () => {
                     <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
                 )}
             </div>
+            < Footer />
         </div>
     );
 };

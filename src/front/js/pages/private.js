@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Footer } from "../../js/component/footer";
 
 
 export const Private = () => {
@@ -39,7 +40,7 @@ export const Private = () => {
             <button className="btn btn-primary" onClick={cerrarSesion}>Log Out</button>
 
 
-
+            < Footer />
         </div>
     )
 }

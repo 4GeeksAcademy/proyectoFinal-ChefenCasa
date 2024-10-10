@@ -4,6 +4,7 @@ import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import "../../styles/recetaCompleta.css"
 import { DropMenuSemanal } from "../component/dropMenuSemanal";
 import { useParams } from "react-router-dom";
+import { Footer } from "../../js/component/footer";
 
 
 export const RecetaCompletaPrivada = () => {
@@ -81,7 +82,7 @@ export const RecetaCompletaPrivada = () => {
         </div>
 
       </div>
-
+      < Footer />
     </div>
   )
 }

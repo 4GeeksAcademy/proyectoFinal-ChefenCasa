@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Footer } from "../../js/component/footer";
 
 import "../../styles/menu.css";
 
@@ -77,8 +78,7 @@ export const MenuSemanal = () => {
                     </div>
                 </div>
             </div>
-
-
+            < Footer />
         </div>
     );
 };

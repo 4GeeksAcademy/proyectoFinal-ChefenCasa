@@ -1,0 +1,31 @@
+.footer {
+    height: 10vh;
+    width: 100vw;
+    background-color: #f9c039;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
+}
+
+.contenedorCafe {
+    display: flex;
+}
+
+.logoFooter {
+    width: 6vh;
+}
+
+.cafecito {
+    margin-top:0.5vh
+}
+
+.textoCafe {
+    font-size: medium;
+    margin-right: 2vw;
+    text-align: center;
+}
+
