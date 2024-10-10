@@ -132,7 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetas: async () => {
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
 				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
 
 				try {
@@ -177,7 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			obtenerRecetaIndividual: async (apiRecetaId) => {
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
 				const url = `https://api.spoonacular.com/recipes/${apiRecetaId}/information?includeNutrition=false&apiKey=${apiKey}`;
 
 				try {
@@ -225,7 +225,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerMenu: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
 
 				try {
 					// obtener el menú semanal desde nuestra base
@@ -328,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerFavoritos: async () => {
 				const token = localStorage.getItem('token');
-				const apiKey = 'c25fb09987e246d2b703abe11ba6275b'
+				const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
 
 				try {
 					// Obtengo los favoritos desde nuestra base de datos
