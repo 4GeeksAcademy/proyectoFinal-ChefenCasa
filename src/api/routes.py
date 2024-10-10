@@ -10,7 +10,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
-
+import os
 
 api = Blueprint('api', __name__)
 
@@ -317,9 +317,11 @@ def enviar_correo():
     
     # Generar token
     token = s.dumps(email, salt='password-reset-salt')
-    
+   
     # Crear enlace de restablecimiento de contraseña
-    reset_link = f'https://potential-fiesta-pj74xgqwqp7wh6pjr-3000.app.github.dev/resetPassword?token={token}'  # Cambia la URL según sea necesario
+    # reset_link = f'{os.getenv('FRONTEND_URL')}/resetPassword?token={token}'  # Cambia la URL según sea necesario
+    reset_link= os.getenv('FRONTEND_URL') + '/resetPassword?token='+token
+    print(reset_link)
     
     # Preparar y enviar el correo
     msg = Message('Solicitud de Restablecimiento de Contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
