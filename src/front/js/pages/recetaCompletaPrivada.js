@@ -80,9 +80,9 @@ export const RecetaCompletaPrivada = () => {
 
 
         </div>
-
+        < Footer />
       </div>
-      < Footer />
+
     </div>
   )
 }

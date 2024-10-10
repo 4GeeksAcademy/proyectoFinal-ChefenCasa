@@ -40,7 +40,7 @@ export const Home = () => {
 
 		<div>
 			< Navbar />
-			<div className="bodyHome">
+			<div><div className="bodyHome">
 				<div className="descripcionHome">
 					<h1>All the food for the week in one place</h1>
 					<br></br>
@@ -57,8 +57,9 @@ export const Home = () => {
 				<div>
 					<img className="imagenHome" src={imagen_Home} alt="Imagen de una chica buscando recetas" />
 				</div>
+				</div>
+				< Footer />
 			</div>
-			< Footer />
 		</div>
 
 	);
