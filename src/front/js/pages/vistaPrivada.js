@@ -16,7 +16,7 @@ export const VistaPrivada = () => {
 
 
     return (
-        <div>
+        <div className="bodyVistaPrivada">
             <NavbarPrivado />
             <div className="contenedorCartasRecetas col-3">
                 {store.recetas.length > 0 ? (
@@ -26,8 +26,8 @@ export const VistaPrivada = () => {
                 ) : (
                     <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
                 )}
+                < Footer />
             </div>
-            < Footer />
         </div>
     );
 };

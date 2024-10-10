@@ -37,8 +37,9 @@ export const ResetPassword = () => {
                         <button type="submit" className="submitButton">Reset</button>
                     </form>
                 </div>
+                < Footer />
             </div>
-            < Footer />
+           
         </div>
     );
 };

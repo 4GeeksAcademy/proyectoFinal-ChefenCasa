@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/footer.css";
-import Logo from "../../img/logo_solo.png";
+
 
 export const Footer = () => {
     return (
         <div className="footer">
-            <div>
-                <img className="logoFooter" src={Logo} alt="Logo Chef at Home" />
-            </div>
             <div className="contenedorCafe">
                 <a href='https://cafecito.app/chefathome' rel='noopener' target='_blank' className="cafecito">
                     <img

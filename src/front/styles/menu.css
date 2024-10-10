@@ -2,10 +2,71 @@
     background-color: #F7B733;
     text-align: center;
     padding: 10px;
+    display: flex; /* Cambiado a flex */
 }
+
 .menu-day {
     background-color: #F7B733;
     font-weight: bold;
     text-align: center;
     padding: 10px;
+    flex: 1; /* Esto asegura que todos los días ocupen el mismo espacio */
+}
+
+.row {
+    display: flex; /* Cambiado a flex para las filas de recetas */
+}
+
+.col.title.lunch,
+.col.title.dinner {
+    background-color: #F7B733;
+    padding: 1vw;
+    margin-top: 3px;
+    text-align: center;
+    flex: 1; /* Asegura que todas las columnas tengan el mismo tamaño */
+}
+
+.col.recipe {
+    background-color: rgb(214, 214, 214);
+    padding: 1vw;
+    margin-top: 3px;
+    text-align: center;
+    flex: 1; /* Asegura que todas las recetas tengan el mismo tamaño */
+}
+
+@media (max-width: 730px) {
+    .col.menu-day {
+        font-size: smaller;
+    }
+    .col.recipe {
+        font-size: smaller;
+    }
+    .col.title.lunch, .col.title.dinner {
+    font-size: smaller;
+}
+}
+
+@media (max-width: 600px) {
+    .col.menu-day {
+        writing-mode: vertical-lr;
+        text-align: center;
+    }
+    .col.recipe {
+        font-size: x-small;
+    }
+    .col.title.lunch, .col.title.dinner {
+        font-size: x-small;
+    }
+}   
+
+@media (max-width: 500px) {
+    .col.menu-day {
+        writing-mode: vertical-lr;
+    }
+    .col.recipe {
+        font-size: xx-small;
+    }
+    .col.title.lunch, .col.title.dinner {
+        font-size: xx-small;
+    }
 }
