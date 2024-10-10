@@ -1,3 +1,7 @@
+.bodyVistaPrivada {
+    min-height: calc(100vh + 120px);
+}
+
 .contenedorCartasRecetas {
     width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */
@@ -63,4 +67,10 @@
     .corazon-info.d-flex {
         font-size: small;
     }
+}
+
+.espacioBlanco {
+    width: 100vw;
+    height: 6vh;
+    background-color: white;
 }

@@ -19,7 +19,7 @@ export const VistaFavoritos = () => {
 
 
     return (
-        <div>
+        <div className="bodyVistaFavoritos">
             <NavbarPrivado />
             <div className="contenedorCardsFavoritos">
                 {store.favoritos.length > 0 ? (
@@ -29,8 +29,9 @@ export const VistaFavoritos = () => {
                 ) : (
                     <p>No favorites availables</p> // Mensaje si no hay recetas
                 )}
+                < Footer />
+                <div className="espacioBlanco"></div>
             </div>
-            < Footer />
         </div>
     );
 };

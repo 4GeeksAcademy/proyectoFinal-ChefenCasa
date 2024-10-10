@@ -70,6 +70,12 @@ p {
   font-size: 30px;
 }
 
+.botonClickHere {
+  background-color: #FFC83D;
+  color:blue;
+  border: none;
+}
+
 @media (max-width: 600px) {
   p {
       font-size: 24px; 

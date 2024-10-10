@@ -21,7 +21,7 @@ export const Navbar = () => {
 	return (
 		
 			<nav className="navbar">
-				<div className="container">
+				<div className="containerNavbar">
 					<Link to="/">
 						<img className="LogoChefEnCasa" src="logo_ingles.png" alt="Logo Chef at Home"></img>
 					</Link>

@@ -70,7 +70,7 @@ export const ModalSesion = ({ show, onClose }) => {
                         <h6>If you are not registered,
                             <button type="button" className="botonClickHere" onClick={handleClickHere}>click here</button>
                         </h6>
-                        <button className="btn-modal" type="submit"> Login </button>
+                        <button className="btn-modal" type="submit" style={{padding: "5px" , borderRadius: "20px"}}> Login </button>
                     </form>
                 </section>
             </div>

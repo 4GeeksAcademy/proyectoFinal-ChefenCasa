@@ -32,6 +32,12 @@
     margin-top: 3px;
     text-align: center;
     flex: 1; /* Asegura que todas las recetas tengan el mismo tamaño */
+    cursor: pointer
+
+}
+
+.col.recipe:active {
+    transform: scale(1.1);
 }
 
 @media (max-width: 730px) {

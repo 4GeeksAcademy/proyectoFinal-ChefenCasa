@@ -1,16 +1,25 @@
 /* Navbar público */
-
 .navbar {
     height: 10vh;
     width: 100vw;
-    padding: 20px;
+    padding: 10px; /* Reduce el padding para pantallas pequeñas */
     background-color: #f9c039;
-    
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Centra verticalmente */
+}
+
+.containerNavbar {
+    margin-left: 15vw;
+    margin-right: 15vw;
+    display: flex;
+    justify-content: space-between; /* Espacio entre logo y botón */
+    width: 100%; /* Asegura que ocupe todo el ancho */
 }
 
 .botonIniciarSesion {
     background-color: #cdcccd;
-    width: 100px;
+    width: auto; /* Cambia a auto para que se ajuste al contenido */
+    min-width: 80px; /* Establece un ancho mínimo */
     box-shadow: 2px 2px 2px rgb(100, 100, 100);
     padding: 10px;
     border: none;
@@ -18,15 +27,25 @@
 }
 
 .LogoChefEnCasa {
-    width: 20vh;
-    min-width: 150px;
-    max-width: 250px;
+    width: auto; /* Cambia a auto para que se ajuste al contenido */
+    max-width: 40%; /* Limita el ancho máximo al 20% del contenedor */
+    height: auto; /* Mantiene la proporción del logo */
 }
 
-.botonClickHere {
-    background-color: #f9c039;
-    border: none;
-    color: blue;
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 900px) {
+    .LogoChefEnCasa {
+        max-width: 150px; /* Ajusta el tamaño máximo en pantallas pequeñas */
+        width: auto; /* Permite que se ajuste automáticamente */
+    }
+    .containerNavbar {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .botonIniciarSesion {
+        min-width: 70px; /* Ajusta el ancho mínimo en pantallas pequeñas */
+        padding: 8px; /* Reduce el padding en pantallas pequeñas */
+    }
 }
 
 /* Navbar Privado */
