@@ -30,9 +30,9 @@ export const ResetPassword = () => {
                 <div className="resetPasswordContenedor">
                     <h2 className="titlePassword">Reset your password</h2>
                     <form className="inputResetPassword" onSubmit={handleSubmit}>
-                        <p style={{ fontSize: "large" }}> New password </p>
+                        <p style={{ fontSize: "medium" }}> New password </p>
                         <input type="password" name="password" id="password1" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-                        <p style={{ fontSize: "large" }}> Repeat password </p>
+                        <p style={{ fontSize: "medium" }}> Repeat password </p>
                         <input type="password" name="password" id="password2" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
                         <button type="submit" className="submitButton">Reset</button>
                     </form>
