@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
+import "../../styles/cardPrivada.css";
 
 export const CardPrivada = ({ receta }) => {
     const { actions, store } = useContext(Context);
