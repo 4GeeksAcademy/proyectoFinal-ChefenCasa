@@ -27,7 +27,7 @@ export const VistaFavoritos = () => {
                         <CardFavoritos key={favoritos.id} receta={favoritos} /> // Pasa la receta como prop
                     ))
                 ) : (
-                    <p>No favorites availables</p> // Mensaje si no hay recetas
+                    <p className="no-favoritos mt-3 ">♥ You don't have favorites yet ♥</p> // Mensaje si no hay recetas
                 )}
                 < Footer />
                 <div className="espacioBlanco"></div>
