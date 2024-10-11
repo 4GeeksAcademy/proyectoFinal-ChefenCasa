@@ -29,17 +29,24 @@ export const RecetaCompletaPrivada = () => {
   }
   return (
     <div className="bodyRecetaPrivada">
+
       <NavbarPrivado />
-      <div className="container mt-5">
-        <header className="recipe-header text-center mb-4">
 
-        </header>
-        <h3>{receta?.title}</h3>
+      <div className="contenidoRecetaCompleta">
 
-        <div className="row recipe-content">
-          <div className="ingredientes col-12 col-md-4 p-4 rounded">
-            <p style={{ fontSize: "large" }}>
-              <strong> Ingredients<br /> </strong></p>
+        <div className="tituloImagenBoton">
+          <h3>{receta?.title}</h3>
+          <div>
+            <img src={receta.image} alt={receta.title} className="ImagenRecetaCompleta" />
+          </div>
+          <div className="botonDropdownMenuRecetaCompleta">
+            <DropMenuSemanal recetaId={receta.id} />
+          </div>
+        </div>
+
+        <div className="contenedorIngredientes">
+          <div className="ingredientesRecetaCompleta">
+            <p><strong> Ingredients<br /> </strong></p>
             <ul>
               {receta.ingredientes && receta.ingredientes.length > 0
                 ? receta.ingredientes.map((ingrediente, index) => (
@@ -47,15 +54,13 @@ export const RecetaCompletaPrivada = () => {
                 ))
                 : 'Ingredients are not availables'}
             </ul>
-
-            <div className="preparation-time">
+            <div className="tiempoDePreparacionRecetaCompleta">
               <p style={{ fontSize: "large" }}>{receta.tiempo_de_coccion} </p>
             </div>
           </div>
 
-          <div className="col-10 col-md-6  rounded">
-          
-            <p className="pasos-bod">
+          <div className="contenedorPreparacion">
+            <p className="preparacion">
               {receta.pasos && receta.pasos.length > 0
                 ? receta.pasos.map((paso, index) => (
                   <span key={index}> <br></br> - Step {index + 1}: {paso.step}</span>
@@ -65,23 +70,8 @@ export const RecetaCompletaPrivada = () => {
           </div>
         </div>
 
-        <div className="text-center mt-3 buttonBottom">
-
-          <DropMenuSemanal recetaId={receta.id} />
-
-
-
-        </div>
-
-        <div className="row note-section ">
-          <div className="col-12 col-md-4 p-4">
-            <img src={receta.image} alt={receta.title} className="img-fluid rounded receta-img" />
-          </div>
-
         < Footer />
         <div className="espacioBlanco"></div>
-        </div>
-        
       </div>
 
     </div>
