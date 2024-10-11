@@ -1,12 +1,13 @@
 .contenedorCardsFavoritos {
-    width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
+    width: 70%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */
     flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias líneas */
     margin: 0 auto; /* Centra el contenedor si es necesario */
+    margin-top: 3vh
 }
 
 .contenedorCardFavorito {
-    width: 35vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
+    width: 30vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
     background-color: #d7d6d6;
     border-radius: 10px;
     align-items: start; /* Centra los elementos horizontalmente */
@@ -15,8 +16,8 @@
 
     padding: 1vw;
     margin-top: 1vw;
-    margin-left: 7vw;
-    margin-right: 7vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
     margin-bottom: 1vw;
     position: relative;
     box-shadow: 10px 6px 10px rgb(100, 100, 100);
@@ -45,7 +46,7 @@
 }
 
 .descripcionFavoritos {
-    width: 17vw;
+    width: 12vw;
     background-color: #f9c039;
     border-radius: 10px;
     padding: 1vw;
