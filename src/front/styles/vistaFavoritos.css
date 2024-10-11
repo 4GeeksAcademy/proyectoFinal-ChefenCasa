@@ -87,17 +87,54 @@
 
 .corazonFavorito {
     border: none;
+    font-size: x-large;
     background-color: #d7d6d6;
     margin-left: 1vw;
 }
 
 /* Media query para pantallas más pequeñas */
-@media (max-width: 768px) { /* Ajusta este valor según tus necesidades */
-    .contenedor-card-fav {
-        width: 40vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+@media (max-width: 1200px) { /* Ajusta este valor según tus necesidades */
+    .contenedorCardFavorito {
+        width: 60vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
     }
-    .corazon-info.d-flex {
+    .descripcionFavoritos {
+        width: 30vw;
+    }
+    .datosTituloImagen {
+        width: 27vw;
+    }
+    .imagenRecetaFavorito {
+        width: 100%;
+        max-width: 25vw;
+    }
+}
+
+@media (max-width: 650px) { /* Ajusta este valor según tus necesidades */
+    .tituloRecetaFavorito {
+        font-size: medium; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+    }
+    .ingredientesFavoritos {
         font-size: small;
+    }
+    .tiempoCoccionFavorito {
+        font-size: small;
+    }
+    .botonesFavoritos {
+        text-align: center;
+        margin-top: 20%;
+        display: flex;
+        flex-direction: column;
+    }
+    .corazonInfoFavorito {
+        flex-direction: column;
+    }
+
+    .botonNotaFavoritos {
+        margin-bottom: 1vh;
+    }
+
+    .corazonFavorito {
+        margin-bottom: 1vh;
     }
 }
 
