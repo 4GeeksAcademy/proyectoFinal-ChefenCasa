@@ -325,7 +325,12 @@ def enviar_correo():
     
     # Preparar y enviar el correo
     msg = Message('Solicitud de Restablecimiento de Contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
-    msg.body = f'Sigue este enlace para restablecer tu contraseña: {reset_link}'
+    msg.body = f"""
+                Click the link below to reset your password:
+                {reset_link}
+                If you did not request a password reset, please ignore this message
+         
+"""
     mail.send(msg)
 
     return {'msg': '¡Correo enviado exitosamente!'}, 200
