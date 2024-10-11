@@ -75,7 +75,7 @@ export const ModalRegistro = ({ show, onClose }) => {
 
 
                 </form>
-                <button className="btn-modal" type="submit" onClick={signUp}>
+                <button className="btn-modal" type="submit" onClick={signUp} style={{padding: "5px" , borderRadius: "20px"}}>
                     Sign up
                 </button>
             </section>

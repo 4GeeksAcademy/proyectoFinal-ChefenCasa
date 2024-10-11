@@ -27,6 +27,7 @@ export const VistaPrivada = () => {
                     <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
                 )}
                 < Footer />
+                <div className="espacioBlanco"></div>
             </div>
         </div>
     );

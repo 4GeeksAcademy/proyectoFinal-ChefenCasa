@@ -28,7 +28,7 @@ export const RecetaCompletaPrivada = () => {
     return (<h1>No hay recetas</h1>)
   }
   return (
-    <div>
+    <div className="bodyRecetaPrivada">
       <NavbarPrivado />
       <div className="container mt-5">
         <header className="recipe-header text-center mb-4">
@@ -78,9 +78,10 @@ export const RecetaCompletaPrivada = () => {
             <img src={receta.image} alt={receta.title} className="img-fluid rounded receta-img" />
           </div>
 
-
-        </div>
         < Footer />
+        <div className="espacioBlanco"></div>
+        </div>
+        
       </div>
 
     </div>
