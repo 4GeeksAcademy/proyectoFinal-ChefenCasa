@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Context } from '../store/appContext';
 import "../../styles/notaModal.css";
 
-export const NotaModal = ({ apiRecetaId, onClose, show }) => {
-  const [notaTexto, setNotaTexto] = useState('');
+export const NotaModal = ({ apiRecetaId, onClose, show, notaTexto, setNotaTexto }) => {
+  // const [notaTexto, setNotaTexto] = useState('');
   const [editarNota, setEditarNota] = useState(false);
   const showHideClassName = show ? "modal display-block" : "modal display-none";
   const { actions, store } = useContext(Context);
