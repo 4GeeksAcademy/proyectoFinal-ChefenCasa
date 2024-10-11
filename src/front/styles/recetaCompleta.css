@@ -1,16 +1,25 @@
 .bodyRecetaPrivada {
-    min-height: calc(100vh + 120px);
+  min-height: calc(100vh + 120px);
 }
 
 .contenidoRecetaCompleta {
   display: flex;
+  width: 85vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
 }
 
-.tituloImagenBoton {
-    margin: 0 auto;
-    margin-top: 5vh;
-  }
-  
+.tituloRecetaCompleta {
+  width: 85vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  margin-top: 3vh;
+}
+
+.imagenBotonRecetaCompleta {
+  margin-right: 3vh;
+}
+
 .ImagenRecetaCompleta {
   margin-top: 2vh;
   margin-bottom: 2vh;
@@ -18,59 +27,88 @@
 }
 
 .ingredientesRecetaCompleta {
-  max-width: 20vw;
+  width: 20vw;
   background-color: #f9c039;
   border-radius: 7px;
   padding: 1vw;
-  margin: 2vh;
+  margin-right: 2vw;
   font-size: medium;
+  height: fit-content;
 }
 
 .contenedorPreparacion {
-  width: 30vw;
+  width: 30vw; /* Ajusta este ancho según sea necesario */
+  max-height: calc(100vh - 120px); /* Establece la altura máxima, restando el espacio ocupado por otros elementos */
+  overflow-y: auto; /* Agrega scroll vertical si el contenido excede la altura máxima */
 }
 
-  .recipe-header h2 {
-    font-size: 2rem;
-    font-weight: bold;
+.contenedorIngredientesYPreparacion {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2vh;
+}
+
+.btn-receta {
+  background-color: #ff7f00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.buttonBottom {
+  display: flex;
+  justify-content: center;
+  margin-left: 20em;
+}
+
+.btn-receta:hover {
+  background-color: #e06b00;
+}
+
+.preparacion {
+  font-size: 20px;
+}
+
+.iconoRelojRecetaCompleta {
+  font-size: large;
+  margin-top: auto;
+}
+
+/* Responsividad */
+@media (max-width: 1200px) {
+  .contenidoRecetaCompleta {
+    width: 95vw;
+    padding-left: 2vh;
+    padding-right: 2vh;
   }
-  
-  .recipe-content {
+  .imagenBotonRecetaCompleta {
+    margin-right: 2vw;
+    margin-left: 8vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .contenidoRecetaCompleta {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ImagenRecetaCompleta {
+    max-width: 70vw;
+  }
+  .imagenBotonRecetaCompleta {
+    margin: 0;
+  }
+  .contenedorIngredientesYPreparacion {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center
   }
-  
-  .btn-receta{
-    background-color: #ff7f00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-right: 10px; 
+  .ingredientesRecetaCompleta {
+    width: 70vw;
   }
-
-  .buttonBottom{
-    display: flex;
-    justify-content: center;
-    margin-left: 20em;
+  .contenedorPreparacion {
+    width: 70vw;
   }
-
-  .btn-receta:hover {
-    background-color: #e06b00;
-  }
-
-  .preparacion{
-    font-size: 20px;
-  }
-  
-  /* Responsividad */
-  @media (max-width: 768px) {
-    .recipe-content {
-      flex-direction:  column;
-    }
-  
-    .note-section {
-      flex-direction: column;
-    }
-  }
+}

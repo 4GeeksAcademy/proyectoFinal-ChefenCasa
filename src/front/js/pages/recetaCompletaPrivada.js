@@ -31,11 +31,13 @@ export const RecetaCompletaPrivada = () => {
     <div className="bodyRecetaPrivada">
 
       <NavbarPrivado />
+      <div className="tituloRecetaCompleta">
+        <h3>{receta?.title}</h3>
+      </div>
 
       <div className="contenidoRecetaCompleta">
 
-        <div className="tituloImagenBoton">
-          <h3>{receta?.title}</h3>
+        <div className="imagenBotonRecetaCompleta">
           <div>
             <img src={receta.image} alt={receta.title} className="ImagenRecetaCompleta" />
           </div>
@@ -44,36 +46,36 @@ export const RecetaCompletaPrivada = () => {
           </div>
         </div>
 
-        <div className="contenedorIngredientes">
+        <div className="contenedorIngredientesYPreparacion">
+
           <div className="ingredientesRecetaCompleta">
-            <p><strong> Ingredients<br /> </strong></p>
-            <ul>
-              {receta.ingredientes && receta.ingredientes.length > 0
-                ? receta.ingredientes.map((ingrediente, index) => (
+            <div className="tituloIngredientesRecetaCompleta">
+              <p><strong> Ingredients<br /></strong></p>
+              <ul>
+                {receta.ingredientes && receta.ingredientes.length > 0 ? receta.ingredientes.map((ingrediente, index) => (
                   <li key={index}>{ingrediente.ingrediente}</li>
-                ))
-                : 'Ingredients are not availables'}
-            </ul>
+                )) : 'Ingredients are not available'}
+              </ul>
+            </div>
             <div className="tiempoDePreparacionRecetaCompleta">
-              <p style={{ fontSize: "large" }}>{receta.tiempo_de_coccion} </p>
+              <p className="iconoRelojRecetaCompleta"> <i className="far fa-clock"></i> {receta.tiempo_de_coccion}</p>
             </div>
           </div>
 
           <div className="contenedorPreparacion">
             <p className="preparacion">
-              {receta.pasos && receta.pasos.length > 0
-                ? receta.pasos.map((paso, index) => (
-                  <span key={index}> <br></br> - Step {index + 1}: {paso.step}</span>
-                ))
-                : 'Steps are not availables'}
+              {receta.pasos && receta.pasos.length > 0 ? receta.pasos.map((paso, index) => (
+                <span key={index}>
+                  - Step {index + 1}: {paso.step} <br />
+                </span>
+              )) : 'Steps are not available'}
             </p>
           </div>
+
         </div>
-
-        < Footer />
-        <div className="espacioBlanco"></div>
       </div>
-
+      <Footer />
+      <div className="espacioBlanco"></div>
     </div>
-  )
+  );
 }
