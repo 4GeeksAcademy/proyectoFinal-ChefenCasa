@@ -3,15 +3,16 @@
 }
 
 .contenedorCartasRecetas {
-    width: 100%; /* Cambia a 100% para que ocupe todo el ancho disponible */
+    width: 80%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */
     justify-content: space-between; /* Espacia las cartas uniformemente */
     flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias líneas */
     margin: 0 auto; /* Centra el contenedor si es necesario */
+    padding-top: 3vh;
 }
 
 .contenedor-card {
-    width: 20vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
+    width: 17vw; /* Ancho del 25% menos margen, para 4 cards en pantallas grandes */
     background-color: #f9c039;
     border-radius: 10px;
     display: flex;
@@ -20,8 +21,6 @@
     padding: 1vw;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
     margin: 1vw; /* Espacio entre las tarjetas */
-    margin-left: 2vw;
-    margin-right: 2vw;
     position: relative;
     box-shadow: 5px 3px 10px rgb(100, 100, 100);
 }

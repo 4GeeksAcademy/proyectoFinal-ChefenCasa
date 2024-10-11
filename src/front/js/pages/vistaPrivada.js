@@ -18,7 +18,7 @@ export const VistaPrivada = () => {
     return (
         <div className="bodyVistaPrivada">
             <NavbarPrivado />
-            <div className="contenedorCartasRecetas col-3">
+            <div className="contenedorCartasRecetas" style={{display:"flex" , justifyContent: "center"}}>
                 {store.recetas.length > 0 ? (
                     store.recetas.map((receta) => (
                         <CardPrivada key={receta.id} receta={receta} /> // Pasa la receta como prop
