@@ -8,6 +8,7 @@ export const CardFavoritos = ({ receta }) => {
     const { actions } = useContext(Context);
     const [isFavorito, setIsFavorito] = useState(true); // Por defecto, es favorito (naranja)
     const [show, setShowModal] = useState(false); // Para controlar el modal
+    const [notaTexto, setNotaTexto] = useState('');
 
     // Abrir y cerrar modal
     const handleModal = () => {
@@ -32,7 +33,7 @@ export const CardFavoritos = ({ receta }) => {
                     <img src={receta.imagen} alt={receta.title} className="imagenRecetaFavorito" />
                     <div className="botonesFavoritos">
                         <div className="corazonInfoFavorito ">
-                            <button className="botonNotaFavoritos" onClick={handleModal}>Note</button>
+                            <button className="botonNotaFavoritos" onClick={handleModal}>{notaTexto ? "1 " : "" }Note</button>
                             <button className='corazonFavorito'>
                                 <i 
                                     className="fa-solid fa-heart me-2" 
@@ -68,7 +69,7 @@ export const CardFavoritos = ({ receta }) => {
             </div>
 
             {/* El modal de nota */}
-            <NotaModal show={show} apiRecetaId={receta.api_receta_id} onClose={handleClose} />
+            <NotaModal show={show} apiRecetaId={receta.api_receta_id} onClose={handleClose} notaTexto={notaTexto} setNotaTexto={setNotaTexto} />
         </div>
     );
 };
