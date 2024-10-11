@@ -28,7 +28,7 @@ export const NavbarPrivado = () => {
         <>
             <nav className="navbar">
                 <div className="container">
-                    <Link to="/">
+                    <Link to="/vistaPrivada">
                         <img className="LogoChefEnCasa" src={logo} alt="Logo Chef at Home" />
                     </Link>
                     <div className="dropdown">
