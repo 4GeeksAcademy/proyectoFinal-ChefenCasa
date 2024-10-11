@@ -71,11 +71,15 @@
   .margin-left {
     margin-left: 15px;
   }
+
+  .pasos-bod{
+    font-size: 20px;
+  }
   
   /* Responsividad */
   @media (max-width: 768px) {
     .recipe-content {
-      flex-direction: column;
+      flex-direction:  column;
     }
   
     .note-section {
