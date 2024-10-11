@@ -59,12 +59,24 @@
 }
 
 /* Media query para pantallas más pequeñas */
+@media (max-width: 920px) { /* Ajusta este valor según tus necesidades */
+    .contenedor-card {
+        width: 24vw;
+    }
+}
+
 @media (max-width: 768px) { /* Ajusta este valor según tus necesidades */
     .contenedor-card {
-        width: 40vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+        width: 33vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
     }
     .corazon-info.d-flex {
         font-size: small;
+    }
+}
+
+@media (max-width: 460px) { /* Ajusta este valor según tus necesidades */
+    .contenedor-card {
+        width: 60vw;
     }
 }
 

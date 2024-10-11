@@ -3,9 +3,9 @@
     width: 100vw; /* Ancho completo */
     background-color: #fcd477; /* Color de fondo */
     display: flex;
-    justify-content: end; /* Mantiene espacio entre los elementos */
+    justify-content: start; /* Mantiene espacio entre los elementos */
     align-items: center; /* Centra verticalmente los elementos */
-    padding-right: 2vw;
+    padding-left: 2vw;
     bottom: 0;
     left: 0;
     margin-top: 2vh;
