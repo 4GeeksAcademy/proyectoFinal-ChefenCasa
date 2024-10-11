@@ -54,8 +54,8 @@ export const RecetaCompletaPrivada = () => {
           </div>
 
           <div className="col-10 col-md-6  rounded">
-            <p>{receta.instructions}</p>
-            <p>
+          
+            <p className="pasos-body">
               {receta.pasos && receta.pasos.length > 0
                 ? receta.pasos.map((paso, index) => (
                   <span key={index}> <br></br> - Step {index + 1}: {paso.step}</span>

@@ -71,6 +71,10 @@
   .margin-left {
     margin-left: 15px;
   }
+
+  .pasos-body{
+    font-size: 20px;
+  }
   
   /* Responsividad */
   @media (max-width: 768px) {
