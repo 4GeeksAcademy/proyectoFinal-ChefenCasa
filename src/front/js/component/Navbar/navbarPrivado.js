@@ -4,6 +4,7 @@ import "../../../styles/navbar.css";
 import logo from "./logo_ingles.png";
 import { ModalPerfil } from "../modalPerfil";
 import { Context } from "../../store/appContext";
+import { ChatBot } from "../chatBot";
 
 export const NavbarPrivado = () => {
     const { store, actions } = useContext(Context);
@@ -31,6 +32,7 @@ export const NavbarPrivado = () => {
                     <Link to="/vistaPrivada">
                         <img className="LogoChefEnCasa" src={logo} alt="Logo Chef at Home" />
                     </Link>
+                    <ChatBot/>
                     <div className="dropdown">
                         <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fas fa-user fa-xl"></i> &nbsp; <i className="fas fa-bars fa-xl"></i>
