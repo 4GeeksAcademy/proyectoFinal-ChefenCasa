@@ -19,7 +19,7 @@ export const ResetPassword = () => {
 
             await actions.resetPassword(token, newPassword);
         } else {
-            alert("Las contraseñas no coinciden.");
+            alert("Passwords do not match.");
         }
     };
 

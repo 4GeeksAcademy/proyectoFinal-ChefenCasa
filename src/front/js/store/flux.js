@@ -171,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				} catch (error) {
-					console.error('Error al obtener las recetas:', error);
+					console.error(error);
 				}
 			},
 
@@ -317,11 +317,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}
 					else {
-						alert('Menú guardado correctamente.')
+						alert('Saved successfully.')
 					}
 
 				} catch (error) {
-					console.log("Se produjo un error durante la solicitud:", error);
+					console.log(error);
 				}
 
 			},
@@ -430,7 +430,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert(errorData.msg);
 
 					} else {
-						alert('Receta agregada a favoritos')
 						getActions().obtenerFavoritos()
 					}
 				} catch (error) {
@@ -484,7 +483,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert(errorData.msg);
 
 					} else {
-						alert('Nota agregada')
+						return;
 					}
 				} catch (error) {
 					console.log("Se produjo un error:", error);
@@ -567,14 +566,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 
 					if (response.ok) {
-						alert("¡Correo de recuperación de contraseña enviado!");
+						alert("¡Sent email!");
 					} else if (response.status === 404) {
-						alert("Correo no encontrado. Por favor intenta nuevamente.");
+						alert("Email not found. Please try again.");
 					} else {
-						alert("Error al enviar el correo. Intenta de nuevo.");
+						alert("Error sending email. try again.");
 					}
 				} catch (error) {
-					console.log("Se produjo un error:", error);
+					console.log("Error:", error);
 				}
 			},
 
@@ -604,11 +603,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const errorData = await response.json();
 						alert(errorData.error); 
 					} else {
-						alert("Error al actualizar la contraseña.");
+						alert("Error updating password.");
 					}
 				} catch (error) {
 					console.log("Se produjo un error:", error);
-					alert("Error en la solicitud.");
+					
 				}
 			}
 
