@@ -24,7 +24,7 @@ export const VistaPrivada = () => {
                         <CardPrivada key={receta.id} receta={receta} /> // Pasa la receta como prop
                     ))
                 ) : (
-                    <p>No hay recetas disponibles.</p> // Mensaje si no hay recetas
+                    <p>Loading...</p> // Mensaje si no hay recetas
                 )}
                 < Footer />
                 <div className="espacioBlanco"></div>

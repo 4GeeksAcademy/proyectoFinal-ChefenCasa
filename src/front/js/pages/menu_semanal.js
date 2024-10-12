@@ -23,7 +23,7 @@ export const MenuSemanal = () => {
             );
         });
 
-        return recetaMenu ? recetaMenu.receta_title : "Sin receta";
+        return recetaMenu ? recetaMenu.receta_title : "No recipe";
     };
     
     const obtenerIDreceta = (dia, tipo) => {

@@ -22,7 +22,7 @@ export const ModalRegistro = ({ show, onClose }) => {
     const signUp = async () => {
         const signUpProcess = await actions.signUp(name, email, password)
         if (signUpProcess) {
-            alert('usuario registrado con exito');
+            alert('successful registration');
             setShowModalSesion(true);
         }
         onClose();

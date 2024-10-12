@@ -23,7 +23,7 @@ export const ModalSesion = ({ show, onClose }) => {
         if (userLogin) {
             navigate('/vistaPrivada');
         } else {
-            alert('Usuario o contraseña incorrectos');
+            alert('Incorrect username or password');
         }
     };
 
