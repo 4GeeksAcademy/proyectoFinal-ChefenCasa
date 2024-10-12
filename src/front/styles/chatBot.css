@@ -1,0 +1,140 @@
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    left: 75em;
+    z-index: 1000;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.chat-toggle-button {
+    background-color: #ff7f00;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none
+}
+
+.chat-modal {
+    width: 300px;
+    max-height: 400px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-header {
+    background-color: #ff7f00;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h4 {
+    margin: 0;
+    font-size: 13px;
+}
+
+.close-button-chat {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    /* Tamaño ajustado para que la X sea visible */
+    margin-left: auto;
+    /* Empuja el botón de cerrar hacia la derecha */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-content {
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message.user {
+    background-color: #fcd477;
+    color: white;
+    align-self: flex-end;
+}
+
+.message.assistant {
+    background-color: rgb(188, 186, 186);
+    align-self: flex-start;
+}
+
+.input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.input-container input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    /* Asegura que ocupe todo el ancho en dispositivos pequeños */
+    max-width: calc(100% - 60px);
+    /* Ajusta el ancho según el botón */
+}
+
+.input-container button {
+    padding: 8px 12px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 60px;
+    height: 40px;
+    flex: 0 0 auto;
+}
+
+@media (max-width: 600px) {
+    .chatbot-container {
+        left: 45em;
+        bottom: 10px;
+    }
+
+    .chat-modal {
+        max-height: 80vh;
+    }
+
+    .chat-content {
+        max-height: 60vh;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .chatbot-container {
+        bottom: 20px;
+        left: 45em;
+        width: 70%;
+        max-width: 400px;
+    }
+}
