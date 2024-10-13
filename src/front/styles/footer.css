@@ -3,12 +3,11 @@
     width: 100vw; /* Ancho completo */
     background-color: #fcd477; /* Color de fondo */
     display: flex;
-    justify-content: start; /* Mantiene espacio entre los elementos */
+    justify-content: end; /* Mantiene espacio entre los elementos */
     align-items: center; /* Centra verticalmente los elementos */
-    padding-left: 2vw;
     bottom: 0;
-    left: 0;
     margin-top: 2vh;
+    padding-right: 30vw;
     padding: 1vh
 }
 
