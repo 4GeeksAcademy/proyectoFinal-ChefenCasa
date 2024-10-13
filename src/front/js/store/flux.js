@@ -58,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// Verifica si la respuesta fue exitosa
 					if (response.status !== 200) {
 						alert(data.msg)
-						console.error('Error en el registro:', data); // Muestra el error en la consola
+						console.error('Error', data); // Muestra el error en la consola
 						return false; // Retorna false si la respuesta no es exitosa
 					}
 					else {
@@ -95,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}
 				} catch (error) {
-					console.error('error durante la autentificación', error);
+					console.error('error', error);
 					return false
 				}
 
@@ -138,7 +138,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(url);
 					if (!response.ok) {
-						throw new Error('Error al obtener las recetas');
+						throw new Error('Error getting recipes');
 					}
 
 
@@ -155,13 +155,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})),
 						instructions: receta.instructions
 							? receta.instructions
-							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
+							: 'Instructions are not availables, try anothe recipe.',
 						tiempo_de_coccion: receta.readyInMinutes
 							? `${receta.readyInMinutes} minutes`
-							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
+							: 'Time are not available.',
 						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps)
 							? receta.analyzedInstructions[0].steps
-							: 'Los pasos no están disponibles.'
+							: 'Steps are not availables.'
 
 					}));
 
@@ -183,7 +183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(url);
 					if (!response.ok) {
-						throw new Error('Error al obtener las recetas');
+						throw new Error('Error getting recipes');
 					}
 
 					const data = await response.json();
@@ -201,13 +201,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})),
 						instructions: receta.instructions
 							? receta.instructions
-							: 'Lamentablemente, no hay instrucciones disponibles para esta receta. ¡Intenta otra receta!',
+							: 'Instructions are not availables, try anothe recipe.',
 						tiempo_de_coccion: receta.readyInMinutes
 							? `${receta.readyInMinutes} minutes`
-							: 'El tiempo de cocción no está disponible. Consulta los detalles de la receta para más información.',
+							: 'Time are not available',
 						pasos: (receta.analyzedInstructions && receta.analyzedInstructions.length > 0 && receta.analyzedInstructions[0].steps)
 							? receta.analyzedInstructions[0].steps
-							: 'Los pasos no están disponibles.'
+							: 'Steps are not availables.'
 
 					})
 
@@ -218,7 +218,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return resultFinal
 
 				} catch (error) {
-					console.error('Error al obtener las recetas:', error);
+					console.error('Error getting recipes:', error);
 				}
 			},
 
@@ -241,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log('Error al obtener el menú');
 					} else {
 						const data = await response.json(); // Array de menús semanales
-						console.log("Menús obtenidos:", data);
+						console.log("Menus:", data);
 
 						// Acá guardo la promesa de info de la api(los titulos)
 						const respuestaPromesaTitulos = [];
@@ -255,7 +255,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 									if (!response.ok) {
 
-										throw new Error(`Error al obtener la receta con id ${receta.api_receta_id}`);
+										throw new Error(`Error getting recipe ${receta.api_receta_id}`);
 
 									}
 
@@ -263,7 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 									const recetaData = await response.json();
 									receta.receta_title = recetaData.title;
 
-									console.log("titulo obtenido correctamente", 200);
+									console.log("title got", 200);
 
 									return receta;
 
@@ -280,14 +280,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Promise.all me sirve para que se ejecuten todas las promesas juntas, por si tengo mas de una, y no hacer un fetch por cada una.
 						const tituloReceta = await Promise.all(respuestaPromesaTitulos);
 
-						console.log("Titulos de las recetas:", tituloReceta);
+						console.log("Titles:", tituloReceta);
 
 						// Guardar en el store
 						setStore({ menuSemanal: tituloReceta });
 						//localStorage.setItem("user_name", data.name)
 					}
 				} catch (error) {
-					console.error('Error durante la autenticación o al obtener datos', error);
+					console.error('Error getting data', error);
 				}
 			},
 
@@ -341,12 +341,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 
 					if (!response.ok) {
-						console.log('Error al obtener favoritos');
+						console.log('Error geting favorites');
 						return;
 					}
 
 					const data = await response.json(); // Array de favoritos
-					console.log("Favoritos obtenidos:", data);
+					console.log("Favorites got:", data);
 
 					// cambio el for por map 
 					const respuestaApi = await Promise.all(
@@ -370,19 +370,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 								};
 
 							} catch (error) {
-								console.error(`Error en la llamada a la API de Spoonacular para el id ${receta.api_receta_id}:`, error);
+								console.error(`Error ${receta.api_receta_id}:`, error);
 								return receta; // Devolver la receta sin cambios si hay un error
 							}
 						})
 					);
 
-					console.log("Datos de las recetas:", respuestaApi);
+					console.log("Recipes data:", respuestaApi);
 
 					// Guardar en el store
 					setStore({ favoritos: respuestaApi });
 
 				} catch (error) {
-					console.error('Error durante la autenticación o al obtener datos', error);
+					console.error('Error getting data', error);
 				}
 			},
 
@@ -401,13 +401,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 
 					if (response.ok) {
-						alert("Sesión cerrada correctamente");
+						alert("session closed correctly");
 						history.push('/');
 					} else {
-						alert("Error al cerrar sesión");
+						alert("Error closing session");
 					}
 				} catch (error) {
-					console.error("Error al cerrar sesión", error);
+					console.error("Error closing session", error);
 				}
 			},
 
@@ -433,7 +433,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getActions().obtenerFavoritos()
 					}
 				} catch (error) {
-					console.log("Se produjo un error durante la solicitud:", error);
+					console.log("Error", error);
 				}
 			},
 
@@ -458,7 +458,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 
 				} catch (error) {
-					console.log("Se produjo un error durante la solicitud:", error);
+					console.log("Error", error);
 				}
 			},
 
@@ -486,7 +486,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return;
 					}
 				} catch (error) {
-					console.log("Se produjo un error:", error);
+					console.log("Error", error);
 				}
 			},
 
@@ -541,7 +541,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}
 				} catch (error) {
-					console.log('Error durante la obtención de las notas');
+					console.log('Error');
 					return false
 				}
 
@@ -606,7 +606,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("Error updating password.");
 					}
 				} catch (error) {
-					console.log("Se produjo un error:", error);
+					console.log("Error", error);
 					
 				}
 			}
