@@ -1,7 +1,7 @@
 .chatbot-container {
     position: fixed;
     bottom: 20px;
-    left: 75em;
+    left: 1vw;
     z-index: 1000;
     border-radius: 20px;
     width: 90%;
@@ -116,25 +116,11 @@
 }
 
 @media (max-width: 600px) {
-    .chatbot-container {
-        left: 45em;
-        bottom: 10px;
-    }
-
     .chat-modal {
         max-height: 80vh;
     }
 
     .chat-content {
         max-height: 60vh;
-    }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-    .chatbot-container {
-        bottom: 20px;
-        left: 45em;
-        width: 70%;
-        max-width: 400px;
     }
 }
