@@ -100,17 +100,18 @@
 /* Media query para pantallas más pequeñas */
 @media (max-width: 1200px) { /* Ajusta este valor según tus necesidades */
     .contenedorCardFavorito {
-        width: 60vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+        width: 80vw; /* Ancho del 50% menos margen, para 2 cards en pantallas pequeñas */
+        margin-bottom: 2vh;
     }
     .descripcionFavoritos {
-        width: 30vw;
+        width: 33vw;
     }
     .datosTituloImagen {
-        width: 27vw;
+        width: 30vw;
     }
     .imagenRecetaFavorito {
         width: 100%;
-        max-width: 25vw;
+        max-width: 28vw;
     }
 }
 

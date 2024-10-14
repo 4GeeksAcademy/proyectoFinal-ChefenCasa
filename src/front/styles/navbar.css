@@ -6,6 +6,8 @@
     background-color: #f9c039;
     display: flex; /* Usa flexbox */
     align-items: center; /* Centra verticalmente */
+    position: relative; /* Necesario para posicionar el contenido del dropdown */
+    
 }
 
 .containerNavbar {
@@ -14,6 +16,8 @@
     display: flex;
     justify-content: space-between; /* Espacio entre logo y botón */
     width: 100%; /* Asegura que ocupe todo el ancho */
+    display: flex;
+    justify-content: flex-end;
 }
 
 .botonIniciarSesion {
@@ -45,6 +49,9 @@
     .botonIniciarSesion {
         min-width: 70px; /* Ajusta el ancho mínimo en pantallas pequeñas */
         padding: 8px; /* Reduce el padding en pantallas pequeñas */
+    }
+    .dropdown {
+        margin-right: 20vw;
     }
 }
 
