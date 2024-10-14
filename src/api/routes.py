@@ -26,7 +26,7 @@ def login():
     #hago un filter para ver si tengo en la base de datos el usuario/contraseña y lo almaceno en una va. 
     user = User.query.filter_by(email=email).first()
     if not user or not check_password_hash(user.password, password): 
-        return jsonify({'msg': 'Email o contraseña incorrectos'}), 401
+        return jsonify({'msg': 'Incorrect email or password'}), 401
         
     
     #sino entra en esa condición, se inicia seción y se genera el jwt:
@@ -41,7 +41,7 @@ def protected():
     user = User.query.get(current_user_id)
 
     if user is None:
-        return jsonify({'msg':'verificación incorrecta'}), 401
+        return jsonify({'msg':'incorrect verification'}), 401
     
     return jsonify({'id':user.id, 'email':user.email})
 
@@ -66,9 +66,9 @@ def signup():
         #añadimos esos datos a nuestro base 
         db.session.add(user)
         db.session.commit()  
-        return jsonify({'msg':'Usuario registrado exitosamente'}),200 
+        return jsonify({'msg':'Successfully registered user'}),200 
     elif user:
-        return jsonify({'msg':'Usuario ya existee'}),400
+        return jsonify({'msg':'User already exists'}),400
     
 #obtenemos los usuarios registrados
 @api.route('/usuarios', methods=['GET'])
@@ -101,19 +101,10 @@ def modificarUsuario(id):
         user.name = name
         user.email = email
         db.session.commit() 
-        return jsonify({'msg':'Usuario modificado exitosamente', 'name':name, 'email':email}),200 
+        return jsonify({'msg':'User modified successfully', 'name':name, 'email':email}),200 
     else:
-        return jsonify({'msg':'Usuario no encontrado'}),400
+        return jsonify({'msg':'User not found'}),400
     
-@api.route('/eliminar/<int:id>', methods=['DELETE'])
-def eliminarUsario(id):
-     user = User.query.filter_by(id=id)#no se ejecuta hasta que haga el user.first()
-     if user.first():
-         user.delete()
-         db.session.commit()
-         return jsonify({'msg':'Usuario eliminado exitosamente'}),200 
-     else:
-        return jsonify({'msg':'Usuario no encontrado'}),400
 
 #menu semanal 
 @api.route('/guardarmenu', methods=['POST'])
@@ -126,12 +117,12 @@ def guardarMenu():
     apiRecetaId = data['api_receta_id']
     # Validación de datos
     if not all(key in data for key in ('dia_semana', 'tipo_comida', 'api_receta_id')):
-        return jsonify({'msg': 'Faltan datos necesarios'}), 400
+        return jsonify({'msg': 'Necessary data is missing'}), 400
     
     menuSemanal = MenuSemanal.query.filter_by(usuario_id = usuarioId, dia_semana = diaSemana, tipo_comida = tipoComida).first()
 
     if menuSemanal:
-        return jsonify({'msg': 'Este menu ya se ha guardado anteriormente en la misma fecha'}), 400
+        return jsonify({'msg': 'This menu has already been saved previously on the same date'}), 400
 
     else:
         # creo un obj vacio donde guardo el menu
@@ -145,7 +136,7 @@ def guardarMenu():
         try:
             db.session.add(nuevoMenu)
             db.session.commit()
-            return jsonify({'msg': 'Menú guardado'}), 200
+            return jsonify({'msg': 'Saved menu'}), 200
         except Exception as e:
             db.session.rollback()  
             return jsonify({'msg': str(e)}), 500
@@ -158,12 +149,12 @@ def get_menu_semanal():
     user = User.query.get(current_user_id)
 
     if user is None:
-        return jsonify({'msg': 'verificación incorrecta'}), 401
+        return jsonify({'msg': 'incorrect verification'}), 401
 
     menu_semanal = MenuSemanal.query.filter_by(usuario_id=current_user_id).all()
 
     if not menu_semanal:
-        return jsonify({'msg': 'No se encontraron menús semanales para este usuario'}), 404
+        return jsonify({'msg': 'No weekly menus found for this user'}), 404
 
     resultado = [menu.serialize() for menu in menu_semanal]
     
@@ -205,10 +196,10 @@ def guardarFavoritos():
         db.session.add(favorito)
         db.session.commit()
     if favorito in usuario.favoritos:
-        return jsonify({'msg':'La receta ya esta agregada a favoritos'}), 200
+        return jsonify({'msg':'The recipe is already added to favorites'}), 200
     usuario.favoritos.append(favorito)
     db.session.commit()
-    return jsonify({'msg': 'Receta guardada en favoritos correctamente'}), 200
+    return jsonify({'msg': 'Recipe saved in favorites correctly'}), 200
 
     
 
@@ -224,15 +215,15 @@ def eliminarFav(api_receta_id):
 
     # Verifico si existe: 
     if not favorito:
-        return jsonify({'msg': 'Favorito no encontrado'}), 404
+        return jsonify({'msg': 'Favorite not found'}), 404
     
     if favorito not in usuario.favoritos: 
-        return jsonify({'msg':'Esta receta no está en tus favoritos'}), 404
+        return jsonify({'msg':'This recipe is not in your favorites'}), 404
     
     usuario.favoritos.remove(favorito)
     db.session.commit()
 
-    return jsonify({'msg': 'Favorito eliminado correctamente'}), 200
+    return jsonify({'msg': 'Favorite deleted successfully'}), 200
 
 
 
@@ -240,7 +231,7 @@ def eliminarFav(api_receta_id):
 #CERRAR SESION
 @api.route('/api/logout', methods=['POST'])
 def logout():
-    return jsonify({"message": "Usuario desconectado"}), 200
+    return jsonify({"message": "Disconnected user"}), 200
 
 
 #NOTAS
@@ -254,7 +245,7 @@ def agregarNota():
     
     # Validación de datos
     if not all(key in data for key in ('contenido', 'api_receta_id')):
-        return jsonify({'msg': 'Faltan datos necesarios'}), 400
+        return jsonify({'msg': 'Necessary data is missing'}), 400
     
         # creo un obj vacio donde guardo la nota
     nuevaNota = Notas(
@@ -267,7 +258,7 @@ def agregarNota():
     try:
             db.session.add(nuevaNota)
             db.session.commit()
-            return jsonify({'msg': 'Nota guardada exitosamente'}), 200
+            return jsonify({'msg': 'Note saved successfully'}), 200
     except Exception as e:
             db.session.rollback()  
             return jsonify({'msg': str(e)}), 500
@@ -284,16 +275,16 @@ def modificarNota():
     api_receta_id = data.get('api_receta_id')
 
     if not api_receta_id or not contenido:
-        return jsonify({'msg': 'Faltan datos necesarios: api_receta_id o contenido'}), 400
+        return jsonify({'msg': 'Required data is missing: api_recipe_id or content'}), 400
     
     notas = Notas.query.filter_by(api_receta_id=api_receta_id).first()
 
     if notas: 
         notas.contenido = contenido
         db.session.commit() 
-        return jsonify({'msg':'Nota modificada exitosamente', 'contenido':contenido, }),200 
+        return jsonify({'msg':'Note successfully modified', 'contenido':contenido, }),200 
     else:
-        return jsonify({'msg':'no se encontro la nota'}),404
+        return jsonify({'msg':'The note was not found'}),404
     
 
 #RECUPERACION DE CONTRASEñA
@@ -324,7 +315,7 @@ def enviar_correo():
     print(reset_link)
     
     # Preparar y enviar el correo
-    msg = Message('Solicitud de Restablecimiento de Contraseña', recipients=[email], sender="chefathome.4geeks@gmail.com")
+    msg = Message('Password Reset Request', recipients=[email], sender="chefathome.4geeks@gmail.com")
     msg.body = f"""
                 Click the link below to reset your password:
                 {reset_link}
@@ -333,7 +324,7 @@ def enviar_correo():
 """
     mail.send(msg)
 
-    return {'msg': '¡Correo enviado exitosamente!'}, 200
+    return {'msg': '¡Email sent successfully!'}, 200
 
 # poner el mensaje en ingles 
 
@@ -345,23 +336,23 @@ def reset_password():
     new_password = data.get("new_password")
 
     if not token or not new_password:
-        return jsonify({"error": "Faltan datos"}), 400
+        return jsonify({"error": "Data is missing"}), 400
     
     # Verificar y decodificar el token
     try:
         email = s.loads(token, salt='password-reset-salt', max_age=3600)  # El token expira en 1 hora
     except Exception as e:
-        return jsonify({"error": "Token inválido o expirado."}), 400
+        return jsonify({"error": "Invalid or expired token."}), 400
 
     user = db.session.query(User).filter_by(email=email).first()
 
     if not user:
-        return jsonify({"error": "Usuario no encontrado"}), 404
+        return jsonify({"error": "User not found"}), 404
     
     user.password = generate_password_hash(new_password)
     db.session.commit()
 
-    return jsonify({"message": "Contraseña actualizada con éxito"}), 200
+    return jsonify({"message": "Password successfully updated"}), 200
 
 
 #obtenemos los favoritos
@@ -376,5 +367,5 @@ def obtenerNotas(apiRecetaId):
     if notas :
         return jsonify({'notas':notas.contenido}), 200
     else:
-        return jsonify({"message": "No tiene notas"}), 204
+        return jsonify({"message": "Has no notes"}), 204
         
