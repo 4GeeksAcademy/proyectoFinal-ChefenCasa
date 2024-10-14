@@ -1,6 +1,6 @@
 .chatbot-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     left: 1vw;
     z-index: 1000;
     border-radius: 20px;
