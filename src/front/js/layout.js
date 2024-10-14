@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import "../styles/footer.css"
 
 import { Home } from "./pages/home";
 
@@ -14,6 +15,7 @@ import { CardPrivada } from "./component/cardPrivada";
 
 import injectContext from "./store/appContext";
 import { MenuSemanal } from "./pages/menu_semanal";
+import { Footer } from "./component/footer";
 
 
 
@@ -42,6 +44,9 @@ const Layout = () => {
 
                     </Routes>
                 </ScrollToTop>
+                <div className="footerLayout">
+                <Footer />
+                </div>
             </BrowserRouter>
         </div>
     );

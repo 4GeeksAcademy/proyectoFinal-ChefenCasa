@@ -1,5 +1,5 @@
-.bodyVistaPrivada {
-    min-height: calc(100vh + 120px);
+.bodyVistaPrivada{
+    width: 100%;
 }
 
 .contenedorCartasRecetas {
@@ -80,8 +80,3 @@
     }
 }
 
-.espacioBlanco {
-    width: 100vw;
-    height: 6vh;
-    background-color: white;
-}

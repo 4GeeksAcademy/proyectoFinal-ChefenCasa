@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { NavbarPrivado } from "../component/Navbar/navbarPrivado";
 import { CardFavoritos } from "../component/cardFavoritos";
 import "../../styles/vistaFavoritos.css";
-import { Footer } from "../../js/component/footer";
+
 
 export const VistaFavoritos = () => {
     const { store, actions } = useContext(Context);
@@ -30,9 +30,9 @@ export const VistaFavoritos = () => {
                     <p className="no-favoritos mt-3 ">♥ You don't have favorites yet ♥</p> // Mensaje si no hay recetas
                 )}
                 
-                <div className="espacioBlanco"></div>
+               
             </div>
-            < Footer />
+           
         </div>
     );
 };

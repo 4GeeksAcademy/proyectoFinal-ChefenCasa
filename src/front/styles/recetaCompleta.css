@@ -1,5 +1,5 @@
 .bodyRecetaPrivada {
-  min-height: calc(100vh + 120px);
+  height: 93vh;
 }
 
 .contenidoRecetaCompleta {
@@ -7,6 +7,7 @@
   width: 85vw;
   padding-left: 10vw;
   padding-right: 10vw;
+  height: 90vh;
 }
 
 .tituloRecetaCompleta {
@@ -34,11 +35,13 @@
   margin-right: 2vw;
   font-size: medium;
   height: fit-content;
+  max-height: 80%;
+  overflow-y: auto;
 }
 
 .contenedorPreparacion {
   width: 30vw; /* Ajusta este ancho según sea necesario */
-  max-height: calc(100vh - 120px); /* Establece la altura máxima, restando el espacio ocupado por otros elementos */
+  max-height: 80%; /* Establece la altura máxima, restando el espacio ocupado por otros elementos */
   overflow-y: auto; /* Agrega scroll vertical si el contenido excede la altura máxima */
 }
 
@@ -69,6 +72,7 @@
 
 .preparacion {
   font-size: 20px;
+  max-height: 80vh;
 }
 
 .iconoRelojRecetaCompleta {

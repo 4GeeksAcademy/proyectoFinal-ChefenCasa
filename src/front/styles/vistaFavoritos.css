@@ -1,3 +1,8 @@
+.bodyVistaFavoritos{
+    min-height: 100%;
+    position: relative;
+}
+
 .contenedorCardsFavoritos {
     width: 70%; /* Cambia a 100% para que ocupe todo el ancho disponible */
     display: flex; /* Activa el modelo de caja flexible */

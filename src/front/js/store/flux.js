@@ -133,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerRecetas: async () => {
 				const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
-				const url = `https://api.spoonacular.com/recipes/random?number=8&apiKey=${apiKey}`;
+				const url = `https://api.spoonacular.com/recipes/random?number=12&apiKey=${apiKey}`;
 
 				try {
 					const response = await fetch(url);

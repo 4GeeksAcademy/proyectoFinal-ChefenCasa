@@ -1,3 +1,6 @@
+.bodyHome{
+    height: 91vh;
+}
 .contenidoHome {
     display: flex;
     flex-direction: row; /* Por defecto, en pantallas grandes */
@@ -11,7 +14,8 @@
 }
 
 .imagenHome {
-    width: 100%; /* Asegúrate de que la imagen no exceda su contenedor */
+    width: 100%;
+    max-height: 80vh;/* Asegúrate de que la imagen no exceda su contenedor */
 }
 
 .botonRegistrarseBody {

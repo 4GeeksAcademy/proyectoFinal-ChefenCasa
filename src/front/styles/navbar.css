@@ -1,8 +1,8 @@
 /* Navbar público */
 .navbar {
     height: 10vh;
-    width: 100vw;
-    padding: 10px; /* Reduce el padding para pantallas pequeñas */
+    width: 100%;
+    /* padding: 10px; Reduce el padding para pantallas pequeñas */
     background-color: #f9c039;
     display: flex; /* Usa flexbox */
     align-items: center; /* Centra verticalmente */

@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Navbar } from "../../js/component/Navbar/navbar";
-import { Footer } from "../../js/component/footer";
 import { ModalRegistro } from "../component/modalRegistro";
 import { useNavigate } from "react-router-dom";
 
@@ -59,7 +58,6 @@ export const Home = () => {
 						<img className="imagenHome" src={imagen_Home} alt="Imagen de una chica buscando recetas" />
 					</div>
 				</div>
-				< Footer />
 			</div>
 		</div>
 
