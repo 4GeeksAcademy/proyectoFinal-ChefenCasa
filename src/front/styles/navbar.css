@@ -1,12 +1,12 @@
 /* Navbar público */
 .navbar {
     height: 10vh;
-    width: 100%;
-    /* padding: 10px; Reduce el padding para pantallas pequeñas */
+    
+    padding: 10px; /*Reduce el padding para pantallas pequeñas */
     background-color: #f9c039;
     display: flex; /* Usa flexbox */
     align-items: center; /* Centra verticalmente */
-    position: relative; /* Necesario para posicionar el contenido del dropdown */
+     /* position: relative Necesario para posicionar el contenido del dropdown */
     
 }
 
@@ -16,8 +16,8 @@
     display: flex;
     justify-content: space-between; /* Espacio entre logo y botón */
     width: 100%; /* Asegura que ocupe todo el ancho */
-    display: flex;
-    justify-content: flex-end;
+    /*display: flex*/;
+   /* justify-content: flex-end*/;
 }
 
 .botonIniciarSesion {
@@ -50,9 +50,9 @@
         min-width: 70px; /* Ajusta el ancho mínimo en pantallas pequeñas */
         padding: 8px; /* Reduce el padding en pantallas pequeñas */
     }
-    .dropdown {
-        margin-right: 20vw;
-    }
+    /*.dropdown {
+        margin-right: 5vw;
+    }*/
 }
 
 /* Navbar Privado */
@@ -62,10 +62,15 @@
     width: 10vh;
     border: none;
     height: 3vh;
+    
+
 }
 
-.dropdown-menu[data-bs-popper] {
-    top: 0;
-    left: 0;
-    margin-top: 0;
+.dropdown-navbar {
+    left:-70px !important;
+    top: -31px !important;
+    
+    margin-top: 0 !important;
+    
+    
 }

@@ -1,5 +1,6 @@
 .dropdown-menu {
     position: relative;
+    
   }
   
   .submenu {
@@ -34,9 +35,9 @@
     padding-left: 20px;
   }
   
-  .dropdown-item {
+ /* .dropdown-item {
     position: relative;
-  }
+  }*/
   
   .dropdown-item::after {
     
