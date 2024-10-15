@@ -8,7 +8,7 @@ import { ChatBot } from "../chatBot";
 
 export const NavbarPrivado = () => {
     const { store, actions } = useContext(Context);
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
 
     const [showModalPerfil, setShowModalPerfil] = useState(false);
 
@@ -22,7 +22,7 @@ export const NavbarPrivado = () => {
 
     const logout = async () => {
         await actions.cerrarSesion();
-        navigate('/'); 
+        navigate('/');
     };
 
     return (
@@ -32,12 +32,12 @@ export const NavbarPrivado = () => {
                     <Link to="/vistaPrivada">
                         <img className="LogoChefEnCasa" src={logo} alt="Logo Chef at Home" />
                     </Link>
-                    <ChatBot/>
+                    <ChatBot />
                     <div className="dropdown">
                         <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fas fa-user fa-xl"></i> &nbsp; <i className="fas fa-bars fa-xl"></i>
                         </button>
-                        <ul className="dropdown-menu">
+                        <ul className="dropdown-menu dropdown-navbar" >
                             <li><a className="dropdown-item" href="#" onClick={openModalProfile}>Edit Profile</a></li>
                             <li>
                                 <Link to="/vistaFavoritos" style={{ textDecoration: 'none', color: 'black' }}>
@@ -53,6 +53,7 @@ export const NavbarPrivado = () => {
                             <li><a className="dropdown-item" style={{color: 'red'}} href="#" onClick={logout}>Sign out</a></li>
                         </ul>
                     </div>
+
                 </div>
             </nav>
             <ModalPerfil show={showModalPerfil} onClose={closeModal} />
