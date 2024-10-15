@@ -28,11 +28,8 @@ export const VistaFavoritos = () => {
                     ))
                 ) : (
                     <p className="no-favoritos mt-3 ">♥ You don't have favorites yet ♥</p> // Mensaje si no hay recetas
-                )}
-                
-               
-            </div>
-           
+                )}  
+            </div>     
         </div>
     );
 };

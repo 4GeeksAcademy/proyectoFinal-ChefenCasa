@@ -44,9 +44,7 @@ const Layout = () => {
 
                     </Routes>
                 </ScrollToTop>
-                <div className="footerLayout">
                 <Footer />
-                </div>
             </BrowserRouter>
         </div>
     );
