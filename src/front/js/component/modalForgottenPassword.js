@@ -20,7 +20,7 @@ export const ForgottenPassword = ({ show, onClose }) => {
             <div className={showHideClassName + " modal-overlay"}>
                 <section className="modal-main">
                     <button className="close-button" onClick={onClose}>&times;</button>
-                    <p>Escribe el email con el que te has registrado</p>
+                    <p>Enter the email address you signed up for</p>
                     <form onSubmit={handleSubmit}>
                         <label>Email</label>
                         <input
@@ -28,10 +28,10 @@ export const ForgottenPassword = ({ show, onClose }) => {
                             type="text"
                             className="login-field"
                             id="email"   
-                            placeholder="Ingresa tu email"
+                            placeholder="Enter your email address"
                             required
                         />
-                        <button className="btn-modal" type="submit">Enviar</button>
+                        <button className="btn-modal" type="submit">Send</button>
                         
                     </form>
                 </section>
